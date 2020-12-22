@@ -133,6 +133,40 @@ Route::group(['middleware' => ['auth','can:isSuperAdmin']], function() {
 
 
     });
+    
+    //Profesori
+    Route::prefix('profesori')->group(function(){
+        Route::get('/',[App\Http\Controllers\ProfesorController::class,'index'])->name('profesori');
+
+        
+        Route::match(['get','post'],'novi_profesor',[App\Http\Controllers\ProfesorController::class,'novi_profesor'])->name('novi_profesor');
+
+        Route::get('profesor/{id}',[App\Http\Controllers\ProfesorController::class,'profesor'])->name('profesor');
+
+        Route::match(['get','post'],'izmena_profesora/{id}',[App\Http\Controllers\ProfesorController::class,'izmena_profesora'])->name('izmena_profesora');
+
+        Route::post('brisanje_profesora/{id}',[App\Http\Controllers\ProfesorController::class,'brisanje_profesora'])->name('brisanje_profesora');
+
+
+    });
+
+    //Obavestenja
+    Route::prefix('obavestenja')->group(function(){
+        Route::get('/',[App\Http\Controllers\ObavestenjeController::class,'index'])->name('obavestenja');
+
+        
+        Route::match(['get','post'],'novo_obavestenje',[App\Http\Controllers\ObavestenjeController::class,'novo_obavestenje'])->name('novo_obavestenje');
+
+        Route::get('obavestenje/{id}',[App\Http\Controllers\ObavestenjeController::class,'obavestenje'])->name('obavestenje');
+
+        Route::match(['get','post'],'izmena_obavestenja/{id}',[App\Http\Controllers\ObavestenjeController::class,'izmena_obavestenja'])->name('izmena_obavestenja');
+
+        Route::post('brisanje_obavestenja/{id}',[App\Http\Controllers\ObavestenjeController::class,'brisanje_obavestenja'])->name('brisanje_obavestenja');
+
+        Route::get('odobrenje_obavestenja/{id}/{odobrenje}',[App\Http\Controllers\ObavestenjeController::class,'odobrenje_obavestenja'])->name('odobrenje_obavestenja');
+
+
+    });
 
 
 

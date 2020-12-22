@@ -15,9 +15,9 @@
 <div class="container">
     <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark rounded-lg shadow-lg">
         <div class="container">
-            <h3 class="display-4" style="text-shadow: 2px 2px lightgray"><i class="fas fa-users"></i> Korisnici</h3>
+            <h1  style="text-shadow: 2px 2px lightgray"><i class="fas fa-users"></i> Korisnici</h1>
 
-            <p class="lead">U ovoj sekciji se upravlja korisničkim nalozima <a
+            <p class="lead">U ovoj sekciji se upravlja nalozima korisnika <a
                     class="btn btn-outline-primary float-right font-weight-bold shadow"
                     href={{ route('novi_korisnik') }} role="button">Dodaj Korisnika</a></p>
         </div>

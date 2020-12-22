@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Obavestenje extends Model
 {
+    public $timestamps = false;
+
     /**
      * The table associated with the model.
      *
@@ -23,7 +25,7 @@ class Obavestenje extends Model
     /**
      * @var array
      */
-    protected $fillable = ['potpis', 'obavestenje', 'datum'];
+    protected $fillable = ['potpis', 'naslov', 'obavestenje', 'datum','odobrenje'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

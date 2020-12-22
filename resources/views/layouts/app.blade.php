@@ -170,18 +170,18 @@
                 <ul class="navbar-nav mr-auto">
                     @if(Request::is('predmeti') || Request::is('predmeti/*') || Request::is('korisnici') ||
                     Request::is('korisnici/*') || Request::is('studenti') || Request::is('studenti/*') ||
-                    Request::is('pocetna'))
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*'))
                     <li class="nav-item">
                         <a class="nav-link
                         @if(Request::is('pocetna'))
                         {{'active'}}
                         @endif
-                        " href={{route('pocetna')}}><i class="fas fa-user-graduate"></i>
+                        " href={{route('pocetna')}}><i class="fas fa-home"></i>
                             Početna</a>
                     </li>
                     @endif
                     @if(Request::is('predmeti') || Request::is('predmeti/*') || Request::is('korisnici') ||
-                    Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna'))
+                    Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*'))
                     <li class="nav-item
                     @if(Request::is('studenti'))
                     {{'active'}}
@@ -225,9 +225,45 @@
                         </ol>
                     </li>
                     @endif
+                    @if(Request::is('predmeti') || Request::is('predmeti/*') || Request::is('korisnici') ||
+                    Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna') || Request::is('profesori') || Request::is('studenti/*')|| Request::is('obavestenja')|| Request::is('obavestenja/*'))
+                    <li class="nav-item
+                    @if(Request::is('profesori'))
+                    {{'active'}}
+                    @endif
+                    ">
+                        <a class="nav-link" href={{ route('profesori') }}><i class="fas fa-user-tie"></i>
+                            Profesori</a>
+                    </li>
+                    @endif
+                    @if(Request::is('profesori/novi_profesor'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('profesori')}}>Profesori</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Novi profesor</li>
+                        </ol>
+                    </li>
+                    @elseif(Request::is('profesori/izmena_profesora/*'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('profesori')}}>Profesori</a></li>
+                            <li class="breadcrumb-item" aria-current="page"><a
+                                    href={{route('profesor',['id'=>$profesor->id])}}>Profesor "{{$profesor->ime}}"</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena profesora "{{$profesor->ime}}"
+                            </li>
+                        </ol>
+                    </li>
+                    @elseif(Request::is('profesori/profesor/*'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('profesori')}}>Profesori</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Profesor "{{$profesor->ime}}"</li>
+                        </ol>
+                    </li>
+                    @endif
                     @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('korisnici') ||
                     Request::is('korisnici/*') || Request::is('predmeti') || Request::is('ocene/*') ||
-                    Request::is('pocetna'))
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*'))
                     <li class="nav-item
                     @if(Request::is('predmeti'))
                     {{'active'}}
@@ -254,7 +290,7 @@
                     @endif
                     @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('predmeti') ||
                     Request::is('predmeti/*') || Request::is('korisnici') || Request::is('ocene/*') ||
-                    Request::is('pocetna'))
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*'))
                     <li class="nav-item
                     @if(Request::is('korisnici'))
                         {{'active'}}
@@ -279,6 +315,49 @@
                         </ol>
                     </li>
                     @endif
+                    @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('predmeti') ||
+                    Request::is('predmeti/*') || Request::is('korisnici') || Request::is('ocene/*') ||
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('korisnici/*') )
+                    <li class="nav-item
+                    @if(Request::is('obavestenja'))
+                        {{'active'}}
+                    @endif
+                    ">
+                    <a class="nav-link" href={{ route('obavestenja') }}><i class="fas fa-clipboard"></i> Obaveštenja 
+                        @if(App\Http\Controllers\ObavestenjeController::brojObavestenja()>0)
+                        <span
+                        class="badge badge-danger badge-pill shadow" data-toggle="tooltip"
+                        data-placement="top" title="<b>NEODOBRENA OBAVEŠTENJA</b>" data-html="true">
+                            {{App\Http\Controllers\ObavestenjeController::brojObavestenja()}}
+                        </span>
+                        @endif
+                    </a>
+                    </li>
+                    @endif
+                    @if(Request::is('obavestenja/novo_obavestenje'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('obavestenja')}}>Obaveštenja</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Novo obaveštenje</li>
+                        </ol>
+                    </li>
+                    @elseif(Request::is('obavestenja/izmena_obavestenja/*'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('obavestenja')}}>Obaveštenja</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('obavestenje',['id'=>$obavestenje->id])}}>Obaveštenje "{{ substr($obavestenje->naslov,0,10)}}..."</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena obaveštenja "{{substr($obavestenje->naslov,0,10)}}..."</li>
+                        </ol>
+                    </li>
+                    @elseif(Request::is('obavestenja/obavestenje/*'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('obavestenja')}}>Obaveštenja</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Obaveštenje "{{substr($obavestenje->naslov,0,10)}}..."</li>
+                        </ol>
+                    </li>
+                    @endif
+
                 </ul>
                 @endcan
                 <!-- Default dropleft button -->

@@ -25,10 +25,10 @@
     {{-- JUMBOTRON START --}}
     <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark shadow-lg">
         <div class="container">
-            <h1 class="display-4" style="text-shadow: 2px 2px lightgray"><i class="fas fa-user-graduate"></i> Studenti
+            <h1 style="text-shadow: 2px 2px lightgray"><i class="fas fa-user-graduate"></i> Studenti
             </h1>
 
-            <p class="lead">U ovoj sekciji se upravlja studentima i njihovim ocenama <a
+            <p class="lead">U ovoj sekciji se upravlja studentima  <a
                     class="btn btn-outline-primary float-right font-weight-bold shadow" href={{ route('novi_student') }}
                     role="button">Dodaj
                     Studenta</a></p>

@@ -228,6 +228,37 @@ return [
         ],
         'uloga'=>[
             'required'=>'Molimo izaberite ulogu korisnika!'
+        ],
+        'datum_zaposljenja'=>[
+            'required'=>'Unesite godinu zaposlenja!',
+            'min'=>'Škola nije postojala pre 1990. godine!',
+            'max'=>'Godina zaposlenja ne može biti u budućnosti!'
+        ],
+        'bio'=>[
+            'required'=>'Unesite biografiju!'
+        ],
+        'predmeti'=>[
+            'required'=>'Unesite predmete profesora!'
+        ],
+        'email_korisnika' => [
+            'required' => 'Email je obavezan!',
+            'max'=>'Email ne sme premašiti 255 karaktera!',
+            'unique'=>'Ovaj email već postoji!'
+        ],
+        'naslov'=>[
+            'required'=>'Unesite naslov!',
+            'max'=>'Maksimalan broj karaktera je 50!'
+        ],
+        'obavestenje'=>[
+            'required'=>'Unesite obaveštenje!'
+        ],
+        'potpis'=>[
+            'required'=>'Obavezan potpis!',
+            'regex'=>'Nemojte pokušavati da menjate HTML, kažnjivo je!'
+        ],
+        'datum'=>[
+            'required'=>'Unesite datum!',
+            'before_or_equal'=>'Obaveštenje ne može biti napisano u budućnosti!'
         ]
     ],
 
