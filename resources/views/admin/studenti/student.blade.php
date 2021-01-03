@@ -29,12 +29,12 @@
         <div class='col-xs-12 col-sm-6 my-2'>
             <div class="card border border-dark shadow-lg">
                 <div class="card-header">
-                    <h2>
-                        <span class="badge badge-pill badge-primary shadow" data-toggle="tooltip" data-placement="top"
-                            title="<b>GODINA STUDIJA</b>" data-html="true">
-                            {{$student->godina_studija}}.
-                        </span>
-
+                    <h3>
+                        <span class="d-flex justify-content-center">
+                        <span class="badge badge-info shadow" data-toggle="tooltip" data-placement="top"
+                        title="<b>BROJ INDEKSA</b>" data-html="true">
+                        {{$student->broj_indeksa}}
+                        </span>&nbsp;
                         <span data-toggle="tooltip" data-placement="top" title="<b>PROSEK OCENA</b>" data-html="true"
                             class="badge badge-pill shadow
                             @if($student->prosek_ocena < 7.00)
@@ -44,14 +44,24 @@
                             @elseif($student->prosek_ocena > 8.50)
                                 {{' badge-success'}}
                             @endif
-                            ">{{$student->prosek_ocena}}
-                        </span>
+                            ">
+                            @if($student->prosek_ocena != NULL)
+                            {{$student->prosek_ocena}}
+                            @else
+                                0.00
+                            @endif
+                        </span>&nbsp;
+                        <span class="badge badge-pill badge-primary shadow" data-toggle="tooltip" data-placement="top"
+                            title="<b>GODINA STUDIJA</b>" data-html="true">
+                            {{$student->godina_studija}}.
+                        </span>&nbsp;
+
                         <span class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                             title="<b>UKUPNO ESPB</b>" data-html="true">
                             {{$student->espb}}
                         </span>
-
-                        <span class="float-right btn-group shadow "><a class="btn btn-outline-dark font-weight-bold"
+                        </span>
+                            <span class="d-flex justify-content-center mt-2 btn-group shadow"><a class="btn btn-outline-dark font-weight-bold"
                                 href={{ route('izmena_studenta', ['id'=>$student->id]) }} role="button">
                                 <i class="fas fa-edit" style="color:orange"></i> Izmeni
                             </a>
@@ -61,7 +71,8 @@
                                 Obriši
                             </button>
                         </span>
-                    </h2>
+
+                    </h3>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal{{$student->id}}" tabindex="-1" role="dialog"
@@ -94,6 +105,13 @@
                 <table class="table table-hover">
                     <tbody>
                         <tr>
+                            <th>Smer</th>
+                            <td><a class="font-weight-bold" href="{{route('smer',['id'=>$student->smers->id])}}" style="color:inherit;">{{$student->smers->naziv}}</a></td>
+
+
+                        </tr>
+
+                        <tr>
                             <th class="ml-3">Ime</th>
                             <td>{{$student->ime}}</td>
 
@@ -110,12 +128,6 @@
 
                         </tr>
 
-                        <tr>
-                            <th>Broj Indeksa</th>
-                            <td>{{$student->broj_indeksa}}</td>
-
-
-                        </tr>
                         <tr>
                             <th>Broj telefona</th>
                             <td>0{{$student->broj_telefona}}</td>
@@ -157,7 +169,10 @@
                                 name="izbor" required oninvalid="this.setCustomValidity('Molimo izaberite predmet!')"
                                 oninput="setCustomValidity('')">
                                 <option>Odaberi Predmet</option>
+                                {{-- OVDE TREBA DA LISTA SAMO PREDMETE SMERA KOJI STUDENT POHADJA --}}
+
                                 @foreach ($predmeti as $predmet)
+
                                 <option value={{$predmet->id}}>{{$predmet->naziv}}</option>
                                 @endforeach
                             </select>
@@ -230,19 +245,13 @@
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
                                 $i=0;
-
-                                foreach ($predmeti as $predmet){
-                                foreach ($ocene as $ocena){
-                                if ($predmet->id==$ocena->predmet_id && $student->id==$ocena->student_id){
-                                if($predmet->godina_studija == 1){
-                                $i++;
-
-                                }
-                                }
-                                }
+                                foreach($student->ocene as $ocena){
+                                    if($ocena->predmet->godina_studija==1){
+                                        $i++;
+                                    }
                                 }
                                 echo $i;
-                                @endphp
+                            @endphp
                             </span></a>
                         <button class="btn btn-primary font-weight-bold shadow mt-1" type="button"
                             data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false"
@@ -251,16 +260,10 @@
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
                                 $i=0;
-
-                                foreach ($predmeti as $predmet){
-                                foreach ($ocene as $ocena){
-                                if ($predmet->id==$ocena->predmet_id && $student->id==$ocena->student_id){
-                                if($predmet->godina_studija == 2){
-                                $i++;
-
-                                }
-                                }
-                                }
+                                foreach($student->ocene as $ocena){
+                                    if($ocena->predmet->godina_studija==2){
+                                        $i++;
+                                    }
                                 }
                                 echo $i;
                                 @endphp
@@ -272,16 +275,10 @@
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
                                 $i=0;
-
-                                foreach ($predmeti as $predmet){
-                                foreach ($ocene as $ocena){
-                                if ($predmet->id==$ocena->predmet_id && $student->id==$ocena->student_id){
-                                if($predmet->godina_studija == 3){
-                                $i++;
-
-                                }
-                                }
-                                }
+                                foreach($student->ocene as $ocena){
+                                    if($ocena->predmet->godina_studija==3){
+                                        $i++;
+                                    }
                                 }
                                 echo $i;
                                 @endphp
@@ -291,21 +288,7 @@
                             aria-controls="multiCollapseExample4" style="width:138.512px">Sve ocene <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ PREDMETA</b>" data-html="true">
-                                @php
-                                $i=0;
-
-                                foreach ($predmeti as $predmet){
-                                foreach ($ocene as $ocena){
-                                if ($predmet->id==$ocena->predmet_id && $student->id==$ocena->student_id){
-
-                                $i++;
-
-
-                                }
-                                }
-                                }
-                                echo $i;
-                                @endphp
+                                {{$student->ocene->count()}}
                             </span></button>
                     </p>
                 </div>
@@ -318,7 +301,15 @@
                                     <h4 class="text-center font-weight-bold pt-2">PRVA GODINA <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ PREDMETA</b>" data-html="true">
-                                            {{$predmeti->where('godina_studija',1)->count()}}
+                                            @php
+                                            $i=0;
+                                            foreach($student->ocene as $ocena){
+                                                if($ocena->predmet->godina_studija==1){
+                                                    $i++;
+                                                }
+                                            }
+                                            echo $i;
+                                            @endphp
                                         </span></h4>
                                 </div>
                                 <div class="card-body bg-dark">
@@ -338,16 +329,13 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($predmeti as $predmet)
-                                                    @foreach ($ocene as $ocena)
-                                                    @if ($predmet->id==$ocena->predmet_id &&
-                                                    $student->id==$ocena->student_id)
-                                                    @if($predmet->godina_studija == 1)
+                                                    @foreach ($student->ocene as $ocena)
+                                                    @if($ocena->predmet->godina_studija==1)
                                                     <tr>
-                                                        <td>{{$predmet->sifra}}</td>
-                                                        <td>{{$predmet->naziv}}</td>
-                                                        <td>{{$predmet->obavezni_izborni}}</td>
-                                                        <td>{{$predmet->espb}}</td>
+                                                        <td>{{$ocena->predmet->sifra}}</td>
+                                                        <td>{{$ocena->predmet->naziv}}</td>
+                                                        <td>{{$ocena->predmet->obavezni_izborni}}</td>
+                                                        <td>{{$ocena->predmet->espb}}</td>
                                                         <td>{{$ocena->ocena}}</td>
                                                         <td class="d-inline-flex">
                                                             <!-- Split dropright button -->
@@ -371,7 +359,7 @@
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{$ocena->id}}">
+                                                                        data-target="#exampleModal{{$ocena->predmet->sifra}}1">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -380,26 +368,26 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{$ocena->id}}"
+                                                            <div class="modal fade" id="exampleModal{{$ocena->predmet->sifra}}1"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">
-                                                                                Brisanje studenta
+                                                                                Brisanje ocene
                                                                             </h5>
                                                                             <button type="button" class="close"
                                                                                 data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete ocenu
                                                                                 {{$ocena->ocena}} iz
                                                                                 predmeta
-                                                                                "{{$predmet->naziv}}"
+                                                                                "{{$ocena->predmet->naziv}}"
                                                                                 studenta "{{ $student->ime }}"?</b>
                                                                         </div>
                                                                         <div
@@ -421,8 +409,6 @@
                                                         </td>
                                                     </tr>
                                                     @endif
-                                                    @endif
-                                                    @endforeach
                                                     @endforeach
                                                 </tbody>
                                             </table>
@@ -445,7 +431,15 @@
                                     <h4 class="text-center font-weight-bold pt-2">DRUGA GODINA <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ PREDMETA</b>" data-html="true">
-                                            {{$predmeti->where('godina_studija',2)->count()}}
+                                            @php
+                                            $i=0;
+                                            foreach($student->ocene as $ocena){
+                                                if($ocena->predmet->godina_studija==2){
+                                                    $i++;
+                                                }
+                                            }
+                                            echo $i;
+                                            @endphp
                                         </span></h4>
                                 </div>
                                 {{-- TABLE ALL GRADES SECOND YEAR START --}}
@@ -465,16 +459,13 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($predmeti as $predmet)
-                                                    @foreach ($ocene as $ocena)
-                                                    @if ($predmet->id==$ocena->predmet_id &&
-                                                    $student->id==$ocena->student_id)
-                                                    @if($predmet->godina_studija == 2)
+                                                    @foreach ($student->ocene as $ocena)
+                                                    @if($ocena->predmet->godina_studija == 2)
                                                     <tr>
-                                                        <td>{{$predmet->sifra}}</td>
-                                                        <td>{{$predmet->naziv}}</td>
-                                                        <td>{{$predmet->obavezni_izborni}}</td>
-                                                        <td>{{$predmet->espb}}</td>
+                                                        <td>{{$ocena->predmet->sifra}}</td>
+                                                        <td>{{$ocena->predmet->naziv}}</td>
+                                                        <td>{{$ocena->predmet->obavezni_izborni}}</td>
+                                                        <td>{{$ocena->predmet->espb}}</td>
                                                         <td>{{$ocena->ocena}}</td>
                                                         <td class="d-inline-flex">
                                                             <!-- Split dropright button -->
@@ -498,7 +489,7 @@
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{$ocena->id}}">
+                                                                        data-target="#exampleModal{{$ocena->predmet->sifra}}2">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -507,26 +498,26 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{$ocena->id}}"
+                                                            <div class="modal fade" id="exampleModal{{$ocena->predmet->sifra}}2"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">
-                                                                                Brisanje studenta
+                                                                                Brisanje ocene
                                                                             </h5>
                                                                             <button type="button" class="close"
                                                                                 data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete ocenu
                                                                                 {{$ocena->ocena}} iz
                                                                                 predmeta
-                                                                                "{{$predmet->naziv}}"
+                                                                                "{{$ocena->predmet->naziv}}"
                                                                                 studenta "{{ $student->ime }}"?</b>
                                                                         </div>
                                                                         <div
@@ -548,8 +539,6 @@
                                                         </td>
                                                     </tr>
                                                     @endif
-                                                    @endif
-                                                    @endforeach
                                                     @endforeach
                                                 </tbody>
                                             </table>
@@ -570,7 +559,15 @@
                                     <h4 class="text-center font-weight-bold pt-2">TREĆA GODINA <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ PREDMETA</b>" data-html="true">
-                                            {{$predmeti->where('godina_studija',3)->count()}}
+                                            @php
+                                                $i=0;
+                                                foreach($student->ocene as $ocena){
+                                                    if($ocena->predmet->godina_studija==3){
+                                                        $i++;
+                                                    }
+                                                }
+                                                echo $i;
+                                            @endphp
                                         </span></h4>
                                 </div>
                                 <div class="card-body bg-dark">
@@ -590,16 +587,13 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($predmeti as $predmet)
-                                                    @foreach ($ocene as $ocena)
-                                                    @if ($predmet->id==$ocena->predmet_id &&
-                                                    $student->id==$ocena->student_id)
-                                                    @if($predmet->godina_studija == 3)
+                                                    @foreach ($student->ocene as $ocena)
+                                                    @if($ocena->predmet->godina_studija==3)
                                                     <tr>
-                                                        <td>{{$predmet->sifra}}</td>
-                                                        <td>{{$predmet->naziv}}</td>
-                                                        <td>{{$predmet->obavezni_izborni}}</td>
-                                                        <td>{{$predmet->espb}}</td>
+                                                        <td>{{$ocena->predmet->sifra}}</td>
+                                                        <td>{{$ocena->predmet->naziv}}</td>
+                                                        <td>{{$ocena->predmet->obavezni_izborni}}</td>
+                                                        <td>{{$ocena->predmet->espb}}</td>
                                                         <td>{{$ocena->ocena}}</td>
                                                         <td class="d-inline-flex">
                                                             <!-- Split dropright button -->
@@ -623,7 +617,7 @@
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{$ocena->id}}">
+                                                                        data-target="#exampleModal{{$ocena->predmet->sifra}}3">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -632,26 +626,26 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{$ocena->id}}"
+                                                            <div class="modal fade" id="exampleModal{{$ocena->predmet->sifra}}3"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">
-                                                                                Brisanje studenta
+                                                                                Brisanje ocene
                                                                             </h5>
                                                                             <button type="button" class="close"
                                                                                 data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete ocenu
                                                                                 {{$ocena->ocena}} iz
                                                                                 predmeta
-                                                                                "{{$predmet->naziv}}"
+                                                                                "{{$ocena->predmet->naziv}}"
                                                                                 studenta "{{ $student->ime }}"?</b>
                                                                         </div>
                                                                         <div
@@ -673,8 +667,6 @@
                                                         </td>
                                                     </tr>
                                                     @endif
-                                                    @endif
-                                                    @endforeach
                                                     @endforeach
                                                 </tbody>
                                             </table>
@@ -696,7 +688,7 @@
                                     <h4 class="text-center font-weight-bold pt-2">SVI PREDMETI <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ PREDMETA</b>" data-html="true">
-                                            {{$predmeti->count()}}
+                                            {{$student->ocene->count()}}
                                         </span></h4>
                                 </div>
                                 <div class="card-body bg-dark">
@@ -717,17 +709,13 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($predmeti as $predmet)
-                                                    @foreach ($ocene as $ocena)
-                                                    @if ($predmet->id==$ocena->predmet_id &&
-                                                    $student->id==$ocena->student_id)
-
+                                                    @foreach ($student->ocene as $ocena)
                                                     <tr>
-                                                        <td>{{$predmet->sifra}}</td>
-                                                        <td>{{$predmet->naziv}}</td>
-                                                        <td>{{$predmet->godina_studija}}</td>
-                                                        <td>{{$predmet->obavezni_izborni}}</td>
-                                                        <td>{{$predmet->espb}}</td>
+                                                        <td>{{$ocena->predmet->sifra}}</td>
+                                                        <td>{{$ocena->predmet->naziv}}</td>
+                                                        <td>{{$ocena->predmet->godina_studija}}</td>
+                                                        <td>{{$ocena->predmet->obavezni_izborni}}</td>
+                                                        <td>{{$ocena->predmet->espb}}</td>
                                                         <td>{{$ocena->ocena}}</td>
                                                         <td class="d-inline-flex">
                                                             <!-- Split dropright button -->
@@ -751,7 +739,7 @@
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{$ocena->id}}">
+                                                                        data-target="#exampleModal{{$ocena->predmet->sifra}}4">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -760,26 +748,26 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{$ocena->id}}"
+                                                            <div class="modal fade" id="exampleModal{{$ocena->predmet->sifra}}4"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">
-                                                                                Brisanje studenta
+                                                                                Brisanje ocene
                                                                             </h5>
                                                                             <button type="button" class="close"
                                                                                 data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete ocenu
                                                                                 {{$ocena->ocena}} iz
                                                                                 predmeta
-                                                                                "{{$predmet->naziv}}"
+                                                                                "{{$ocena->predmet->naziv}}"
                                                                                 studenta "{{ $student->ime }}"?</b>
                                                                         </div>
                                                                         <div
@@ -800,8 +788,6 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    @endif
-                                                    @endforeach
                                                     @endforeach
                                                 </tbody>
                                             </table>

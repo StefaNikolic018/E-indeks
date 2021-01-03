@@ -65,8 +65,9 @@ oninput="setCustomValidity('')" type="number" max="7" min="3" placeholder="3" cl
   </div>
 
 </div>
+<div class="form-row">
 
-        <div class="col-12 my-1 text-center">
+        <div class="col-lg-6 col-md-6 col-sm-12 my-1 text-center">
           <label for="obavezni_izborni">Obavezni/Izborni</label><br>
           <select class="custom-select mr-sm-2 @error('obavezni_izborni') is-invalid @enderror" id="inlineFormCustomSelect" name="obavezni_izborni" required oninvalid="this.setCustomValidity('Molimo izaberite status predmeta!')"
  oninput="setCustomValidity('')">
@@ -80,6 +81,23 @@ oninput="setCustomValidity('')" type="number" max="7" min="3" placeholder="3" cl
         </span>
       @enderror
         </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12  my-1 text-center">
+            <label for="smer">Smer</label><br>
+            <select class="custom-select mr-sm-2 @error('smer') is-invalid @enderror" id="inlineFormCustomSelect" name="smer" required oninvalid="this.setCustomValidity('Molimo izaberite smer!')"
+   oninput="setCustomValidity('')">
+              <option value="">Izaberi smer</option>
+              @foreach($smerovi as $smer)
+              <option value="{{$smer->id}}">{{$smer->naziv}}</option>
+              @endforeach
+            </select>
+        @error('smer')
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+          </span>
+        @enderror
+          </div>
+</div>
           <br>
 
         <div class="col-12 text-center">

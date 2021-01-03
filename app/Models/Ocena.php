@@ -26,4 +26,20 @@ class Ocena extends Model
      */
     protected $fillable = ['student_id', 'predmet_id', 'ocena', 'datum','student_predmet'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function predmet()
+    {
+        return $this->belongsTo(Predmet::class, 'predmet_id', 'id');
+    }
+
 }

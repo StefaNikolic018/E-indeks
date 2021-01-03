@@ -73,9 +73,10 @@
                             <select class="custom-select mr-sm-2 @error('email_korisnika') is-invalid @enderror" id="email_korisnika"
                                 name="email_korisnika" required oninvalid="this.setCustomValidity('Molimo izaberite email!')"
                                 oninput="setCustomValidity('')"">
-                            @foreach($emails as $email)
-                            <option value="{{$email->email}}">{{$email->email}}</option>
-                            @endforeach
+                                <option value="">Izaberite email</option>
+                                @foreach($emails as $email)
+                                <option value="{{$email->email}}">{{$email->email}}</option>
+                                @endforeach
                             </select>
                         </div>
                         @error('email_korisnika')

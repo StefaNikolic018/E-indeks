@@ -32,6 +32,6 @@ class Obavestenje extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User', 'potpis', 'role');
+        return $this->belongsTo(User::class, 'potpis', 'role');
     }
 }

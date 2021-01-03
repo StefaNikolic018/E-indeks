@@ -13,7 +13,7 @@
                 @csrf
                 <div class="form-row">
 
-                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                         <label for="broj_indeksa">Broj indeksa</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                         <label for="ime">Ime</label>
                         <input required oninvalid="this.setCustomValidity('Molimo unesite ime!')"
                             oninput="setCustomValidity('')" type="text"
@@ -46,7 +46,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                         <label for="ime_roditelja">Ime roditelja</label>
                         <input required oninvalid="this.setCustomValidity('Molimo unesite ime roditelja!')"
                             oninput="setCustomValidity('')" type="text"
@@ -59,11 +59,8 @@
                         </span>
                         @enderror
                     </div>
-                </div>
 
-                <div class="form-row">
-
-                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                         <label for="prezime">Prezime</label>
                         <input required oninvalid="this.setCustomValidity('Molimo unesite prezime!')"
                             oninput="setCustomValidity('')" type="text"
@@ -75,23 +72,48 @@
                         </span>
                         @enderror
                     </div>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
+                        <label for="email">Smer</label>
+                        <div class="input-group">
+                            <select class="custom-select mr-sm-2 @error('smer') is-invalid @enderror" id="smer"
+                                name="smer" required oninvalid="this.setCustomValidity('Molimo izaberite smer!')"
+                                oninput="setCustomValidity('')"">
+                                <option value="">Izaberite smer</option>
+
+                                @foreach($smerovi as $smer)
+                                <option value="{{$smer->id}}">{{$smer->naziv}}</option>
+                                @endforeach
+                        </select>
+                        </div>
+                        @error('smer')
+                        <span class=" invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                    </div>
+
+
+
 
                     <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
                         <label for="email">Email</label>
                         <div class="input-group">
-                            <input required oninvalid="this.setCustomValidity('Molimo unesite validan email!')"
-                                oninput="setCustomValidity('')" type="email"
-                                class="form-control @error('email') is-invalid @enderror" id="email" name="email"
-                                value={{old('email') ? old('email') : $student->email}}>
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon2">@example.com</span>
-                            </div>
+                            <select class="custom-select mr-sm-2 @error('email') is-invalid @enderror" id="email"
+                                name="email" required oninvalid="this.setCustomValidity('Molimo izaberite email!')"
+                                oninput="setCustomValidity('')"">
+                                <option value="">Izaberite email</option>
+                                <option value="{{$student->email}}" selected>{{$student->email}}</option>
+                        </select>
                         </div>
                         @error('email')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                        <span class=" invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                     </div>
 
                     <div class="form-group col-lg-4 col-md-4 col-sm-12 ">

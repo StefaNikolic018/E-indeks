@@ -23,7 +23,7 @@
                 @csrf
                 <div class="form-row">
 
-                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                         <label for="broj_indeksa">Broj indeksa</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                         <label for="ime">Ime</label>
                         <input value="{{ old('ime') }}" required
                             oninvalid="this.setCustomValidity('Molimo unesite ime!')" oninput="setCustomValidity('')"
@@ -55,7 +55,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                         <label for="ime_roditelja">Ime roditelja</label>
                         <input value="{{ old('ime_roditelja') }}" required
                             oninvalid="this.setCustomValidity('Molimo unesite ime roditelja!')"
@@ -68,11 +68,8 @@
                         </span>
                         @enderror
                     </div>
-                </div>
 
-                <div class="form-row">
-
-                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
+                    <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                         <label for="prezime">Prezime</label>
                         <input value="{{ old('prezime') }}" required
                             oninvalid="this.setCustomValidity('Molimo unesite prezime!')"
@@ -84,6 +81,29 @@
                         </span>
                         @enderror
                     </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
+                        <label for="email">Smer</label>
+                        <div class="input-group">
+                            <select class="custom-select mr-sm-2 @error('smer') is-invalid @enderror" id="smer"
+                                name="smer" required oninvalid="this.setCustomValidity('Molimo izaberite smer!')"
+                                oninput="setCustomValidity('')"">
+                                <option value="">Izaberite smer</option>
+                                @foreach($smerovi as $smer)
+                                <option value="{{$smer->id}}">{{$smer->naziv}}</option>
+                                @endforeach
+                        </select>
+                        </div>
+                        @error('smer')
+                        <span class=" invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                        @enderror
+                    </div>
+
+
 
                     <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
                         <label for="email">Email</label>
@@ -91,9 +111,10 @@
                             <select class="custom-select mr-sm-2 @error('email') is-invalid @enderror" id="email"
                                 name="email" required oninvalid="this.setCustomValidity('Molimo izaberite email!')"
                                 oninput="setCustomValidity('')"">
-                            @foreach($emails as $email)
-                            <option value={{$email->email}}>{{$email->email}}</option>
-                            @endforeach
+                                <option value="">Izaberite email</option>
+                                @foreach($emails as $email)
+                                <option value={{$email->email}}>{{$email->email}}</option>
+                                @endforeach
                         </select>
                         </div>
                         @error('email')

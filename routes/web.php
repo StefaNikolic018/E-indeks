@@ -32,7 +32,7 @@ Route::get('/', function () {
         }
     }
     return view('auth.login');
-});
+})->name('/');
 
 Route::fallback(function(Request $req){
     if(Auth::check()){
@@ -50,7 +50,7 @@ Route::fallback(function(Request $req){
     return redirect()->route('login');
 });
 
-Route::group(['middleware' => ['auth','can:isAdmin']], function() {
+Route::group(['middleware' => ['auth','can:isSuperAdmin']], function() {
 
     // Ocene
     Route::prefix('ocene')->group(function(){
@@ -114,6 +114,8 @@ Route::group(['middleware' => ['auth','can:isSuperAdmin']], function() {
 
         Route::post('brisanje_predmeta/{id}',[App\Http\Controllers\PredmetController::class,'brisanje_predmeta'])->name('brisanje_predmeta');
 
+        Route::match(['get','post'],'kopiranje_predmeta/{id}',[App\Http\Controllers\PredmetController::class,'kopiranje_predmeta'])->name('kopiranje_predmeta');
+
 
 
 
@@ -133,12 +135,12 @@ Route::group(['middleware' => ['auth','can:isSuperAdmin']], function() {
 
 
     });
-    
+
     //Profesori
     Route::prefix('profesori')->group(function(){
         Route::get('/',[App\Http\Controllers\ProfesorController::class,'index'])->name('profesori');
 
-        
+
         Route::match(['get','post'],'novi_profesor',[App\Http\Controllers\ProfesorController::class,'novi_profesor'])->name('novi_profesor');
 
         Route::get('profesor/{id}',[App\Http\Controllers\ProfesorController::class,'profesor'])->name('profesor');
@@ -154,7 +156,7 @@ Route::group(['middleware' => ['auth','can:isSuperAdmin']], function() {
     Route::prefix('obavestenja')->group(function(){
         Route::get('/',[App\Http\Controllers\ObavestenjeController::class,'index'])->name('obavestenja');
 
-        
+
         Route::match(['get','post'],'novo_obavestenje',[App\Http\Controllers\ObavestenjeController::class,'novo_obavestenje'])->name('novo_obavestenje');
 
         Route::get('obavestenje/{id}',[App\Http\Controllers\ObavestenjeController::class,'obavestenje'])->name('obavestenje');
@@ -165,6 +167,20 @@ Route::group(['middleware' => ['auth','can:isSuperAdmin']], function() {
 
         Route::get('odobrenje_obavestenja/{id}/{odobrenje}',[App\Http\Controllers\ObavestenjeController::class,'odobrenje_obavestenja'])->name('odobrenje_obavestenja');
 
+
+    });
+
+    //Smerovi
+    Route::prefix('smerovi')->group(function(){
+        Route::get('/',[App\Http\Controllers\SmerController::class,'index'])->name('smerovi');
+
+        Route::match(['get','post'],'novi_smer',[App\Http\Controllers\SmerController::class,'novi_smer'])->name('novi_smer');
+
+        Route::get('smer/{id}',[App\Http\Controllers\SmerController::class,'smer'])->name('smer');
+
+        Route::match(['get','post'],'izmena_smera/{id}',[App\Http\Controllers\SmerController::class,'izmena_smera'])->name('izmena_smera');
+
+        Route::post('brisanje_smera/{id}',[App\Http\Controllers\SmerController::class,'brisanje_smera'])->name('brisanje_smera');
 
     });
 

@@ -31,6 +31,49 @@ class Student extends Model
     /**
      * @var array
      */
-    protected $fillable = ['ime', 'ime_roditelja', 'prezime', 'broj_indeksa', 'godina_studija', 'jmbg', 'datum_rodjenja', 'espb', 'prosek_ocena', 'broj_telefona', 'email'];
+    protected $fillable = ['ime', 'ime_roditelja', 'prezime', 'broj_indeksa', 'godina_studija', 'jmbg', 'datum_rodjenja', 'espb', 'prosek_ocena', 'broj_telefona', 'email','smer'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function smers()
+    {
+        return $this->belongsTo(Smer::class,'smer','id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'email', 'email');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ocene()
+    {
+        return $this->hasMany(Ocena::class, 'student_id', 'id');
+    }
+
+    // /**
+    //  * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+    //  */
+    // public function predmet()
+    // {
+    //     return $this->hasManyThrough(
+    //         Ocena::class,
+    //         Predmet::class,
+    //         'predmet_id',
+    //         '',
+    //         'student_id',
+    //         'id'
+
+    //     );
+    // }
+
+    // URADITI HAS MANY THROUGH ZA PREDMETE IZ KOJIH SU OCENE,
+    // ZNACI KORISTITI PREDMETE I OCENE I NJIHOVE KLJUCEVE
 
 }

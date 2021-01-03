@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Predmet;
 use App\Models\Student;
 use App\Models\Ocena;
+use App\Models\Smer;
+
 
 class PredmetController extends Controller
 {
@@ -37,10 +39,11 @@ class PredmetController extends Controller
         // Ako pristupamo stranici
         if($req->method()=='GET')
         {
-            return view('admin.predmeti.novi_predmet');
+            $smerovi=Smer::all();
+            return view('admin.predmeti.novi_predmet',['smerovi'=>$smerovi]);
         }
         // Ako unosimo podatke
-        $input=['sifra'=>$req->sifra,'naziv'=>$req->naziv,'godina_studija'=>$req->godina_studija,'espb'=>$req->espb,'obavezni_izborni'=>$req->obavezni_izborni];
+        $input=['sifra'=>$req->sifra,'naziv'=>$req->naziv,'godina_studija'=>$req->godina_studija,'espb'=>$req->espb,'obavezni_izborni'=>$req->obavezni_izborni,'smerovi'=>$req->smer];
         // Validator
         $validator=Validator::make($input,[
             'sifra'=>['required','max:10',
@@ -49,6 +52,7 @@ class PredmetController extends Controller
             'espb'=>'required|digits:1',
             'godina_studija'=>'required|numeric|digits:1',
             'obavezni_izborni'=>'required',
+            'smerovi'=>'required'
         ]);
         // Ako polja nisu validna
         if($validator->fails()){
@@ -56,6 +60,16 @@ class PredmetController extends Controller
         }
         // Ako jesu
         Predmet::create($input);
+        // $predmeti=Smer::where('id',$req->smer)->pluck('predmeti');
+        // if(strpos($predmeti,',') !== false){
+        //     $predmeti=$predmeti.','.$req->naziv;
+        //     $predmeti=['predmeti'=>$predmeti];
+        //     Smer::where('id',$req->smer)->update($predmeti);
+        // } else {
+        //     $predmeti=['predmeti'=>$req->naziv];
+        //     Smer::where('id',$req->smer)->update($predmeti);
+        // }
+
 
         $req->session()->flash('predmet',['success','Uspešno dodat predmet '.$req->naziv.'!']);
         return redirect()->route('predmeti');
@@ -67,11 +81,12 @@ class PredmetController extends Controller
         // Ako zelimo da pristupimo stranici
         if($req->method()=='GET')
         {
+            $smerovi=Smer::all();
             $predmet=Predmet::where('id',$id)->first();
-            return view('admin.predmeti.izmena_predmeta',['predmet'=>$predmet]);
+            return view('admin.predmeti.izmena_predmeta',['predmet'=>$predmet,'smerovi'=>$smerovi]);
         }
         // Ako unosimo podatke
-        $input=['sifra'=>$req->sifra,'naziv'=>$req->naziv,'godina_studija'=>$req->godina_studija,'espb'=>$req->espb,'obavezni_izborni'=>$req->obavezni_izborni];
+        $input=['sifra'=>$req->sifra,'naziv'=>$req->naziv,'godina_studija'=>$req->godina_studija,'espb'=>$req->espb,'obavezni_izborni'=>$req->obavezni_izborni,'smerovi'=>$req->smer];
 
         // Validator
         $validator=Validator::make($input,[
@@ -81,6 +96,7 @@ class PredmetController extends Controller
             'espb'=>'required|digits:1',
             'godina_studija'=>'required|numeric|digits:1',
             'obavezni_izborni'=>'required',
+            'smerovi'=>'required'
         ]);
         // Ako polja nisu validna
         if($validator->fails()){
@@ -90,6 +106,40 @@ class PredmetController extends Controller
         Predmet::where('id',$id)->update($input);
 
         $req->session()->flash('predmet',['success','Uspešno izmenjen predmet '.$req->naziv.'!']);
+        return redirect()->route('predmeti');
+    }
+
+    public function kopiranje_predmeta($id, Request $req)
+    {
+        // Ako zelimo da pristupimo stranici
+        if($req->method()=='GET')
+        {
+            $predmet=Predmet::find($id);
+            $smerovi=Smer::where('id','!=',$predmet->smerovi)->get();
+            return view('admin.predmeti.kopiranje_predmeta',['predmet'=>$predmet,'smerovi'=>$smerovi]);
+        }
+        $predmet=Predmet::find($id);
+
+        // Ako unosimo podatke
+        $input=['sifra'=>$req->sifra,'naziv'=>$predmet->naziv,'godina_studija'=>$req->godina_studija,'espb'=>$req->espb,'obavezni_izborni'=>$req->obavezni_izborni,'smerovi'=>$req->smer];
+
+        // Validator
+        $validator=Validator::make($input,[
+            'sifra'=>['required','max:10',
+            'regex:/^([A-Z]+[0-9]+)/',"unique:predmeti,sifra"],
+            'espb'=>'required|digits:1',
+            'godina_studija'=>'required|numeric|digits:1',
+            'obavezni_izborni'=>'required',
+            'smerovi'=>'required'
+        ]);
+        // Ako polja nisu validna
+        if($validator->fails()){
+            return back()->withErrors($validator)->withInput();
+        }
+
+        Predmet::create($input);
+
+        $req->session()->flash('predmet',['success','Uspešno kopiran predmet '.$req->naziv.'!']);
         return redirect()->route('predmeti');
     }
 

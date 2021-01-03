@@ -78,7 +78,7 @@
                                             {{$predmeti->where('godina_studija',1)->count()}}
                                         </span></h4>
                                 </div>
-                                <div class="card-body bg-dark">
+                                <div class="card-body bg-dark" id="prva">
                                     {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -87,6 +87,7 @@
                                                     <tr>
                                                         <th scope="col">Sifra</th>
                                                         <th scope="col">Naziv</th>
+                                                        <th scope="col">Smer</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Obavezni/Izborni</th>
                                                         <th scope="col">Akcije</th>
@@ -99,6 +100,7 @@
 
                                                         <td>{{ $predmet->sifra }}</td>
                                                         <td>{{ $predmet->naziv }}</td>
+                                                        <td>{{ $predmet->smer->naziv }}</td>
                                                         <td>{{ $predmet->espb }}</td>
                                                         <td>{{ $predmet->obavezni_izborni }}</td>
                                                         <td class="d-inline-flex">
@@ -120,10 +122,16 @@
                                                                         <i class="fas fa-edit" style="color:orange"></i>
                                                                         Izmeni
                                                                     </a>
+                                                                    <a class="dropdown-item"
+                                                                        href={{ route('kopiranje_predmeta',['id'=>$predmet->id]) }}
+                                                                        role="button">
+                                                                        <i class="far fa-copy" style="color:gray"></i>
+                                                                        Kopiraj
+                                                                    </a>
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{ $predmet->id }}">
+                                                                        data-target="#exampleModal{{ $predmet->id }}1">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -131,13 +139,13 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $predmet->id }}"
+                                                            <div class="modal fade" id="exampleModal{{ $predmet->id }}1"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">Brisanje
                                                                                 studenta
                                                                             </h5>
@@ -146,7 +154,7 @@
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete
                                                                                 predmet
                                                                                 "{{ $predmet->naziv }}"?</b>
@@ -204,6 +212,7 @@
                                                     <tr>
                                                         <th scope="col">Sifra</th>
                                                         <th scope="col">Naziv</th>
+                                                        <th scope="col">Smer</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Obavezni/Izborni</th>
                                                         <th scope="col">Akcije</th>
@@ -216,6 +225,7 @@
 
                                                         <td>{{ $predmet->sifra }}</td>
                                                         <td>{{ $predmet->naziv }}</td>
+                                                        <td>{{ $predmet->smer->naziv }}</td>
                                                         <td>{{ $predmet->espb }}</td>
                                                         <td>{{ $predmet->obavezni_izborni }}</td>
                                                         <td class="d-inline-flex">
@@ -237,10 +247,16 @@
                                                                         <i class="fas fa-edit" style="color:orange"></i>
                                                                         Izmeni
                                                                     </a>
+                                                                    <a class="dropdown-item"
+                                                                        href={{ route('kopiranje_predmeta',['id'=>$predmet->id]) }}
+                                                                        role="button">
+                                                                        <i class="far fa-copy" style="color:gray"></i>
+                                                                        Kopiraj
+                                                                    </a>
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{ $predmet->id }}">
+                                                                        data-target="#exampleModal{{ $predmet->id }}2">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -248,13 +264,13 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $predmet->id }}"
+                                                            <div class="modal fade" id="exampleModal{{ $predmet->id }}2"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">Brisanje
                                                                                 studenta
                                                                             </h5>
@@ -263,7 +279,7 @@
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete
                                                                                 predmet
                                                                                 "{{ $predmet->naziv }}"?</b>
@@ -319,6 +335,7 @@
                                                     <tr>
                                                         <th scope="col">Sifra</th>
                                                         <th scope="col">Naziv</th>
+                                                        <th scope="col">Smer</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Obavezni/Izborni</th>
                                                         <th scope="col">Akcije</th>
@@ -331,6 +348,7 @@
 
                                                         <td>{{ $predmet->sifra }}</td>
                                                         <td>{{ $predmet->naziv }}</td>
+                                                        <td>{{ $predmet->smer->naziv }}</td>
                                                         <td>{{ $predmet->espb }}</td>
                                                         <td>{{ $predmet->obavezni_izborni }}</td>
                                                         <td class="d-inline-flex">
@@ -352,10 +370,16 @@
                                                                         <i class="fas fa-edit" style="color:orange"></i>
                                                                         Izmeni
                                                                     </a>
+                                                                    <a class="dropdown-item"
+                                                                        href={{ route('kopiranje_predmeta',['id'=>$predmet->id]) }}
+                                                                        role="button">
+                                                                        <i class="far fa-copy" style="color:gray"></i>
+                                                                        Kopiraj
+                                                                    </a>
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{ $predmet->id }}">
+                                                                        data-target="#exampleModal{{ $predmet->id }}3">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -363,13 +387,13 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $predmet->id }}"
+                                                            <div class="modal fade" id="exampleModal{{ $predmet->id }}3"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">Brisanje
                                                                                 studenta
                                                                             </h5>
@@ -378,7 +402,7 @@
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete
                                                                                 predmet
                                                                                 "{{ $predmet->naziv }}"?</b>
@@ -420,7 +444,8 @@
                         <div class="collapse multi-collapse show" id="multiCollapseExample4">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="text-center font-weight-bold pt-2">SVI PREDMETI <span
+
+                                    <h4 class="text-center font-weight-bold pt-2" focus>SVI PREDMETI <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ PREDMETA</b>" data-html="true">
                                             {{$predmeti->count()}}
@@ -435,6 +460,7 @@
                                                     <tr>
                                                         <th scope="col">Sifra</th>
                                                         <th scope="col">Naziv</th>
+                                                        <th scope="col">Smer</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Godina studija</th>
                                                         <th scope="col">Obavezni/Izborni</th>
@@ -447,6 +473,7 @@
 
                                                         <td>{{ $predmet->sifra }}</td>
                                                         <td>{{ $predmet->naziv }}</td>
+                                                        <td>{{ $predmet->smer->naziv }}</td>
                                                         <td>{{ $predmet->espb }}</td>
                                                         <td>{{$predmet->godina_studija}}</td>
                                                         <td>{{ $predmet->obavezni_izborni }}</td>
@@ -469,10 +496,16 @@
                                                                         <i class="fas fa-edit" style="color:orange"></i>
                                                                         Izmeni
                                                                     </a>
+                                                                    <a class="dropdown-item"
+                                                                        href={{ route('kopiranje_predmeta',['id'=>$predmet->id]) }}
+                                                                        role="button">
+                                                                        <i class="far fa-copy" style="color:gray"></i>
+                                                                        Kopiraj
+                                                                    </a>
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{ $predmet->id }}">
+                                                                        data-target="#exampleModal{{ $predmet->id }}4">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -480,13 +513,13 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $predmet->id }}"
+                                                            <div class="modal fade" id="exampleModal{{ $predmet->id }}4"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">
                                                                                 Brisanje
                                                                                 studenta
@@ -496,7 +529,7 @@
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete
                                                                                 predmet
                                                                                 "{{ $predmet->naziv }}"?</b>

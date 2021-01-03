@@ -259,6 +259,10 @@ return [
         'datum'=>[
             'required'=>'Unesite datum!',
             'before_or_equal'=>'Obaveštenje ne može biti napisano u budućnosti!'
+        ],
+        'smer'=>[
+            'required'=>'Izaberite smer!',
+            'exists'=>'Ovaj smer ne postoji!'
         ]
     ],
 

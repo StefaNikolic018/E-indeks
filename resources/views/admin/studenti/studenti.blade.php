@@ -476,6 +476,7 @@
                                                         <th scope="col">Ime</th>
                                                         <th scope="col">Prezime</th>
                                                         <th scope="col">Godina studija</th>
+                                                        <th scope="col">Smer</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Prosek ocena</th>
                                                         <th scope="col"> &nbsp;Akcije</th>
@@ -488,8 +489,15 @@
                                                         <td>{{ $student->ime }}</td>
                                                         <td>{{ $student->prezime }}</td>
                                                         <td>{{ $student->godina_studija }}</td>
+                                                        <td>{{ $student->smers->naziv }}</td>
                                                         <td>{{ $student->espb }}</td>
-                                                        <td>{{ $student->prosek_ocena }}</td>
+                                                        <td>
+                                                            @if($student->prosek_ocena != NULL)
+                                                            {{ $student->prosek_ocena }}
+                                                            @else
+                                                                0.00
+                                                            @endif
+                                                        </td>
 
                                                         <td class="d-inline-flex">
 

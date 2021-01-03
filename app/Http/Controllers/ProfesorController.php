@@ -29,6 +29,8 @@ class ProfesorController extends Controller
             $predmeti=Predmet::all();
             if(Profesor::count()==0){
                 $emails=User::select('email')->where('role','admin')->get();
+            } else if(Profesor::count()==User::where('role','admin')->count()){
+                $emails=[];
             } else {
                 $emails=User::rightJoin('profesori','profesori.email_korisnika','!=','users.email')->where('users.email','!=','profesori.email_korisnika')->where('users.role','admin')->get(['users.email']);
             }

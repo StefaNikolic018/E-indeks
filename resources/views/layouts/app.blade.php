@@ -42,7 +42,7 @@
     <div id="app">
         @if(Auth::check())
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-            <a class="navbar-brand " href={{ route('studenti') }}>Evidencija Studenata</a>
+            <a class="navbar-brand " href={{ route('/') }}>Evidencija Studenata</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -170,7 +170,7 @@
                 <ul class="navbar-nav mr-auto">
                     @if(Request::is('predmeti') || Request::is('predmeti/*') || Request::is('korisnici') ||
                     Request::is('korisnici/*') || Request::is('studenti') || Request::is('studenti/*') ||
-                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*'))
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*'))
                     <li class="nav-item">
                         <a class="nav-link
                         @if(Request::is('pocetna'))
@@ -181,7 +181,7 @@
                     </li>
                     @endif
                     @if(Request::is('predmeti') || Request::is('predmeti/*') || Request::is('korisnici') ||
-                    Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*'))
+                    Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*'))
                     <li class="nav-item
                     @if(Request::is('studenti'))
                     {{'active'}}
@@ -226,7 +226,7 @@
                     </li>
                     @endif
                     @if(Request::is('predmeti') || Request::is('predmeti/*') || Request::is('korisnici') ||
-                    Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna') || Request::is('profesori') || Request::is('studenti/*')|| Request::is('obavestenja')|| Request::is('obavestenja/*'))
+                    Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna') || Request::is('profesori') || Request::is('studenti/*')|| Request::is('obavestenja')|| Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*'))
                     <li class="nav-item
                     @if(Request::is('profesori'))
                     {{'active'}}
@@ -263,7 +263,8 @@
                     @endif
                     @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('korisnici') ||
                     Request::is('korisnici/*') || Request::is('predmeti') || Request::is('ocene/*') ||
-                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*'))
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*')
+                    || Request::is('smerovi') || Request::is('smerovi/*'))
                     <li class="nav-item
                     @if(Request::is('predmeti'))
                     {{'active'}}
@@ -287,10 +288,18 @@
                             </li>
                         </ol>
                     </li>
+                    @elseif(Request::is('predmeti/kopiranje_predmeta/*'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('predmeti')}}>Predmeti</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Kopiranje predmeta "{{$predmet->naziv}}"
+                            </li>
+                        </ol>
+                    </li>
                     @endif
                     @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('predmeti') ||
                     Request::is('predmeti/*') || Request::is('korisnici') || Request::is('ocene/*') ||
-                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*'))
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*'))
                     <li class="nav-item
                     @if(Request::is('korisnici'))
                         {{'active'}}
@@ -317,13 +326,13 @@
                     @endif
                     @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('predmeti') ||
                     Request::is('predmeti/*') || Request::is('korisnici') || Request::is('ocene/*') ||
-                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('korisnici/*') )
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('korisnici/*') || Request::is('smerovi') || Request::is('smerovi/*'))
                     <li class="nav-item
                     @if(Request::is('obavestenja'))
                         {{'active'}}
                     @endif
                     ">
-                    <a class="nav-link" href={{ route('obavestenja') }}><i class="fas fa-clipboard"></i> Obaveštenja 
+                    <a class="nav-link" href={{ route('obavestenja') }}><i class="fas fa-clipboard"></i> Obaveštenja
                         @if(App\Http\Controllers\ObavestenjeController::brojObavestenja()>0)
                         <span
                         class="badge badge-danger badge-pill shadow" data-toggle="tooltip"
@@ -354,6 +363,42 @@
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('obavestenja')}}>Obaveštenja</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Obaveštenje "{{substr($obavestenje->naslov,0,10)}}..."</li>
+                        </ol>
+                    </li>
+                    @endif
+
+                    @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('predmeti') ||
+                    Request::is('predmeti/*') || Request::is('korisnici') || Request::is('ocene/*') ||
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('korisnici/*') || Request::is('smerovi'))
+                    <li class="nav-item
+                    @if(Request::is('smerovi'))
+                        {{'active'}}
+                    @endif
+                    ">
+                    <a class="nav-link" href={{ route('smerovi') }}><i class="fas fa-swatchbook"></i> Smerovi
+                    </a>
+                    </li>
+                    @endif
+                    @if(Request::is('smerovi/novi_smer'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('smerovi')}}>Smerovi</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Novi smer</li>
+                        </ol>
+                    </li>
+                    @elseif(Request::is('smerovi/izmena_smera/*'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('smerovi')}}>Smerovi</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('smerovi',['id'=>$smer->id])}}>Smer "{{ substr($smer->naziv,0,10)}}..."</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena smera "{{substr($smer->naziv,0,10)}}..."</li>
+                        </ol>
+                    </li>
+                    @elseif(Request::is('smerovi/smer/*'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('smerovi')}}>Smerovi</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Smer "{{substr($smer->naziv,0,10)}}..."</li>
                         </ol>
                     </li>
                     @endif

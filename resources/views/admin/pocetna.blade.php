@@ -32,7 +32,7 @@
         {{-- PREDMETI START --}}
         <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="card bg-gradient-primary text-center p-3 shadow-lg">
-                <a style="text-decoration: none; color:inherit;" href="{{route('predmeti')}}">
+                <a style="text-decoration: none; color:inherit;" href="{{route('predmeti','svi')}}">
                 <h2 class="font-weight-bold" style="text-shadow: 1px 1px lightgray"><i class="fas fa-book"></i> PREDMETI
                 </h2>
                 </a>
@@ -82,8 +82,16 @@
         {{-- OBAVESTENJA START --}}
         <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="card bg-gradient-secondary text-center p-3 shadow-lg">
-                <h2 class="font-weight-bold" style="text-shadow: 1px 1px lightgray"><i class="fas fa-book"></i>
+                @if($neodobrena<1)
+                <a href="{{route('obavestenja')}}" style="text-decoration: none; color:inherit;">
+                <h2 class="font-weight-bold" style="text-shadow: 1px 1px lightgray; "><i class="fas fa-clipboard"></i>
                     OBAVEŠTENJA</h2>
+                </a>
+                @else
+                <h2 class="font-weight-bold" style="text-shadow: 1px 1px lightgray"><i class="fas fa-clipboard"></i>
+                    OBAVEŠTENJA
+                </h2>
+                @endif
                 <h2 class="font-weight-bold" style="text-shadow: 1px 1px lightgray">
                     <span class="badge badge-pill badge-light shadow">
                         + {{ $obavestenja }}

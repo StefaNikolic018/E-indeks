@@ -34,30 +34,27 @@ class User extends Authenticatable
         'password',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function obavestenje()
+    {
+        return $this->hasMany(Obavestenje::class, 'potpis', 'role');
+    }
 
-    // Determines which role
-    // public function isAdmin($id){
-    //     $role=self::where('id',$id)->first('role');
-    //     if($role=='admin'){
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function profesor()
+    {
+        return $this->hasOne(Profesor::class, 'email_korisnika', 'email');
+    }
 
-    // public function isUser($id){
-    //     $role=self::where('id',$id)->first('role');
-    //     if($role=='user'){
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
-    // /**
-    //  * The attributes that should be cast to native types.
-    //  *
-    //  * @var array
-    //  */
-    // protected $casts = [
-    //     'email_verified_at' => 'datetime',
-    // ];
+        /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function student()
+    {
+        return $this->hasOne(Student::class, 'email', 'email');
+    }
 }

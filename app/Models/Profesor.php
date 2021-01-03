@@ -37,6 +37,6 @@ class Profesor extends Model
      */
     public function user()
     {
-        return $this->belongsTo('AppModels\User', 'email_korisnika', 'email');
+        return $this->belongsTo(User::class, 'email_korisnika', 'email');
     }
 }
