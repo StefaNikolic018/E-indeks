@@ -43,4 +43,12 @@ class Smer extends Model
         return $this->hasMany(Predmet::class, 'smerovi','id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function raspored()
+    {
+        return $this->hasMany(Raspored::class, 'smer','id');
+    }
+
 }

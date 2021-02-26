@@ -22,7 +22,6 @@
             <form action={{ route('novi_smer') }} method="POST">
                 @csrf
                 <div class="form-row">
-{{-- 264, 228,221,257,214,216 --}}
                     <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
                         <label for="naziv">Naziv</label>
                             <input value="{{ old('naziv') }}" required
@@ -108,6 +107,6 @@
 
     </div>
     {{-- FORM TO ADD A STUDENT END --}}
-
+</div>
 
     @endsection

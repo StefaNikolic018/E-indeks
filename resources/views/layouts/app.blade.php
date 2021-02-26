@@ -8,6 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
     <title>
 
         @sectionMissing('title')
@@ -17,8 +18,11 @@
         @endif
 
     </title>
-
-    <!-- Scripts -->
+    {{-- fullcalendar start --}}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js" integrity="sha256-rPPF6R+AH/Gilj2aC00ZAuB2EKmnEjXlEWx5MkAp7bw=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/locales-all.min.js" integrity="sha256-/ZgxvDj3QtyBZNLbfJaHdwbHF8R6OW82+5MT5yBsH9g=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css" integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+    {{-- fullcalendar end --}}
     <script src="{{ asset('js/app.js') }}"></script>
 
     {{-- TOOLTIP SCRIPT START --}}
@@ -28,17 +32,15 @@
         });
     </script>
     {{-- TOOLTIP SCRIPT END --}}
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css?v=echo time();') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 </head>
 
-<body style="background-image: linear-gradient(to bottom right, rgb(252,252,252), rgb(90, 90, 90)">
+<body style="background-image: linear-gradient(to bottom right, rgb(252,252,252), rgb(90, 90, 90)" onload="createFormFields()">
     <div id="app">
         @if(Auth::check())
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
@@ -170,7 +172,7 @@
                 <ul class="navbar-nav mr-auto">
                     @if(Request::is('predmeti') || Request::is('predmeti/*') || Request::is('korisnici') ||
                     Request::is('korisnici/*') || Request::is('studenti') || Request::is('studenti/*') ||
-                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*'))
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*') || Request::is('raspored') || Request::is('raspored/*') || Request::is('raspored_ispita') || Request::is('raspored_ispita/*'))
                     <li class="nav-item">
                         <a class="nav-link
                         @if(Request::is('pocetna'))
@@ -181,7 +183,7 @@
                     </li>
                     @endif
                     @if(Request::is('predmeti') || Request::is('predmeti/*') || Request::is('korisnici') ||
-                    Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*'))
+                    Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*') || Request::is('raspored') || Request::is('raspored/*') || Request::is('raspored_ispita') || Request::is('raspored_ispita/*'))
                     <li class="nav-item
                     @if(Request::is('studenti'))
                     {{'active'}}
@@ -226,7 +228,7 @@
                     </li>
                     @endif
                     @if(Request::is('predmeti') || Request::is('predmeti/*') || Request::is('korisnici') ||
-                    Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna') || Request::is('profesori') || Request::is('studenti/*')|| Request::is('obavestenja')|| Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*'))
+                    Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna') || Request::is('profesori') || Request::is('studenti/*')|| Request::is('obavestenja')|| Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*') || Request::is('raspored') || Request::is('raspored/*') || Request::is('raspored_ispita') || Request::is('raspored_ispita/*'))
                     <li class="nav-item
                     @if(Request::is('profesori'))
                     {{'active'}}
@@ -264,7 +266,7 @@
                     @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('korisnici') ||
                     Request::is('korisnici/*') || Request::is('predmeti') || Request::is('ocene/*') ||
                     Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*')
-                    || Request::is('smerovi') || Request::is('smerovi/*'))
+                    || Request::is('smerovi') || Request::is('smerovi/*') || Request::is('raspored') || Request::is('raspored/*') || Request::is('raspored_ispita') || Request::is('raspored_ispita/*'))
                     <li class="nav-item
                     @if(Request::is('predmeti'))
                     {{'active'}}
@@ -299,7 +301,7 @@
                     @endif
                     @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('predmeti') ||
                     Request::is('predmeti/*') || Request::is('korisnici') || Request::is('ocene/*') ||
-                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*'))
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*') || Request::is('raspored') || Request::is('raspored/*') || Request::is('raspored_ispita') || Request::is('raspored_ispita/*'))
                     <li class="nav-item
                     @if(Request::is('korisnici'))
                         {{'active'}}
@@ -326,7 +328,7 @@
                     @endif
                     @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('predmeti') ||
                     Request::is('predmeti/*') || Request::is('korisnici') || Request::is('ocene/*') ||
-                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('korisnici/*') || Request::is('smerovi') || Request::is('smerovi/*'))
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('korisnici/*') || Request::is('smerovi') || Request::is('smerovi/*') || Request::is('raspored') || Request::is('raspored/*') || Request::is('raspored_ispita') || Request::is('raspored_ispita/*'))
                     <li class="nav-item
                     @if(Request::is('obavestenja'))
                         {{'active'}}
@@ -369,7 +371,7 @@
 
                     @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('predmeti') ||
                     Request::is('predmeti/*') || Request::is('korisnici') || Request::is('ocene/*') ||
-                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('korisnici/*') || Request::is('smerovi'))
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('korisnici/*') || Request::is('smerovi') || Request::is('raspored') || Request::is('raspored/*') || Request::is('raspored_ispita') || Request::is('raspored_ispita/*'))
                     <li class="nav-item
                     @if(Request::is('smerovi'))
                         {{'active'}}
@@ -403,6 +405,79 @@
                     </li>
                     @endif
 
+                    @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('predmeti') ||
+                    Request::is('predmeti/*') || Request::is('korisnici') || Request::is('ocene/*') ||
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('korisnici/*') || Request::is('smerovi') || Request::is('smerovi/*') || Request::is('raspored') || Request::is('raspored/*') || Request::is('raspored_ispita'))
+                    <li class="nav-item
+                    @if(Request::is('raspored_ispita'))
+                        {{'active'}}
+                    @endif
+                    ">
+                    <a class="nav-link" href={{ route('raspored_ispita') }}><i class="far fa-calendar-alt"></i> Ispiti/Kolokvijumi
+                    </a>
+                    </li>
+                    @endif
+                    @if(Request::is('raspored_ispita/novi_raspored'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('raspored_ispita')}}>Ispiti/Kolokvijumi</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Novi raspored</li>
+                        </ol>
+                    </li>
+                    @elseif(Request::is('raspored_ispita/izmena_rasporeda/*'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('raspored_ispita')}}>Ispiti/Kolokvijumi</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('raspored_ispita',['id'=>$raspored->id])}}>Raspored {{$raspored->godina_studija}}. godina"{{ substr($raspored->smerovi->naziv,0,10)}}..."</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena rasporeda..."</li>
+                        </ol>
+                    </li>
+                    @elseif(Request::is('raspored_ispita/jedan/*'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('raspored_ispita')}}>Ispiti/Kolokvijumi</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Raspored {{$raspored->godina_studija}}. godina "{{substr($raspored->smerovi->naziv,0,10)}}..."</li>
+                        </ol>
+                    </li>
+                    @endif
+
+                    @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('predmeti') ||
+                    Request::is('predmeti/*') || Request::is('korisnici') || Request::is('ocene/*') ||
+                    Request::is('pocetna') || Request::is('profesori') || Request::is('profesori/*') || Request::is('obavestenja') || Request::is('obavestenja/*') || Request::is('korisnici/*') || Request::is('smerovi') || Request::is('smerovi/*') || Request::is('raspored_ispita') || Request::is('raspored_ispita/*') || Request::is('raspored'))
+                    <li class="nav-item
+                    @if(Request::is('raspored'))
+                        {{'active'}}
+                    @endif
+                    ">
+                    <a class="nav-link" href={{ route('raspored') }}><i class="fas fa-table"></i> Raspored
+                    </a>
+                    </li>
+                    @endif
+                    @if(Request::is('raspored/novi_raspored'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('raspored')}}>Raspored</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Novi raspored</li>
+                        </ol>
+                    </li>
+                    @elseif(Request::is('raspored/izmena_rasporeda/*'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('raspored')}}>Raspored</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('raspored',['id'=>$raspored->id])}}>Raspored {{$raspored->godina_studija}}. godina"{{ substr($raspored->smerovi->naziv,0,10)}}..."</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena rasporeda..."</li>
+                        </ol>
+                    </li>
+                    @elseif(Request::is('raspored/jedan/*'))
+                    <li class="nav-item">
+                        <ol class="breadcrumb mt-1 mb-0 py-1">
+                            <li class="breadcrumb-item"><a href={{ route('raspored')}}>Raspored</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Raspored {{$raspored->godina_studija}}. godina "{{substr($raspored->smerovi->naziv,0,10)}}..."</li>
+                        </ol>
+                    </li>
+                    @endif
+
+
                 </ul>
                 @endcan
                 <!-- Default dropleft button -->
@@ -431,6 +506,7 @@
             @yield('content')
         </main>
     </div>
+
 </body>
 
 </html>

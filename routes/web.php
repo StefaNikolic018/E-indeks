@@ -184,10 +184,39 @@ Route::group(['middleware' => ['auth','can:isSuperAdmin']], function() {
 
     });
 
+    Route::prefix('raspored')->group(function(){
+        Route::get('/',[App\Http\Controllers\RasporedController::class,'index'])->name('raspored');
+
+        Route::match(['get','post'],'novi_raspored',[App\Http\Controllers\RasporedController::class,'novi_raspored'])->name('novi_raspored');
+
+        Route::match(['get','post'],'izmena_rasporeda/{id}',[App\Http\Controllers\RasporedController::class,'izmena_rasporeda'])->name('izmena_rasporeda');
+
+        Route::get('jedan/{id}',[App\Http\Controllers\RasporedController::class, 'raspored'])->name('jedan');
+
+        Route::post('brisanje_rasporeda/{id}',[App\Http\Controllers\RasporedController::class,'brisanje_rasporeda'])->name('brisanje_rasporeda');
+
+
+    });
+
+    // Kreiraj kontroler za raspored ispita i kolokvijuma
+    Route::prefix('raspored_ispita')->group(function(){
+        Route::get('/',[App\Http\Controllers\RasporedIspitaController::class,'index'])->name('raspored_ispita');
+
+        Route::match(['get','post'],'novi_raspored',[App\Http\Controllers\RasporedIspitaController::class,'novi_raspored'])->name('novi_dogadjaj');
+
+        Route::match(['get','post'],'izmena_rasporeda/{id}',[App\Http\Controllers\RasporedIspitaController::class,'izmena_rasporeda'])->name('izmena_rasporeda');
+
+        Route::get('jedan/{id}',[App\Http\Controllers\RasporedIspitaController::class, 'raspored'])->name('jedan');
+
+        Route::post('brisanje_rasporeda/{id}',[App\Http\Controllers\RasporedIspitaController::class,'brisanje_rasporeda'])->name('brisanje_rasporeda');
+
+
+    });
 
 
 
 });
+
 
     Route::get('/logout', function(Request $req){
         if(Auth::check()){
