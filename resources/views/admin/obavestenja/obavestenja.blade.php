@@ -4,12 +4,25 @@
 @section('content')
 
 
-<div class="container">
+<div class="container" id="kontejner">
     {{-- ALERT MESSAGES START --}}
+    {{-- <div class="row justify-content-center d-none">
+        <div class='col-lg-6 col-md-6 col-sm-12'>
+            <div class="alert alert-success" id="obavestenjeUspeh">
+                Uspešno izmenjen status obaveštenja!</div>
+        </div>
+    </div>
+    <div class="row justify-content-center d-none">
+        <div class='col-lg-6 col-md-6 col-sm-12'>
+            <div class="alert alert-danger" id="obavestenjeGreska">
+                Došlo je do greške, pokušajte ponovo!</div>
+        </div>
+    </div> --}}
+
     @if(session('obavestenje'))
     <div class="row justify-content-center">
         <div class='col-lg-6 col-md-6 col-sm-12'>
-            <div class="alert alert-{{ session('obavestenje')[0] }}">
+            <div class="alert alert-{{ session('obavestenje')[0] }}" id="obavestenje">
                 {{ session('obavestenje')[1] }}</div>
         </div>
     </div>
@@ -17,7 +30,7 @@
     @if(url()->previous()==url('/login'))
     <div class="row justify-content-center">
         <div class='col-lg-6 col-md-6  col-sm-12'>
-            <div class="alert alert-success shadow">Dobrodošli {{ Auth::user()->ime }}!</div>
+            <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
         </div>
     </div>
     @endif
@@ -180,7 +193,7 @@
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{ $obavestenje->id }}">
+                                                                        data-target="#exampleModal{{ $obavestenje->id }}1">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -188,7 +201,7 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $obavestenje->id }}"
+                                                            <div class="modal fade" id="exampleModal{{ $obavestenje->id }}1"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
@@ -328,7 +341,7 @@
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{ $obavestenje->id }}">
+                                                                        data-target="#exampleModal{{ $obavestenje->id }}2">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -336,7 +349,7 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $obavestenje->id }}"
+                                                            <div class="modal fade" id="exampleModal{{ $obavestenje->id }}2"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
@@ -445,9 +458,11 @@
                                                         <td>{{ $obavestenje->datum }}</td>
                                                         <td>
                                                             @if($obavestenje->odobrenje=='0')
+                                                            {{-- <button class="btn btn-success font-weight-bold shadow" onclick="odobrenje('1',{{$obavestenje->id}})">ODOBRITI</button> --}}
                                                             <a class="btn btn-success font-weight-bold shadow" href="{{ route('odobrenje_obavestenja',['id'=>$obavestenje->id,'odobrenje'=>1]) }}" role="button">ODOBRITI</a>
 
                                                             @elseif($obavestenje->odobrenje=='1')
+                                                            {{-- <button class="btn btn-danger font-weight-bold shadow" onclick="odobrenje('0',{{$obavestenje->id}})">ZABRANITI</button> --}}
                                                             <a class="btn btn-danger font-weight-bold shadow" href="{{ route('odobrenje_obavestenja',['id'=>$obavestenje->id,'odobrenje'=>0]) }}" role="button">ZABRANITI</a>
                                                             @endif
 
@@ -482,7 +497,7 @@
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{ $obavestenje->id }}">
+                                                                        data-target="#exampleModal{{ $obavestenje->id }}3">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -490,7 +505,7 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $obavestenje->id }}"
+                                                            <div class="modal fade" id="exampleModal{{ $obavestenje->id }}3"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
@@ -551,6 +566,51 @@
     {{-- COLLAPSE FOR STUDENTS END --}}
 
 
-
 </div>
+{{-- <script>
+    function odobrenje(odobrenje,id){
+        console.log(odobrenje);
+        let izmenaUrl = "{{ route('odobrenje_obavestenja',[':id',':odobrenje']) }}";
+        izmenaUrl = izmenaUrl.replace(':id',id);
+        izmenaUrl= izmenaUrl.replace(':odobrenje',odobrenje);
+        $.ajax({
+            type: "POST",
+            url: izmenaUrl,
+            data: {
+                id: id,
+                odobrenje: odobrenje,
+            },
+            headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+            success:function(){
+                    document.getElementById('obavestenjeUspeh').classList.remove('d-none');
+                    $("#obavestenjeUspeh").fadeTo(2000, 500).slideUp(500, function(){
+                        $("#obavestenjeUspeh").slideUp(500);
+                    });
+                    let html='<div class="row justify-content-center d-none" id="obavestenjeUspeh">';
+                    html+='<div class="col-lg-6 col-md-6 col-sm-12">';
+                    html+='<div class="alert alert-success">';
+                    html+='Uspešno izmenjen status obaveštenja!';
+                    html+='</div>';
+                    html+='</div>';
+                    html+='</div>';
+                    document.getElementById('kontejner').insertAdjacentHTML('beforeBegin',html);
+            },error:function(){
+                    document.getElementById('obavestenjeGreska').classList.remove('d-none');
+                    $("#obavestenjeGreska").fadeTo(2000, 500).slideUp(500, function(){
+                        $("#obavestenjeGreska").slideUp(500);
+                    });
+                    let html='<div class="row justify-content-center d-none" id="obavestenjeGreska">';
+                    html+='<div class="col-lg-6 col-md-6 col-sm-12">';
+                    html+='<div class="alert alert-danger">';
+                    html+='Došlo je do greške, pokušajte ponovo!';
+                    html+='</div>';
+                    html+='</div>';
+                    html+='</div>';
+                    document.getElementById('kontejner').insertAdjacentHTML('beforeBegin',html);
+            }
+        });
+    }
+</script> --}}
 @endsection

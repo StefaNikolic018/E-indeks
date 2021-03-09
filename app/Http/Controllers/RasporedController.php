@@ -185,7 +185,7 @@ class RasporedController extends Controller
      */
     public function brisanje_rasporeda($id, Request $req){
         Raspored::where('id',$id)->delete();
-        $req->session()->flash('obavestenje',['success','Uspešno izbrisan raspored!']);
+        $req->session()->flash('raspored',['success','Uspešno izbrisan raspored!']);
         return redirect()->route('raspored');
     }
 

@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Obavestenje;
 use App\Models\Raspored;
 use App\Models\Smer;
+use App\Models\Dogadjaj;
 
 class RasporedIspitaController extends Controller
 {
@@ -36,8 +37,10 @@ class RasporedIspitaController extends Controller
         $rasporedi=Raspored::all();
         $rasporedi=$this->rastaviNiz($rasporedi);
         $predmeti=Predmet::all();
+        $dogadjaji=Dogadjaj::all();
+        $dogadjaji=$this->formatDatuma($dogadjaji);
 
-        return view('admin.raspored.raspored',['rasporedi'=>$rasporedi,'predmeti'=>$predmeti]);
+        return view('admin.raspored.raspored',['rasporedi'=>$rasporedi,'predmeti'=>$predmeti,'dogadjaji'=>$dogadjaji]);
     }
 
 
@@ -45,149 +48,121 @@ class RasporedIspitaController extends Controller
     /**
      * Shows the adding students panel
      */
-    public function novi_raspored(Request $req){
-        if($req->method()=='GET'){
-            $predmeti=Predmet::all();
-            $smerovi = Smer::all();
-            return view('admin.raspored.novi_raspored',['smerovi'=>$smerovi,'predmeti'=>$predmeti]);
-        }
-        $ponedeljak=$req->ponedeljak;
-        $pon=$this->kreirajNiz($ponedeljak,'Ponedeljak','',$req);
-        $utorak=$req->utorak;
-        $uto=$this->kreirajNiz($utorak,'Utorak','',$req);
-        $sreda=$req->sreda;
-        $sre=$this->kreirajNiz($sreda,'Sreda','',$req);
-        $cetvrtak=$req->cetvrtak;
-        $cet=$this->kreirajNiz($cetvrtak,'Četvrtak','',$req);
-        $petak=$req->petak;
-        $pet=$this->kreirajNiz($petak,'Petak','',$req);
+    public function novi_dogadjaj(Request $req){
+        // if($req->method()=='GET'){
+        //     $predmeti=Predmet::all();
+        //     $smerovi = Smer::all();
+        //     return view('admin.raspored.novi_raspored',['smerovi'=>$smerovi,'predmeti'=>$predmeti]);
+        // }
+        // $ponedeljak=$req->ponedeljak;
+        // $pon=$this->kreirajNiz($ponedeljak,'Ponedeljak','',$req);
+        // $utorak=$req->utorak;
+        // $uto=$this->kreirajNiz($utorak,'Utorak','',$req);
+        // $sreda=$req->sreda;
+        // $sre=$this->kreirajNiz($sreda,'Sreda','',$req);
+        // $cetvrtak=$req->cetvrtak;
+        // $cet=$this->kreirajNiz($cetvrtak,'Četvrtak','',$req);
+        // $petak=$req->petak;
+        // $pet=$this->kreirajNiz($petak,'Petak','',$req);
 
 
-        $input=['smer'=>$req->smer,'godina_studija'=>$req->godina_studija,'ponedeljak'=>$pon,'utorak'=>$uto,'sreda'=>$sre,'cetvrtak'=>$cet,'petak'=>$pet];
+        // $input=['smer'=>$req->smer,'godina_studija'=>$req->godina_studija,'ponedeljak'=>$pon,'utorak'=>$uto,'sreda'=>$sre,'cetvrtak'=>$cet,'petak'=>$pet];
 
+
+        // // Validator
+        // $validator=Validator::make($input,[
+        //     'smer'=>'required',
+        //     'godina_studija'=>'required|numeric',
+        // ]);
+        $input=['naslov'=>$req->naslov,'predmet'=>$req->predmet,'godina_studija'=>$req->godina_studija,'izbor'=>$req->izbor,'pocetak'=>$req->pocetak,'zavrsetak'=>$req->zavrsetak,'boja'=>$req->boja,'ceo_dan'=>$req->ceo_dan];
 
         // Validator
         $validator=Validator::make($input,[
-            'smer'=>'required',
+            'naslov'=>'required|string',
+            'predmet'=>'required|numeric',
             'godina_studija'=>'required|numeric',
+            'izbor'=>'required|string',
+            'pocetak'=>'required|date',
+            'zavrsetak'=>'required|date',
+            'boja'=>'required',
+            'ceo_dan'
         ]);
         // Ako polja nisu validna
         if($validator->fails()){
-            return back()->withErrors($validator)->withInput();
+            $req->session()->flash('raspored_ispita',['danger','Neispravno popunjena polja!']);
+            return back();
+            // return back()->withErrors($validator)->withInput();
         }
         // Ako jesu
-        Raspored::create($input);
-        $req->session()->flash('raspored',['success','Uspešno dodat raspored!']);
-        return redirect()->route('raspored');
+        Dogadjaj::create($input);
+        $req->session()->flash('raspored_ispita',['success','Uspešno dodat raspored!']);
+        return redirect()->route('raspored_ispita');
         }
 
 
-    /**
-     * Shows individual student
-     */
-    public function raspored($id){
-        $raspored=Raspored::where('id',$id)->get();
-        $raspored=$this->rastaviNiz($raspored);
-        $raspored1=Raspored::find($id);
-        foreach($raspored as $raspored){
-            $raspored1->ponedeljak=$raspored->ponedeljak;
-            $raspored1->utorak=$raspored->utorak;
-            $raspored1->sreda=$raspored->sreda;
-            $raspored1->cetvrtak=$raspored->cetvrtak;
-            $raspored1->petak=$raspored->petak;
+    // /**
+    //  * Shows individual student
+    //  */
+    // public function raspored($id){
+    //     $raspored=Raspored::where('id',$id)->get();
+    //     $raspored=$this->rastaviNiz($raspored);
+    //     $raspored1=Raspored::find($id);
+    //     foreach($raspored as $raspored){
+    //         $raspored1->ponedeljak=$raspored->ponedeljak;
+    //         $raspored1->utorak=$raspored->utorak;
+    //         $raspored1->sreda=$raspored->sreda;
+    //         $raspored1->cetvrtak=$raspored->cetvrtak;
+    //         $raspored1->petak=$raspored->petak;
 
-        }
+    //     }
 
-        // dd($raspored);
+    //     // dd($raspored);
 
-        return view('admin.raspored.jedan',['raspored'=>$raspored1]);
+    //     return view('admin.raspored.jedan',['raspored'=>$raspored1]);
 
-    }
+    // }
 
     /**
      * Updating students info
      */
     // TODO
-    public function izmena_rasporeda($id,Request $req){
-        if($req->method()=='GET'){
-            $raspored=Raspored::where('id',$id)->get();
-            $raspored=$this->rastaviNiz($raspored);
-            $raspored1=Raspored::find($id);
-            foreach($raspored as $raspored){
-                $raspored1->ponedeljak=$raspored->ponedeljak;
-                $raspored1->utorak=$raspored->utorak;
-                $raspored1->sreda=$raspored->sreda;
-                $raspored1->cetvrtak=$raspored->cetvrtak;
-                $raspored1->petak=$raspored->petak;
+    public function izmena_dogadjaja($id,Request $req){
+        if($req->id){
+            $input=['pocetak'=>$req->pocetak,'zavrsetak'=>$req->zavrsetak];
+        } else {
+            $input=['naslov'=>$req->naslov,'predmet'=>$req->predmet,'godina_studija'=>$req->godina_studija,'izbor'=>$req->izbor,'pocetak'=>$req->pocetak,'zavrsetak'=>$req->zavrsetak,'boja'=>$req->boja,'ceo_dan'=>$req->ceo_dan];
 
+            // Validator
+            $validator=Validator::make($input,[
+                'naslov'=>'required|string',
+                'predmet'=>'required|numeric',
+                'godina_studija'=>'required|numeric',
+                'izbor'=>'required|string',
+                'pocetak'=>'required|date',
+                'zavrsetak'=>'required|date',
+                'boja'=>'required',
+                'ceo_dan'
+            ]);
+            // Ako polja nisu validna
+            if($validator->fails()){
+                $req->session()->flash('raspored_ispita',['danger','Neispravno popunjena polja!']);
+                return back();
+                // return back()->withErrors($validator)->withInput()->with('dogadjaj_id',$id);
             }
-            if($raspored1->ponedeljak!='Nema predavanja'){
-                $pon=count($raspored1->ponedeljak)/4;
-            } else {
-                $pon=0;
-            }
-            if($raspored1->utorak!='Nema predavanja'){
-                $uto=count($raspored1->utorak)/4;
-            } else {
-                $uto=0;
-            }
-            if($raspored1->sreda!='Nema predavanja'){
-                $sre=count($raspored1->sreda)/4;
-            } else {
-                $sre=0;
-            }
-            if($raspored1->cetvrtak!='Nema predavanja'){
-                $cet=count($raspored1->cetvrtak)/4;
-            } else {
-                $cet=0;
-            }
-            if($raspored1->petak!='Nema predavanja'){
-                $pet=count($raspored1->petak)/4;
-            } else {
-                $pet=0;
-            }
-
-
-            $predmeti=Predmet::all();
-            return view('admin.raspored.izmena_rasporeda',['raspored'=>$raspored1,'predmeti'=>$predmeti,'pon'=>$pon,'uto'=>$uto,'sre'=>$sre,'cet'=>$cet,'pet'=>$pet]);
-        }
-        $ponedeljak=$req->ponedeljak;
-        $pon=$this->kreirajNiz($ponedeljak,'Ponedeljak','',$req);
-        $utorak=$req->utorak;
-        $uto=$this->kreirajNiz($utorak,'Utorak','',$req);
-        $sreda=$req->sreda;
-        $sre=$this->kreirajNiz($sreda,'Sreda','',$req);
-        $cetvrtak=$req->cetvrtak;
-        $cet=$this->kreirajNiz($cetvrtak,'Četvrtak','',$req);
-        $petak=$req->petak;
-        $pet=$this->kreirajNiz($petak,'Petak','',$req);
-
-
-        $input=['smer'=>$req->smer,'godina_studija'=>$req->godina_studija,'ponedeljak'=>$pon,'utorak'=>$uto,'sreda'=>$sre,'cetvrtak'=>$cet,'petak'=>$pet];
-
-
-        // Validator
-        $validator=Validator::make($input,[
-            'smer'=>'required',
-            'godina_studija'=>'required|numeric',
-        ]);
-        // Ako polja nisu validna
-        if($validator->fails()){
-            return back()->withErrors($validator)->withInput();
         }
         // Ako jesu
-        Raspored::where('id',$id)->update($input);
-        $req->session()->flash('raspored',['success','Uspešno izmenjen raspored!']);
-        return redirect()->route('raspored');
+        Dogadjaj::where('id',$id)->update($input);
+        $req->session()->flash('raspored_ispita',['success','Uspešno izmenjen događaj!']);
+        return redirect()->route('raspored_ispita');
     }
 
     /**
      * Deleting the student
      */
-    public function brisanje_rasporeda($id, Request $req){
-        Raspored::where('id',$id)->delete();
-        $req->session()->flash('obavestenje',['success','Uspešno izbrisan raspored!']);
-        return redirect()->route('raspored');
+    public function brisanje_dogadjaja($id, Request $req){
+        Dogadjaj::where('id',$id)->delete();
+        $req->session()->flash('raspored_ispita',['success','Uspešno izbrisan događaj!']);
+        return redirect()->route('raspored_ispita');
     }
 
     // Kreiramo niz vrednosti iz forme za raspored casova
@@ -243,5 +218,20 @@ class RasporedIspitaController extends Controller
             }
         }
         return $rasporedi;
+    }
+
+    private function formatDatuma($dogadjaji){
+        $niz=['pocetak','zavrsetak'];
+        foreach($dogadjaji as $dogadjaj){
+            foreach($niz as $polje){
+                $dan=substr($dogadjaj->$polje,0,strpos($dogadjaj->$polje,'.')+1);
+                $ostatak=substr($dogadjaj->$polje,strlen($dan),strlen($dogadjaj->$polje));
+                $mesec=substr($ostatak,0,strpos($ostatak,'.')+1);
+                $mesecDan=$mesec.$dan;
+                $datum=$mesec.$dan.substr($dogadjaj->$polje,strlen($mesecDan));
+                $dogadjaj->$polje=$datum;
+            }
+        }
+        return $dogadjaji;
     }
 }

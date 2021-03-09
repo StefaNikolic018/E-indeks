@@ -36,6 +36,13 @@ class Predmet extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function dogadjaj()
+    {
+        return $this->hasMany(Dogadjaj::class, 'predmet', 'id');
+    }
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function smer()

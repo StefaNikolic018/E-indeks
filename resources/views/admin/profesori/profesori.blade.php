@@ -9,8 +9,15 @@
     @if(session('profesor'))
     <div class="row justify-content-center">
         <div class='col-lg-6 col-md-6 col-sm-12'>
-            <div class="alert alert-{{ session('profesor')[0] }}">
+            <div class="alert alert-{{ session('profesor')[0] }}" id="profesor">
                 {{ session('profesor')[1] }}</div>
+        </div>
+    </div>
+    @endif
+    @if(url()->previous()==url('/login'))
+    <div class="row justify-content-center">
+        <div class='col-lg-6 col-md-6  col-sm-12'>
+            <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
         </div>
     </div>
     @endif
@@ -38,27 +45,27 @@
             <div class="card border-dark shadow-lg">
                 <div class="card-header pt-3">
                     <p class="text-center justify-content-around">
-                        <a class="btn btn-outline-primary font-weight-bold shadow mt-1" data-toggle="collapse"
+                        {{-- <a class="btn btn-outline-primary font-weight-bold shadow mt-1" data-toggle="collapse"
                             href="#multiCollapseExample1" role="button" aria-expanded="false"
                             aria-controls="multiCollapseExample1" style="width:138.512px">Smer 1 <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
-                                title="<b>BROJ PROFESORA</b>" data-html="true">
+                                title="<b>BROJ PROFESORA</b>" data-html="true"> --}}
                                 {{-- {{$profesori->where('godina_studija',1)->count()}} --}}
-                            </span></a>
-                        <button class="btn btn-primary font-weight-bold shadow mt-1" type="button"
+                            {{-- </span></a> --}}
+                        {{-- <button class="btn btn-primary font-weight-bold shadow mt-1" type="button"
                             data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false"
                             aria-controls="multiCollapseExample2" style="width:138.512px">Smer 2 <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
-                                title="<b>BROJ PROFESORA</b>" data-html="true">
+                                title="<b>BROJ PROFESORA</b>" data-html="true"> --}}
                                 {{-- {{$profesori->where('godina_studija',2)->count()}} --}}
-                            </span></button>
+                            {{-- </span></button>
                         <button class="btn btn-info font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample3" aria-expanded="false"
                             aria-controls="multiCollapseExample2" style="width:138.512px">Smer 3 <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
-                                title="<b>BROJ PROFESORA</b>" data-html="true">
+                                title="<b>BROJ PROFESORA</b>" data-html="true"> --}}
                                 {{-- {{$profesori->where('godina_studija',3)->count()}} --}}
-                            </span></button>
+                            {{-- </span></button> --}}
                         <button class="btn btn-dark font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample4" aria-expanded="false"
                             aria-controls="multiCollapseExample4" style="width:138.512px">Svi
@@ -70,20 +77,20 @@
                 </div>
                 <div class="row">
                     {{-- PRVA GODINA START --}}
-                    <div class="col-lg-12 col-mg-12 col-sm-12">
+                    {{-- <div class="col-lg-12 col-mg-12 col-sm-12">
                         <div class="collapse multi-collapse" id="multiCollapseExample1">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="text-center font-weight-bold pt-2">Smer 1 <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
-                                            data-placement="top" title="<b>BROJ PROFESORA</b>" data-html="true">
+                                            data-placement="top" title="<b>BROJ PROFESORA</b>" data-html="true"> --}}
                                             {{-- {{$stud->where('godina_studija',1)->count()}} --}}
-                                        </span></h4>
+                                        {{-- </span></h4>
                                 </div>
-                                <div class="card-body bg-dark">
+                                <div class="card-body bg-dark"> --}}
                                     {{-- TABLE ALL STUDENTS START --}}
-                                    <div class="row">
-                                        <div class="col-lg-12">
+                                    {{-- <div class="row">
+                                        <div class="col-lg-12"> --}}
                                             {{-- <table class="table table-dark table-hover table-responsive-sm">
                                                 <thead>
                                                     <tr>
@@ -185,32 +192,32 @@
                                                     @endforeach
                                                 </tbody>
                                             </table> --}}
-                                        </div>
+                                        {{-- </div>
 
-                                    </div>
+                                    </div> --}}
                                     {{-- TABLE ALL SUBJECTS END --}}
-                                </div>
+                                {{-- </div>
 
                             </div>
 
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- PRVA GODINA END --}}
                     {{-- DRUGA GODINA START --}}
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    {{-- <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="collapse multi-collapse" id="multiCollapseExample2">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="text-center font-weight-bold pt-2">DRUGA GODINA <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
-                                            data-placement="top" title="<b>BROJ PROFESORA</b>" data-html="true">
+                                            data-placement="top" title="<b>BROJ PROFESORA</b>" data-html="true"> --}}
                                             {{-- {{$stud->where('godina_studija',2)->count()}} --}}
-                                        </span></h4>
-                                </div>
+                                        {{-- </span></h4>
+                                </div> --}}
                                 {{-- TABLE ALL STUDENTS START --}}
-                                <div class="card-body bg-dark">
+                                {{-- <div class="card-body bg-dark">
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-12"> --}}
                                             {{-- <table class="table table-dark table-hover table-responsive-sm">
                                                 <thead>
                                                     <tr>
@@ -312,30 +319,30 @@
                                                     @endforeach
                                                 </tbody>
                                             </table> --}}
-                                        </div>
+                                        {{-- </div>
 
                                     </div>
-                                </div>
+                                </div> --}}
                                 {{-- TABLE ALL SUBJECTS END --}}
-                            </div>
+                            {{-- </div>
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- DRUGA GODINA END --}}
                     {{-- TRECA GODINA START --}}
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    {{-- <div class="col-lg-12 col-md-12 col-sm-12">
                         <div class="collapse multi-collapse" id="multiCollapseExample3">
                             <div class="card">
                                 <div class="card-header">
                                     <h4 class="text-center font-weight-bold pt-2">TREĆA GODINA <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
-                                            data-placement="top" title="<b>BROJ PROFESORA</b>" data-html="true">
+                                            data-placement="top" title="<b>BROJ PROFESORA</b>" data-html="true"> --}}
                                             {{-- {{$stud->where('godina_studija',3)->count()}} --}}
-                                        </span></h4>
-                                </div>
-                                <div class="card-body bg-dark">
+                                        {{-- </span></h4> --}}
+                                {{-- </div>
+                                <div class="card-body bg-dark"> --}}
                                     {{-- TABLE ALL SUBJECTS START --}}
-                                    <div class="row">
-                                        <div class="col-lg-12">
+                                    {{-- <div class="row">
+                                        <div class="col-lg-12"> --}}
                                             {{-- <table class="table table-dark table-hover table-responsive-sm">
                                                 <thead>
                                                     <tr>
@@ -437,15 +444,15 @@
                                                     @endforeach
                                                 </tbody>
                                             </table> --}}
-                                        </div>
+                                        {{-- </div>
 
-                                    </div>
+                                    </div> --}}
                                     {{-- TABLE ALL SUBJECTS END --}}
-                                </div>
+                                {{-- </div>
 
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- TRECA GODINA END --}}
                     {{-- SVI STUDENTI START --}}
                     <div class="col-lg-12 col-mg-12 col-sm-12">

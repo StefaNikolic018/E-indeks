@@ -9,10 +9,17 @@
     @if(session('profesor'))
         <div class="row justify-content-center">
             <div class='col-lg-6 col-xs-12'>
-                <div class="alert alert-{{ session('profesor')[0] }} shadow">
+                <div class="alert alert-{{ session('profesor')[0] }} shadow" id="profesor">
                     {{ session('profesor')[1] }}</div>
             </div>
         </div>
+    @endif
+    @if(url()->previous()==url('/login'))
+    <div class="row justify-content-center">
+        <div class='col-lg-6 col-md-6  col-sm-12'>
+            <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
+        </div>
+    </div>
     @endif
     {{-- ALERT MESSAGES END --}}
 
@@ -27,7 +34,7 @@
                             {{-- OVDE TREBA DA BUDE RACUNICA OD DATUMA ZAPOSLJENJA --}}
                             @php
                              $d=date("Y");
-                             echo ($d-$profesor->datum_zaposljenja);   
+                             echo ($d-$profesor->datum_zaposljenja);
                             @endphp
                         </span>
                         <span class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
@@ -111,7 +118,7 @@
                             <td>{{ $profesor->datum_rodjenja }}</td>
                         </tr>
                     </tbody>
-                    
+
                 </table>
                                                 <div class="list-group text-center border border-secondary">
                                                     <button type="button"

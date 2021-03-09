@@ -7,7 +7,7 @@
         @if(session('raspored'))
         <div class="row justify-content-center">
             <div class='col-lg-6 col-md-6 col-sm-12'>
-                <div class="alert alert-{{ session('raspored')[0] }}">
+                <div class="alert alert-{{ session('raspored')[0] }}" id="raspored">
                     {{ session('raspored')[1] }}</div>
             </div>
         </div>
@@ -15,7 +15,7 @@
         @if(url()->previous()==url('/login'))
         <div class="row justify-content-center">
             <div class='col-lg-6 col-md-6  col-sm-12'>
-                <div class="alert alert-success shadow">Dobrodošli {{ Auth::user()->ime }}!</div>
+                <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
             </div>
         </div>
         @endif
@@ -23,7 +23,7 @@
         {{-- JUMBOTRON START --}}
         <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark shadow-lg">
             <div class="container">
-                <h1 style="text-shadow: 2px 2px lightgray"><i class="fas fa-table"></i> Raspored časova
+                <h1 style="text-shadow: 2px 2px lightgray"><i class="fas fa-table"></i> Raspored predavanja
                 </h1>
 
                 <p class="lead">U ovoj sekciji se upravlja rasporedom <a
@@ -208,8 +208,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->ponedeljak != 'Nema predavanja'){
-                                                                        $i=count($raspored->ponedeljak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->ponedeljak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->ponedeljak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -223,8 +228,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->utorak != 'Nema predavanja'){
-                                                                        $i=count($raspored->utorak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->utorak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->utorak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -238,8 +248,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->sreda != 'Nema predavanja'){
-                                                                        $i=count($raspored->sreda)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->sreda)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->sreda)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -253,8 +268,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->cetvrtak != 'Nema predavanja'){
-                                                                        $i=count($raspored->cetvrtak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->cetvrtak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->cetvrtak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -268,8 +288,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->petak != 'Nema predavanja'){
-                                                                        $i=count($raspored->petak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->petak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->petak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -349,6 +374,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            {{-- Modal end --}}
                                                         </th>
                                                             </tr>
 
@@ -404,8 +430,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->ponedeljak != 'Nema predavanja'){
-                                                                        $i=count($raspored->ponedeljak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->ponedeljak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->ponedeljak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -419,8 +450,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->utorak != 'Nema predavanja'){
-                                                                        $i=count($raspored->utorak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->utorak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->utorak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -434,8 +470,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->sreda != 'Nema predavanja'){
-                                                                        $i=count($raspored->sreda)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->sreda)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->sreda)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -449,8 +490,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->cetvrtak != 'Nema predavanja'){
-                                                                        $i=count($raspored->cetvrtak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->cetvrtak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->cetvrtak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -464,8 +510,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->petak != 'Nema predavanja'){
-                                                                        $i=count($raspored->petak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->petak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->petak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -599,8 +650,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->ponedeljak != 'Nema predavanja'){
-                                                                        $i=count($raspored->ponedeljak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->ponedeljak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->ponedeljak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -614,8 +670,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->utorak != 'Nema predavanja'){
-                                                                        $i=count($raspored->utorak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->utorak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->utorak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -629,8 +690,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->sreda != 'Nema predavanja'){
-                                                                        $i=count($raspored->sreda)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->sreda)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->sreda)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -644,8 +710,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->cetvrtak != 'Nema predavanja'){
-                                                                        $i=count($raspored->cetvrtak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->cetvrtak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->cetvrtak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -659,8 +730,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->petak != 'Nema predavanja'){
-                                                                        $i=count($raspored->petak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->petak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->petak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -797,8 +873,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->ponedeljak != 'Nema predavanja'){
-                                                                        $i=count($raspored->ponedeljak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->ponedeljak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->ponedeljak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -812,8 +893,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->utorak != 'Nema predavanja'){
-                                                                        $i=count($raspored->utorak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->utorak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->utorak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -827,8 +913,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->sreda != 'Nema predavanja'){
-                                                                        $i=count($raspored->sreda)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->sreda)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->sreda)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -842,8 +933,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->cetvrtak != 'Nema predavanja'){
-                                                                        $i=count($raspored->cetvrtak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->cetvrtak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->cetvrtak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;
@@ -857,8 +953,13 @@
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
                                                                     if($raspored->petak != 'Nema predavanja'){
-                                                                        $i=count($raspored->petak)/4;
-                                                                        echo $i;
+                                                                        if(count($raspored->petak)==1){
+                                                                            $i=1;
+                                                                            echo $i;
+                                                                        } else {
+                                                                            $i=count($raspored->petak)/4;
+                                                                            echo $i;
+                                                                        }
                                                                     } else {
                                                                         $i='Nema predavanja';
                                                                         echo $i;

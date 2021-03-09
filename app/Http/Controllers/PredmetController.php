@@ -100,6 +100,7 @@ class PredmetController extends Controller
         ]);
         // Ako polja nisu validna
         if($validator->fails()){
+            // dump($validator);
             return back()->withErrors($validator)->withInput();
         }
 

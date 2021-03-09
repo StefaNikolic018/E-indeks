@@ -9,12 +9,18 @@
     @if(session('raspored'))
     <div class="row justify-content-center">
         <div class='col-lg-6 col-xs-12'>
-            <div class="alert alert-{{ session('raspored')[0] }}">
+            <div class="alert alert-{{ session('raspored')[0] }}" id="raspored">
                 {{ session('raspored')[1] }}</div>
         </div>
     </div>
     @endif
-
+    @if(url()->previous()==url('/login'))
+    <div class="row justify-content-center">
+        <div class='col-lg-6 col-md-6  col-sm-12'>
+            <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
+        </div>
+    </div>
+    @endif
     {{-- FORM TO ADD A STUDENT START --}}
     <div class="card rounded-lg border border-dark bg-gradient-light shadow-lg">
         <div class="card-header text-center">

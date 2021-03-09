@@ -10,6 +10,13 @@
     </div>
   </div>
 @endif
+@if(url()->previous()==url('/login'))
+    <div class="row justify-content-center">
+        <div class='col-lg-6 col-md-6  col-sm-12'>
+            <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
+        </div>
+    </div>
+    @endif
 <div class="card rounded-lg bg-gradient-light border border-dark">
     <div class="card-header text-center"><h1>Novi Predmet</h1></div>
     <div class="card-body">

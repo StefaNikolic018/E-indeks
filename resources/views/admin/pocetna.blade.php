@@ -9,7 +9,7 @@
     @if(session('student'))
         <div class="row justify-content-center">
             <div class='col-lg-6 col-xs-12'>
-                <div class="alert alert-{{ session('student')[0] }} shadow">{!!
+                <div class="alert alert-{{ session('student')[0] }} shadow" id="student">{!!
                     session('student')[1]
                     !!}</div>
             </div>
@@ -18,12 +18,19 @@
     @error('student_predmet')
         <div class="row justify-content-center">
             <div class='col-lg-6 col-xs-12'>
-                <div class="alert alert-danger shadow">
+                <div class="alert alert-danger shadow" id="student_predmet">
                     {{ $message }}
                 </div>
             </div>
         </div>
     @enderror
+    @if(url()->previous()==url('/login'))
+    <div class="row justify-content-center">
+        <div class='col-lg-6 col-md-6  col-sm-12'>
+            <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
+        </div>
+    </div>
+    @endif
     {{-- ALERT MESSAGES END --}}
 
     {{-- POBROJAVANJE START --}}

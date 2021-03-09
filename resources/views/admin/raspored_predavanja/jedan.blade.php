@@ -9,7 +9,7 @@
         @if(session('raspored'))
         <div class="row justify-content-center">
             <div class='col-lg-6 col-md-6 col-sm-12'>
-                <div class="alert alert-{{ session('raspored')[0] }}">
+                <div class="alert alert-{{ session('raspored')[0] }}" id="raspored">
                     {{ session('raspored')[1] }}</div>
             </div>
         </div>
@@ -17,7 +17,7 @@
         @if(url()->previous()==url('/login'))
         <div class="row justify-content-center">
             <div class='col-lg-6 col-md-6  col-sm-12'>
-                <div class="alert alert-success shadow">Dobrodošli {{ Auth::user()->ime }}!</div>
+                <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
             </div>
         </div>
         @endif
@@ -29,7 +29,7 @@
                 data-placement="top" title="<b>GODINA STUDIJA</b>" data-html="true">{{$raspored->godina_studija}}.</span>
                 <span class="float-right mt-3 mt-sm-0">
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-outline-dark"><i class="fas fa-edit" style="color:orange"></i> Izmeni</button>
+                        <a href="{{route('izmena_rasporeda',['id'=>$raspored->id])}}" class="btn btn-outline-dark"><i class="fas fa-edit" style="color:orange"></i> Izmeni</a>
                         <button type="button" class="btn btn-outline-dark"  data-toggle="modal"
                         data-target="#exampleModal{{$raspored->id}}"><i class="fas fa-trash-alt" style="color:red" ></i>
                             Obriši</button>

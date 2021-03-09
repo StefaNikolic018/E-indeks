@@ -3,6 +3,13 @@
 
 @section('content')
 <div class="container">
+    @if(url()->previous()==url('/login'))
+    <div class="row justify-content-center">
+        <div class='col-lg-6 col-md-6  col-sm-12'>
+            <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
+        </div>
+    </div>
+    @endif
     <div class="row justify-content-center text-center">
         <div class="card rounded-lg bg-gradient-light border border-dark shadow-lg">
             <div class="card-header text-center">
@@ -13,6 +20,23 @@
 
                 <form action={{route('kopiranje_predmeta', ['id'=>$predmet->id])}} method="POST">
                     @csrf
+                    <div class="form-row">
+                        <div class="form-group col-12 text-center">
+                            <label for="smer">Smer</label><br>
+                            <select class="custom-select mr-sm-2 @error('smer') is-invalid @enderror" id="inlineFormCustomSelect" name="smer" required oninvalid="this.setCustomValidity('Molimo izaberite smer!')"
+                oninput="setCustomValidity('')">
+                            <option value="">Izaberi smer</option>
+                            @foreach($smerovi as $smer)
+                            <option value="{{$smer->id}}">{{$smer->naziv}}</option>
+                            @endforeach
+                            </select>
+                        @error('smer')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    </div>
                     <div class="form-row">
                         <div class="form-group col-6 ">
                             <label for="sifra">Šifra</label>
@@ -74,13 +98,13 @@
 
                     <div class="form-row">
 
-                        <div class="col-lg-6 col-md-6 col-sm-12 my-1 text-center">
+                        <div class="form-group col-12 text-center">
                           <label for="obavezni_izborni">Obavezni/Izborni</label><br>
                           <select class="custom-select mr-sm-2 @error('obavezni_izborni') is-invalid @enderror" id="inlineFormCustomSelect" name="obavezni_izborni" required oninvalid="this.setCustomValidity('Molimo izaberite status predmeta!')"
                  oninput="setCustomValidity('')">
                             <option selected value="Nije izabrano">Status Predmeta</option>
-                            <option value="Obavezni">Obavezni</option>
-                            <option value="Izborni">Izborni</option>
+                            <option value="Obavezni" @if($predmet->obavezni_izborni=='Obavezni') selected @endif>Obavezni</option>
+                            <option value="Izborni" @if($predmet->obavezni_izborni=='Izborni') selected @endif>Izborni</option>
                           </select>
                       @error('obavezni_izborni')
                         <span class="invalid-feedback" role="alert">
@@ -88,22 +112,6 @@
                         </span>
                       @enderror
                         </div>
-
-                        <div class="col-lg-6 col-md-6 col-sm-12  my-1 text-center">
-                            <label for="smer">Smer</label><br>
-                            <select class="custom-select mr-sm-2 @error('smer') is-invalid @enderror" id="inlineFormCustomSelect" name="smer" required oninvalid="this.setCustomValidity('Molimo izaberite smer!')"
-                   oninput="setCustomValidity('')">
-                              <option value="">Izaberi smer</option>
-                              @foreach($smerovi as $smer)
-                              <option value="{{$smer->id}}">{{$smer->naziv}}</option>
-                              @endforeach
-                            </select>
-                        @error('smer')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>{{ $message }}</strong>
-                          </span>
-                        @enderror
-                          </div>
                 </div>
                     <br>
 

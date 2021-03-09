@@ -16,11 +16,11 @@
                 <br>
 
                 <div class="row justify-content-center">
-                    <div class='col-lg-6 col-xs-12'>
+                    <div class='col-8 '>
                         @if(!empty($poruka))
                         @section('poruka')
                         <div class="justify-content-center">
-                            <div class="alert alert-danger shadow">
+                            <div class="alert alert-danger shadow" id="poruka">
                                 <?php echo $poruka ?>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                         @endif
                         @if(session('login'))
                         <div class="justify-content-center">
-                            <div class="alert alert-{{session('login')[0]}} shadow">
+                            <div class="alert alert-{{session('login')[0]}} shadow" id="login">
                                 {{session('login')[1]}}
                             </div>
                         </div>

@@ -7,8 +7,15 @@
     @if(session('profesor'))
     <div class="row justify-content-center">
         <div class='col-lg-6 col-xs-12'>
-            <div class="alert alert-{{ session('profesor')[0] }}">
+            <div class="alert alert-{{ session('profesor')[0] }}" id="profesor">
                 {{ session('profesor')[1] }}</div>
+        </div>
+    </div>
+    @endif
+    @if(url()->previous()==url('/login'))
+    <div class="row justify-content-center">
+        <div class='col-lg-6 col-md-6  col-sm-12'>
+            <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
         </div>
     </div>
     @endif
@@ -103,8 +110,8 @@
                                 name="datum_zaposljenja" oninvalid="this.setCustomValidity('Molimo izaberite godinu zaposlenja!')"
                                 oninput="setCustomValidity('')">
                             @for($i=1990;$i<=date("Y");$i++)
-                            <option value="{{$i}}" 
-                            @if($profesor->datum_zaposljenja == $i) 
+                            <option value="{{$i}}"
+                            @if($profesor->datum_zaposljenja == $i)
                                 selected
                             @elseif(old('datum_zaposljenja')==$i)
                                 selected
@@ -131,11 +138,11 @@
                                 oninvalid="this.setCustomValidity('Molimo izaberite predmete!')"
                                 oninput="setCustomValidity('')" multiple>
                                 @foreach($predmeti as $predmet)
-                                <option value="{{ $predmet->naziv }}" 
-                                    @foreach($pred as $p) 
-                                        @if($predmet->naziv==$p) 
-                                            selected 
-                                        @endif 
+                                <option value="{{ $predmet->naziv }}"
+                                    @foreach($pred as $p)
+                                        @if($predmet->naziv==$p)
+                                            selected
+                                        @endif
                                     @endforeach>{{ $predmet->naziv }}</option>
                                 @endforeach
                             </select>

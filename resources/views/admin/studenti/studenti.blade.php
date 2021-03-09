@@ -9,7 +9,7 @@
     @if(session('student'))
     <div class="row justify-content-center">
         <div class='col-lg-6 col-md-6 col-sm-12'>
-            <div class="alert alert-{{ session('student')[0] }}">
+            <div class="alert alert-{{ session('student')[0] }}" id="student">
                 {{ session('student')[1] }}</div>
         </div>
     </div>
@@ -17,10 +17,11 @@
     @if(url()->previous()==url('/login'))
     <div class="row justify-content-center">
         <div class='col-lg-6 col-md-6  col-sm-12'>
-            <div class="alert alert-success shadow">Dobrodošli {{ Auth::user()->ime }}!</div>
+            <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
         </div>
     </div>
     @endif
+
     {{-- ALERT MESSAGES END --}}
     {{-- JUMBOTRON START --}}
     <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark shadow-lg">

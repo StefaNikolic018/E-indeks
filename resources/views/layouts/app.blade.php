@@ -507,6 +507,57 @@
         </main>
     </div>
 
+    {{-- script alert messages fade out start --}}
+    <script>
+        @if(session('korisnik'))
+        $("#korisnik").fadeTo(2000, 500).slideUp(500, function(){
+            $("#korisnik").slideUp(500);
+        });
+        @elseif(session('obavestenje'))
+        $("#obavestenje").fadeTo(2000, 500).slideUp(500, function(){
+            $("#obavestenje").slideUp(500);
+        });
+        @elseif(session('profesor'))
+        $("#profesor").fadeTo(2000, 500).slideUp(500, function(){
+            $("#profesor").slideUp(500);
+        });
+        @elseif(session('predmet'))
+        $("#predmet").fadeTo(2000, 500).slideUp(500, function(){
+            $("#predmet").slideUp(500);
+        });
+        @elseif(session('raspored_ispita'))
+        $("#raspored_ispita").fadeTo(2000, 500).slideUp(500, function(){
+            $("#raspored_ispita").slideUp(500);
+        });
+        @elseif(session('raspored'))
+        $("#raspored").fadeTo(2000, 500).slideUp(500, function(){
+            $("#raspored").slideUp(500);
+        });
+        @elseif(session('smer'))
+        $("#smer").fadeTo(2000, 500).slideUp(500, function(){
+            $("#smer").slideUp(500);
+        });
+        @elseif(session('student'))
+        $("#student").fadeTo(2000, 500).slideUp(500, function(){
+            $("#student").slideUp(500);
+        });
+        @elseif(session('login'))
+        $("#login").fadeTo(2000,500).slideUp(500,function(){
+            $("#login").slideUp(500);
+        });
+        @elseif(!empty('poruka'))
+        $("#poruka").fadeTo(2000,500).slideUp(500,function(){
+            $("#poruka").slideUp(500);
+        })
+        @endif
+        @if(url()->previous()==url('/login'))
+        $('#welcome').fadeTo(2000,500).slideUp(500, function(){
+            $("#welcome").slideUp(500);
+        })
+        @endif
+    </script>
+
+    {{-- script alert messages fade out end --}}
 </body>
 
 </html>

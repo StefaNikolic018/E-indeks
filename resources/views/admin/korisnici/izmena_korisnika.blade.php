@@ -3,6 +3,13 @@
 
 @section('content')
 <div class="container">
+    @if(url()->previous()==url('/login'))
+    <div class="row justify-content-center">
+        <div class='col-lg-6 col-md-6  col-sm-12'>
+            <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
+        </div>
+    </div>
+    @endif
     <div class="card bg-gradient-light rounded-lg border border-dark shadow-lg">
         <div class="card-header text-center bg-gradient-white rounded-sm">
             <h3 class="font-weight-bold pt-2" style="text-shadow: 2px 2px lightgray">Izmena korisnika </h3>
@@ -43,9 +50,9 @@
                         <select class="custom-select mr-sm-2 @error('uloga') is-invalid @enderror" id="uloga"
                             name="uloga" required oninvalid="this.setCustomValidity('Molimo izaberite ulogu!')"
                             oninput="setCustomValidity('')"">
-                            <option value=" admin">Profesor</option>
-                            <option value="user">Student</option>
-                            <option value="superAdmin">Administrator</option>
+                            <option value="admin" @if($korisnik->role=='admin') selected @endif>Profesor</option>
+                            <option value="user" @if($korisnik->role=='user') selected @endif>Student</option>
+                            <option value="superAdmin" @if($korisnik->role=='superAdmin') selected @endif>Administrator</option>
                         </select>
                         @error('uloga')
                             <span class="invalid-feedback" role="alert">

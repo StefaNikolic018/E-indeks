@@ -183,6 +183,20 @@ return [
             'required' => 'ESPB bodovi su obavezni!',
             'digits'=>'Maksimum ESP bodova je 7!'
         ],
+        'izbor'=> [
+            'required'=>'Izaberite vrstu događaja!'
+        ],
+        'pocetak'=>[
+            'required'=>'Unesite početno vreme!',
+            'date'=>'Vreme mora biti u formatu datuma!'
+        ],
+        'zavrsetak'=>[
+            'required'=>'Unesite početno vreme!',
+            'date'=>'Vreme mora biti u formatu datuma!'
+        ],
+        'boja'=>[
+            'required'=>'Izaberite boju!'
+        ],
         'obavezni_izborni' => [
             'required' => 'Izaberite status predmeta!',
         ],
@@ -213,6 +227,10 @@ return [
         ],
         'predmet_id'=>[
             'required'=>'Ocena mora biti vezana za predmet!',
+            'numeric'=>'ID predmeta mora biti numerički!'
+        ],
+        'predmet'=>[
+            'required'=>'Predmet je obavezan!',
             'numeric'=>'ID predmeta mora biti numerički!'
         ],
         'ocena'=>[

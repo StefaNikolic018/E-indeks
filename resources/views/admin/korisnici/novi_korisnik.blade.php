@@ -3,6 +3,13 @@
 
 @section('content')
 <div class="container">
+    @if(url()->previous()==url('/login'))
+    <div class="row justify-content-center">
+        <div class='col-lg-6 col-md-6  col-sm-12'>
+            <div class="alert alert-success shadow" id="welcome">Dobrodošli {{ Auth::user()->ime }}!</div>
+        </div>
+    </div>
+    @endif
     <div class="card bg-gradient-light rounded-lg border-dark text-center shadow-lg">
         <div class="card-header bg-gradient-white ">
             <h3 class="font-weight-bold pt-2" style="text-shadow: 2px 2px lightgray">Novi korisnik </h3>
