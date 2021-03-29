@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Predmet;
 use App\Models\Student;
 use App\Models\Ocena;
+use App\Models\Profesor;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,43 +21,62 @@ use App\Models\Ocena;
 |
 */
 
+// POCETNA START
 Route::get('/', function () {
     if(Auth::check()){
+        $email=Auth::user()->email;
         if(Auth::user()->role=='admin'){
-            return redirect()->route('studenti');
+            $ime=Profesor::where('email_korisnika',$email)->value('ime');
+            return redirect()->route('profile',['ime'=>$ime]);
         } elseif (Auth::user()->role=='superAdmin'){
             return redirect()->route('pocetna');
         } elseif (Auth::user()->role=='user'){
-            $email=Auth::user()->email;
             $ime=Student::where('email',$email)->value('ime');
             return redirect()->route('profil',['ime'=>$ime]);
         }
     }
     return view('auth.login');
 })->name('/');
+// POCETNA END
 
+// NEPOSTOJECE START
 Route::fallback(function(Request $req){
     if(Auth::check()){
+        $email=Auth::user()->email;
         if(Auth::user()->role=='admin'){
-            return redirect()->route('studenti');
+            // Profesor
+            $ime=Profesor::where('email_korisnika',$email)->value('ime');
+            return redirect()->route('profile',['ime'=>$ime]);
         } elseif (Auth::user()->role=='user') {
-            $email=Auth::user()->email;
+            // Student
             $ime=Student::where('email',$email)->value('ime');
             return redirect()->route('profil',['ime'=>$ime]);
         } elseif (Auth::user()->role='superAdmin'){
+            // Administrator
             return redirect()->route('pocetna');
         }
     }
     $req->session()->flash('login',['danger','Stranica ne postoji :( ']);
     return redirect()->route('login');
 });
+// NEPOSTOJECE END
 
-Route::group(['middleware' => ['auth','can:isSuperAdmin']], function() {
+// PROFESORI START
+Route::group(['middleware' => ['auth','can:isAdmin']], function() {
+    // Profesorski profil
+    Route::prefix('profesor')->group(function(){
+        Route::get('/{ime}',[App\Http\Controllers\ProfesorController::class, 'profesor'])->name('profile');
+    });
+
+    // Studenti kojima profesor daje ocene
+    Route::prefix('student')->group(function(){
+        Route::get('svi',[App\Http\Controllers\HomeController::class, 'index'])->name('svi');
+
+        Route::get('/{id}',[App\Http\Controllers\HomeController::class,'student'])->name('jedan_student');
+    });
 
     // Ocene
     Route::prefix('ocene')->group(function(){
-        Route::get('/', [App\Http\Controllers\OcenaController::class, 'index'])->name('ocene');
-
         Route::post('dodaj_ocenu/{id}',[App\Http\Controllers\OcenaController::class,'dodaj_ocenu'])->name('dodaj_ocenu');
 
         Route::match(['get','post'],'ocena_izmena/{id}/{id1}',[App\Http\Controllers\OcenaController::class,'ocena_izmena'])->name('ocena_izmena');
@@ -64,22 +85,42 @@ Route::group(['middleware' => ['auth','can:isSuperAdmin']], function() {
 
     });
 
+    //Obavestenja
+    Route::prefix('obavestavanje')->group(function(){
+        Route::get('/sva',[App\Http\Controllers\ObavestenjeController::class,'index'])->name('sva');
 
-});
 
-Route::group(['middleware' => ['auth','can:isUser']], function() {
-    Route::prefix('profil')->group(function(){
+        Route::match(['get','post'],'novo',[App\Http\Controllers\ObavestenjeController::class,'novo_obavestenje'])->name('novo');
 
-        Route::get('/{ime}',[App\Http\Controllers\StudentController::class,'index'])->name('profil');
-        // Route::view('/','studenti.profil',['studenti'=>Student::all(),'predmeti'=>Predmet::all(),'ocene'=>Ocena::all()])->name('profil');
+        Route::get('/{id}',[App\Http\Controllers\ObavestenjeController::class,'obavestenje'])->name('profesorsko_obavestenje');
+
+        Route::match(['get','post'],'/izmena/{id}',[App\Http\Controllers\ObavestenjeController::class,'izmena_obavestenja'])->name('izmena');
+
+        Route::post('brisanje/{id}',[App\Http\Controllers\ObavestenjeController::class,'brisanje_obavestenja'])->name('brisanje');
 
     });
 
 
+});
+// PROFESORI END
+
+// STUDENTI START
+Route::group(['middleware' => ['auth','can:isUser']], function() {
+    Route::prefix('profil')->group(function(){
+        Route::get('/{ime}',[App\Http\Controllers\StudentController::class,'index'])->name('profil');
+    });
+
+    Route::get('raspored_predavanja',[App\Http\Controllers\StudentController::class, 'raspored'])->name('raspored_predavanja');
+
+    Route::get('kalendar',[App\Http\Controllers\RasporedIspitaController::class, 'index'])->name('kalendar');
+
+
 
 
 });
+// STUDENTI END
 
+// ADMINISTRACIJA START
 Route::group(['middleware' => ['auth','can:isSuperAdmin']], function() {
     // Pocetna
     Route::prefix('pocetna')->group(function(){
@@ -214,6 +255,7 @@ Route::group(['middleware' => ['auth','can:isSuperAdmin']], function() {
 
 
 });
+// ADMINISTRACIJA END
 
 
     Route::get('/logout', function(Request $req){

@@ -9,7 +9,7 @@
     @if(session('smer'))
     <div class="row justify-content-center">
         <div class='col-lg-6 col-md-6 col-sm-12'>
-            <div class="alert alert-{{ session('smer')[0] }}" id="smer>
+            <div class="alert alert-{{ session('smer')[0] }}" id="smer">
                 {{ session('smer')[1] }}</div>
         </div>
     </div>
@@ -25,15 +25,16 @@
     {{-- JUMBOTRON START --}}
     <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark shadow-lg">
         <div class="container">
-            <h1 class="text-center" style="text-shadow: 1px 1px lightgray"> <span class="float-left">
+            <h1 class="text-center" style="text-shadow: 1px 1px lightgray">
+                <span class="text-center text-sm-left">
                 <a class="btn btn-dark font-weight-bold" style="text-shadow: 0px 0px"
                 href={{ route('izmena_smera', ['id'=>$smer->id]) }}
                 role="button">
                 <i class="fas fa-edit" style="color:orange"></i>
                 Izmeni
-            </a></span>
+                </a></span>
             {{$smer->naziv}}
-            <span class="float-right">
+            <span class="text-center text-sm-right">
                 <button class="btn btn-dark font-weight-bold" data-toggle="modal"
                 data-target="#exampleModal{{ $smer->id }}">
                 <i class="fas fa-trash-alt"
@@ -81,10 +82,10 @@
                 </div>
             </div>
             {{-- Modal end --}}
-
+            <hr>
             <h4 class=" text-center">{{$smer->opis}}</h4>
             <hr>
-            <h6 class="font-weight-bold">ESPB: {{$smer->espb}} <span class="float-right"> Akreditovan: {{$smer->akreditovan}}. godine</span></h6>
+            <p class="font-weight-bold">ESPB:{{$smer->espb}} <span class="float-right"> Akreditovan:{{$smer->akreditovan}}. godine</span></p>
         </div>
     </div>
     {{-- JUMBOTRON END --}}

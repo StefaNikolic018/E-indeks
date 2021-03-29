@@ -60,7 +60,7 @@ class OcenaController extends Controller
         Student::where('id',$id)->update(['prosek_ocena'=>$ocena]);
 
         $req->session()->flash('student',['success','Uspešno dodata ocena!']);
-        return redirect()->route('student',$id);
+        return redirect()->route('jedan_student',$id);
     }
 
     /**
@@ -78,7 +78,7 @@ class OcenaController extends Controller
             Student::where('id',$st_id)->update(['prosek_ocena'=>0.00]);
         }
         $req->session()->flash('student',['success','Uspešno obrisana ocena!']);
-        return redirect()->route('student',$st_id);
+        return redirect()->route('jedan_student',$st_id);
 
 
     }
@@ -123,7 +123,7 @@ class OcenaController extends Controller
         Student::where('id',$st_id)->update(['prosek_ocena'=>$ocena]);
 
         $req->session()->flash('student',['success','Uspešno izmenjena ocena!']);
-        return redirect()->route('student',$st_id);
+        return redirect()->route('jedan_student',$st_id);
 
 
     }

@@ -30,7 +30,7 @@
                 @csrf
                 <div class="form-row">
 
-                    <div class="form-group col-lg-6 col-md-6 col-sm-12 ">
+                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
                         <label for="naslov">Naslov</label>
                             <input value="{{ old('naslov') ? old('naslov') : $obavestenje->naslov }}" required
                                 oninvalid="this.setCustomValidity('Molimo unesite naslov!')"
@@ -44,7 +44,7 @@
                             @enderror
                     </div>
 
-                    <div class="form-group col-lg-6 col-md-6 col-sm-12 ">
+                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
                             <label for="datum">Datum</label>
                             <input value="{{ old('datum') ? old('datum') : $obavestenje->datum }}" required
                                 oninvalid="this.setCustomValidity('Molimo unesite datum!')"
@@ -56,7 +56,24 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-                        </div>
+                    </div>
+                    <div class="form-group col-lg-4 col-md-4 col-sm-12 ">
+                        <label for="naslov">Smer</label>
+                            <select class="custom-select mr-sm-2 @error('smer') is-invalid @enderror" id="smer"
+                                name="smer" required oninvalid="this.setCustomValidity('Molimo izaberite smer!')"
+                                oninput="setCustomValidity('')"">
+                                <option value="">Izaberite smer</option>
+                                <option value="svi" @if($obavestenje->smer=='svi') selected @endif>Svi smerovi</option>
+                                @foreach($smerovi as $smer)
+                                <option value="{{$smer->id}}" @if(old('smer'))@if(old('smer')==$smer->id) selected @endif @elseif($smer->id==$obavestenje->smer) selected @endif>{{$smer->naziv}}</option>
+                                @endforeach
+                            </select>
+                            @error('smer')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                    </div>
 
                 </div>
 

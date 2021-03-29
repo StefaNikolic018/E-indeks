@@ -211,6 +211,8 @@
 
 
 <script>
+    let vrednost=0;
+
 
     function createFormFields(){
         let week=['Ponedeljak','Utorak','Sreda','Četvrtak','Petak'];
@@ -276,76 +278,83 @@
             }
     }
 
-
+    // Kreira broj casova za odredjeni dan
     document.addEventListener('input', function (event) {
 
         let week=['Ponedeljak','Utorak','Sreda','Četvrtak','Petak'];
 
-        for(i=0;i<week.length;i++){
-            if(event.target.id==week[i]){
-                // let smer1=document.getElementById('smer').value;
-                // console.log(smer1);
-                // let godina1=document.getElementById('godina_studija').value;
-                // console.log(godina1);
+        if(week.includes(event.target.id)){
+            for(i=0;i<week.length;i++){
+                if(event.target.id==week[i]){
+                    // let smer1=document.getElementById('smer').value;
+                    // console.log(smer1);
+                    // let godina1=document.getElementById('godina_studija').value;
+                    // console.log(godina1);
 
-                let html = '';
-                let br = event.target.value;
-                for(j=0;j<br;j++){
-                    let cas=j+1;
-                    html+='<div class="form-row p-1 border rounded border-dark shadow bg-light">';
-                    html+='<h2 class="col-12 text-center p-2">'+week[i]+': '+cas+'. čas</h2><hr>';
-                    html+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
-                    html+='<label for="predmet">Predmet</label>';
-                    html+='<select value="{{ old("predmet") }}" required oninvalid="this.setCustomValidity("Molimo unesite ime predmeta!")" oninput="setCustomValidity("")" class="form-control custom-select @error("predmet") is-invalid @enderror" id="predmet" name="'+week[i]+cas+'[]" placeholder="Unesite predmet">';
-                    html+='<option value="">Izaberite predmet</option>';
-                    html+='@foreach($predmeti as $predmet) ';
-                    html+='<option value="{{$predmet->id}}">{{$predmet->naziv}}</option>';
-                    html+='@endforeach';
-                    html+='</select>';
-                    html+='@error("predmet")';
-                    html+='<span class="invalid-feedback" role="alert">';
-                    html+='<strong>{{ $message }}</strong>';
-                    html+='</span>';
-                    html+='@enderror';
-                    html+='</div>';
-                    html+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
-                    html+='<label for="vreme">Vreme</label>';
-                    html+='<input value="{{ old("vreme") }}" required oninvalid="this.setCustomValidity("Molimo unesite vreme!(od-do)")" oninput="setCustomValidity("")" type="text" class="form-control @error("vreme") is-invalid @enderror" id="vreme" name="'+week[i]+cas+'[]" placeholder="Unesite vreme">';
-                    html+='@error("vreme")<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror';
-                    html+='</div>';
-                    html+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
-                    html+='<label class="font-weight-bold" for="vrsta">Predavanja/vežbe</label>';
-                    html+='<select class="form-control custom-select mr-sm-2 @error("vrsta") is-invalid @enderror" id="vrsta" name="'+week[i]+cas+'[]" oninvalid="this.setCustomValidity("Molimo izaberite vrstu predavanja!")" oninput="setCustomValidity("")">';
-                    html+='<option value="">Izaberite vrstu predavanja</option>';
-                    html+='<option value="Predavanja">Predavanja</option>';
-                    html+='<option value="Vežbe">Vežbe</option>'
-                    html+='</select>';
-                    html+='@error("vrsta")';
-                    html+='<span class="invalid-feedback" role="alert">'
-                    html+='<strong>{{ $message }}</strong>';
-                    html+='</span>';
-                    html+='@enderror';
-                    html+='</div>';
-                    html+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
-                    html+='<label class="font-weight-bold" for="prostorija">Prostorija</label>';
-                    html+='<select class="form-control custom-select mr-sm-2 @error("prostorija") is-invalid @enderror" id="prostorija" name="'+week[i]+cas+'[]" oninvalid="this.setCustomValidity("Molimo izaberite prostoriju predavanja!")" oninput="setCustomValidity("")">';
-                    html+='<option value="">Izaberite prostoriju predavanja</option>';
-                    html+='<option value="A1">A1</option>';
-                    html+='<option value="A2">A2</option>';
-                    html+='<option value="A3">A3</option>';
-                    html+='</select>';
-                    html+='@error("prostorija")';
-                    html+='<span class="invalid-feedback" role="alert">'
-                    html+='<strong>{{ $message }}</strong>'
-                    html+='</span>';
-                    html+='@enderror';
-                    html+='</div>';
-                    html+='</div><br>';
+                    let html = '';
+                    let br = event.target.value;
+                    for(j=0;j<br;j++){
+                        let cas=j+1;
+                        html+='<div class="form-row p-1 border rounded border-dark shadow bg-light">';
+                        html+='<h2 class="col-12 text-center p-2">'+week[i]+': '+cas+'. čas</h2><hr>';
+                        html+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
+                        html+='<label for="predmet">Predmet</label>';
+                        html+='<select value="{{ old("predmet") }}" required oninvalid="this.setCustomValidity("Molimo unesite ime predmeta!")" oninput="setCustomValidity("")" class="form-control custom-select @error("predmet") is-invalid @enderror" id="predmet" name="'+week[i]+cas+'[]" placeholder="Unesite predmet">';
+                        html+='<option value="">Izaberite predmet</option>';
+                        html+='@foreach($predmeti as $predmet) ';
+                        html+='<option value="{{$predmet->id}}">{{$predmet->naziv}}</option>';
+                        html+='@endforeach';
+                        html+='</select>';
+                        html+='@error("predmet")';
+                        html+='<span class="invalid-feedback" role="alert">';
+                        html+='<strong>{{ $message }}</strong>';
+                        html+='</span>';
+                        html+='@enderror';
+                        html+='</div>';
+                        html+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
+                        html+='<label for="vreme">Vreme</label>';
+                        html+='<input value="{{ old("vreme") }}" required oninvalid="this.setCustomValidity("Molimo unesite vreme!(od-do)")" oninput="setCustomValidity("")" type="text" class="form-control @error("vreme") is-invalid @enderror" id="vreme" name="'+week[i]+cas+'[]" placeholder="Od - do">';
+                        html+='@error("vreme")<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror';
+                        html+='</div>';
+                        html+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
+                        html+='<label class="font-weight-bold" for="vrsta">Predavanja/vežbe</label>';
+                        html+='<select class="form-control custom-select mr-sm-2 @error("vrsta") is-invalid @enderror" id="vrsta" name="'+week[i]+cas+'[]" oninvalid="this.setCustomValidity("Molimo izaberite vrstu predavanja!")" oninput="setCustomValidity("")">';
+                        html+='<option value="">Izaberite vrstu predavanja</option>';
+                        html+='<option value="Predavanja">Predavanja</option>';
+                        html+='<option value="Vežbe">Vežbe</option>'
+                        html+='</select>';
+                        html+='@error("vrsta")';
+                        html+='<span class="invalid-feedback" role="alert">'
+                        html+='<strong>{{ $message }}</strong>';
+                        html+='</span>';
+                        html+='@enderror';
+                        html+='</div>';
+                        html+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
+                        html+='<label class="font-weight-bold" for="prostorija">Prostorija</label>';
+                        html+='<select class="form-control custom-select mr-sm-2 @error("prostorija") is-invalid @enderror" id="prostorija" name="'+week[i]+cas+'[]" oninvalid="this.setCustomValidity("Molimo izaberite prostoriju predavanja!")" oninput="setCustomValidity("")">';
+                        html+='<option value="">Izaberite prostoriju predavanja</option>';
+                        html+='<option value="A1">A1</option>';
+                        html+='<option value="A2">A2</option>';
+                        html+='<option value="A3">A3</option>';
+                        html+='</select>';
+                        html+='@error("prostorija")';
+                        html+='<span class="invalid-feedback" role="alert">'
+                        html+='<strong>{{ $message }}</strong>'
+                        html+='</span>';
+                        html+='@enderror';
+                        html+='</div>';
+                        html+='</div><br>';
+                    }
+                    document.querySelector("."+week[i]).innerHTML=html;
+
                 }
-                document.querySelector("."+week[i]).innerHTML=html;
-
             }
+
+        } else if(event.target.id=='smer') {
+            console.log(event.target.value);
+            vrednost=event.target.value;
         }
+
 });
 </script>
 

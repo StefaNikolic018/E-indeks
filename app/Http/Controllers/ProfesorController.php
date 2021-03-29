@@ -64,7 +64,15 @@ class ProfesorController extends Controller
      * Shows individual student
      */
     public function profesor($id){
-        $profesor=Profesor::find($id);
+        if(Auth::user()->role=='admin'){
+            $email=Auth::user()->email;
+            $profesor=Profesor::where('email_korisnika',$email)->first();
+        } else {
+            $profesor=Profesor::find($id);
+            if(!$profesor){
+                return back();
+            }
+        }
         $pred=explode(',',$profesor->predmeti);
         $predmeti=[];
         for($i=0;$i<count($pred);$i++){
@@ -72,9 +80,16 @@ class ProfesorController extends Controller
             $p=$p->toArray();
             array_push($predmeti,$p);
         }
-        // $predmeti=collect($predmeti);
-        return view('admin.profesori.profesor',['profesor'=>$profesor,'predmeti'=>$predmeti,'pred'=>$pred]);
-
+        if(Profesor::where('ime',$id)->first()){
+            // Ako je prosledjeno ime kao parametar
+            return view('admin.profesori.profesor',['profesor'=>$profesor,'predmeti'=>$predmeti,'pred'=>$pred]);
+        } else if(Profesor::find($id)){
+            // Ako je prosledjen id kao parametar
+            return view('admin.profesori.profesor',['profesor'=>$profesor,'predmeti'=>$predmeti,'pred'=>$pred]);
+        } else {
+            // Ako je pogresno ime
+            return redirect()->route('profile',['ime'=>$profesor->ime]);
+        }
     }
 
     /**

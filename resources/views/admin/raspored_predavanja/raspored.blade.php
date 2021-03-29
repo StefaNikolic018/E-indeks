@@ -108,7 +108,7 @@
             <tbody>
         @foreach($rasporedi as $raspored)
             @if($raspored->godina_studija==1)
-                @if($raspored->ponedeljak != 'Nema predavanja')
+                @if($raspored->ponedeljak[0] != 'Nema predavanja' && !empty($raspored->))
                     @for($i=0;$i<count($raspored->ponedeljak);$i+4)
                     <tr>
                             <th scope="row">{{$raspored->ponedeljak[$i+1]}}</th>
@@ -185,7 +185,7 @@
                                             {{-- TABLE ALL SUBJECTS START --}}
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive border">
+                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
                                                         <thead>
                                                         <tr>
                                                             <th scope="col">Smer</th>
@@ -207,7 +207,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->ponedeljak != 'Nema predavanja'){
+                                                                    if($raspored->ponedeljak[0] != 'Nema predavanja' && !empty($raspored->ponedeljak[0])){
                                                                         if(count($raspored->ponedeljak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -227,7 +227,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->utorak != 'Nema predavanja'){
+                                                                    if($raspored->utorak[0] != 'Nema predavanja' && !empty($raspored->utorak[0])){
                                                                         if(count($raspored->utorak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -247,7 +247,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->sreda != 'Nema predavanja'){
+                                                                    if($raspored->sreda[0] != 'Nema predavanja' && !empty($raspored->sreda[0])){
                                                                         if(count($raspored->sreda)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -267,7 +267,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->cetvrtak != 'Nema predavanja'){
+                                                                    if($raspored->cetvrtak[0] != 'Nema predavanja' && !empty($raspored->cetvrtak[0])){
                                                                         if(count($raspored->cetvrtak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -287,7 +287,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->petak != 'Nema predavanja'){
+                                                                    if($raspored->petak[0] != 'Nema predavanja' && !empty($raspored->petak[0])){
                                                                         if(count($raspored->petak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -407,7 +407,7 @@
                                         <div class="card-body bg-dark">
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive border">
+                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
                                                         <thead>
                                                         <tr>
                                                             <th scope="col">Smer</th>
@@ -429,7 +429,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->ponedeljak != 'Nema predavanja'){
+                                                                    if($raspored->ponedeljak[0] != 'Nema predavanja' && !empty($raspored->ponedeljak[0])){
                                                                         if(count($raspored->ponedeljak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -449,7 +449,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->utorak != 'Nema predavanja'){
+                                                                    if($raspored->utorak[0] != 'Nema predavanja' && !empty($raspored->utorak[0])){
                                                                         if(count($raspored->utorak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -469,7 +469,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->sreda != 'Nema predavanja'){
+                                                                    if($raspored->sreda[0] != 'Nema predavanja' && !empty($raspored->sreda[0])){
                                                                         if(count($raspored->sreda)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -489,7 +489,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->cetvrtak != 'Nema predavanja'){
+                                                                    if($raspored->cetvrtak[0] != 'Nema predavanja' && !empty($raspored->cetvrtak[0])){
                                                                         if(count($raspored->cetvrtak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -509,7 +509,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->petak != 'Nema predavanja'){
+                                                                    if($raspored->petak[0] != 'Nema predavanja' && !empty($raspored->petak[0])){
                                                                         if(count($raspored->petak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -627,7 +627,7 @@
                                             {{-- TABLE ALL SUBJECTS START --}}
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive border">
+                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
                                                         <thead>
                                                         <tr>
                                                             <th scope="col">Smer</th>
@@ -649,7 +649,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->ponedeljak != 'Nema predavanja'){
+                                                                    if($raspored->ponedeljak[0] != 'Nema predavanja' && !empty($raspored->ponedeljak[0])){
                                                                         if(count($raspored->ponedeljak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -669,7 +669,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->utorak != 'Nema predavanja'){
+                                                                    if($raspored->utorak[0] != 'Nema predavanja' && !empty($raspored->utorak[0])){
                                                                         if(count($raspored->utorak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -689,7 +689,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->sreda != 'Nema predavanja'){
+                                                                    if($raspored->sreda[0] != 'Nema predavanja' && !empty($raspored->sreda[0])){
                                                                         if(count($raspored->sreda)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -709,7 +709,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->cetvrtak != 'Nema predavanja'){
+                                                                    if($raspored->cetvrtak[0] != 'Nema predavanja' && !empty($raspored->cetvrtak[0])){
                                                                         if(count($raspored->cetvrtak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -729,7 +729,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->petak != 'Nema predavanja'){
+                                                                    if($raspored->petak[0] != 'Nema predavanja' && !empty($raspored->petak[0])){
                                                                         if(count($raspored->petak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -849,7 +849,7 @@
                                             {{-- TABLE ALL SUBJECTS START --}}
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive border">
+                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
                                                         <thead>
                                                         <tr>
                                                             <th scope="col">Smer</th>
@@ -872,7 +872,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->ponedeljak != 'Nema predavanja'){
+                                                                    if($raspored->ponedeljak[0] != 'Nema predavanja' && !empty($raspored->ponedeljak[0])){
                                                                         if(count($raspored->ponedeljak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -892,7 +892,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->utorak != 'Nema predavanja'){
+                                                                    if($raspored->utorak[0] != 'Nema predavanja' && !empty($raspored->utorak[0])){
                                                                         if(count($raspored->utorak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -912,7 +912,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->sreda != 'Nema predavanja'){
+                                                                    if($raspored->sreda[0] != 'Nema predavanja' && !empty($raspored->sreda[0])){
                                                                         if(count($raspored->sreda)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -932,7 +932,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->cetvrtak != 'Nema predavanja'){
+                                                                    if($raspored->cetvrtak[0] != 'Nema predavanja' && !empty($raspored->cetvrtak[0])){
                                                                         if(count($raspored->cetvrtak)==1){
                                                                             $i=1;
                                                                             echo $i;
@@ -952,7 +952,7 @@
                                                                     class="badge badge-secondary shadow" data-toggle="tooltip"
                                                                     data-placement="top" title="<b>BROJ PREDAVANJA</b>" data-html="true">
                                                                     @php
-                                                                    if($raspored->petak != 'Nema predavanja'){
+                                                                    if($raspored->petak[0] != 'Nema predavanja' && !empty($raspored->petak[0])){
                                                                         if(count($raspored->petak)==1){
                                                                             $i=1;
                                                                             echo $i;

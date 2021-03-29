@@ -27,13 +27,14 @@
             <h3>{{$raspored->smerovi->naziv}} <span
                 class="badge badge-secondary shadow" data-toggle="tooltip"
                 data-placement="top" title="<b>GODINA STUDIJA</b>" data-html="true">{{$raspored->godina_studija}}.</span>
+        @can('isSuperAdmin')
                 <span class="float-right mt-3 mt-sm-0">
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a href="{{route('izmena_rasporeda',['id'=>$raspored->id])}}" class="btn btn-outline-dark"><i class="fas fa-edit" style="color:orange"></i> Izmeni</a>
                         <button type="button" class="btn btn-outline-dark"  data-toggle="modal"
                         data-target="#exampleModal{{$raspored->id}}"><i class="fas fa-trash-alt" style="color:red" ></i>
                             Obriši</button>
-                  </div>
+                    </div>
                 </span>
             </h3>
             <!-- Modal -->
@@ -64,9 +65,10 @@
                 </div>
             </div>
             {{-- Modal end --}}
+        @endcan
         </div>
         <div class="card-body">
-            @if($raspored->ponedeljak != 'Nema predavanja' && count($raspored->ponedeljak)>4)
+            @if($raspored->ponedeljak[0] != 'Nema predavanja' && count($raspored->ponedeljak)>4)
             <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
@@ -85,14 +87,14 @@
 
                     <tr>
                         <th scope="row">{{$raspored->ponedeljak[$i+1]}}</th>
-                        <td>{{$raspored->ponedeljak[$i]}}</td>
+                        <td>{{$predmeti->find($raspored->ponedeljak[$i])->naziv}}</td>
                         <td>{{$raspored->ponedeljak[$i+2]}}</td>
                         <td>{{$raspored->ponedeljak[$i+3]}}</td>
                     </tr>
                 @endfor
                 </tbody>
             </table>
-            @elseif($raspored->ponedeljak == 'Nema predavanja')
+            @elseif($raspored->ponedeljak[0] == 'Nema predavanja' || empty($raspored->ponedeljak[0]))
             <table class="table table-dark table-hover table-striped table-responsive-xs border">
                 <thead>
                     <tr class="bg-light">
@@ -122,7 +124,7 @@
                 <tbody>
                 <tr>
                     <th scope="row">{{$raspored->ponedeljak[1]}}</th>
-                    <td>{{$raspored->ponedeljak[0]}}</td>
+                    <td>{{$predmeti->find($raspored->ponedeljak[0])->naziv}}</td>
                     <td>{{$raspored->ponedeljak[2]}}</td>
                     <td>{{$raspored->ponedeljak[3]}}</td>
                 </tr>
@@ -133,7 +135,7 @@
             @endif
             {{-- PONEDELJAK END --}}
             {{-- UTORAK START--}}
-            @if($raspored->utorak != 'Nema predavanja' && count($raspored->utorak)>4)
+            @if($raspored->utorak[0] != 'Nema predavanja' && count($raspored->utorak)>4)
             <table class="table table-dark table-hover table-striped table-responsive-sm border">
                 <thead>
                 <tr class="bg-light">
@@ -150,7 +152,7 @@
                 @for($i=0;$i<count($raspored->utorak);$i=$i+4)
                 <tr>
                         <th scope="row">{{$raspored->utorak[$i+1]}}</th>
-                        <td>{{$raspored->utorak[$i]}}</td>
+                        <td>{{$predmeti->find($raspored->utorak[$i])->naziv}}</td>
                         <td>{{$raspored->utorak[$i+2]}}</td>
                         <td>{{$raspored->utorak[$i+3]}}</td>
                     </tr>
@@ -160,7 +162,7 @@
                 @endfor
                 </tbody>
             </table>
-            @elseif($raspored->utorak=='Nema predavanja')
+            @elseif($raspored->utorak[0]=='Nema predavanja' || empty($raspored->utorak[0]))
             <table class="table table-dark table-hover table-striped table-responsive-xs border">
                 <thead>
                     <tr class="bg-light">
@@ -191,7 +193,7 @@
 
                 <tr>
                     <th scope="row">{{$raspored->utorak[1]}}</th>
-                    <td>{{$raspored->utorak[0]}}</td>
+                    <td>{{$predmeti->find($raspored->utorak[0])->naziv}}</td>
                     <td>{{$raspored->utorak[2]}}</td>
                     <td>{{$raspored->utorak[3]}}</td>
                 </tr>
@@ -200,7 +202,7 @@
             @endif
             {{-- UTORAK END --}}
             {{-- SREDA START --}}
-            @if($raspored->sreda != 'Nema predavanja' && count($raspored->sreda)>4)
+            @if($raspored->sreda[0] != 'Nema predavanja' && count($raspored->sreda)>4)
             <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
@@ -217,7 +219,7 @@
                 @for($i=0;$i<count($raspored->sreda);$i=$i+4)
                 <tr>
                         <th scope="row">{{$raspored->sreda[$i+1]}}</th>
-                        <td>{{$raspored->sreda[$i]}}</td>
+                        <td>{{$predmeti->find($raspored->sreda[$i])->naziv}}</td>
                         <td>{{$raspored->sreda[$i+2]}}</td>
                         <td>{{$raspored->sreda[$i+3]}}</td>
                     </tr>
@@ -227,7 +229,7 @@
                 @endfor
                 </tbody>
             </table>
-            @elseif($raspored->sreda=='Nema predavanja')
+            @elseif($raspored->sreda[0]=='Nema predavanja' || empty($raspored->sreda[0]))
             <table class="table table-dark table-hover table-striped table-responsive-xs border">
                 <thead>
                     <tr class="bg-light">
@@ -256,7 +258,7 @@
                 <tbody>
                 <tr>
                     <th scope="row">{{$raspored->sreda[1]}}</th>
-                    <td>{{$raspored->sreda[0]}}</td>
+                    <td>{{$predmeti->find($raspored->sreda[0])->naziv}}</td>
                     <td>{{$raspored->sreda[2]}}</td>
                     <td>{{$raspored->sreda[3]}}</td>
                 </tr>
@@ -265,7 +267,7 @@
             @endif
             {{-- SREDA END --}}
             {{-- CETVRTAK START --}}
-            @if($raspored->cetvrtak != 'Nema predavanja' && count($raspored->cetvrtak)>4)
+            @if($raspored->cetvrtak[0] != 'Nema predavanja' && count($raspored->cetvrtak)>4)
             <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
@@ -282,7 +284,7 @@
                 @for($i=0;$i<count($raspored->cetvrtak);$i=$i+4)
                 <tr>
                         <th scope="row">{{$raspored->cetvrtak[$i+1]}}</th>
-                        <td>{{$raspored->cetvrtak[$i]}}</td>
+                        <td>{{$predmeti->find($raspored->cetvrtak[$i])->naziv}}</td>
                         <td>{{$raspored->cetvrtak[$i+2]}}</td>
                         <td>{{$raspored->cetvrtak[$i+3]}}</td>
                     </tr>
@@ -292,7 +294,7 @@
                 @endfor
                 </tbody>
             </table>
-            @elseif($raspored->cetvrtak=='Nema predavanja')
+            @elseif($raspored->cetvrtak[0]=='Nema predavanja' || empty($raspored->cetvrtak[0]))
             <table class="table table-dark table-hover table-striped table-responsive-xs border">
                 <thead>
                     <tr class="bg-light">
@@ -321,7 +323,7 @@
                 <tbody>
                 <tr>
                     <th scope="row">{{$raspored->cetvrtak[1]}}</th>
-                    <td>{{$raspored->cetvrtak[0]}}</td>
+                    <td>{{$predmeti->find($raspored->cetvrtak[0])->naziv}}</td>
                     <td>{{$raspored->cetvrtak[2]}}</td>
                     <td>{{$raspored->cetvrtak[3]}}</td>
                 </tr>
@@ -330,7 +332,7 @@
             @endif
             {{-- CETVRTAK END --}}
             {{-- PETAK START --}}
-            @if($raspored->petak != 'Nema predavanja' && count($raspored->petak)>4)
+            @if($raspored->petak[0] != 'Nema predavanja' && count($raspored->petak)>4)
             <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
@@ -347,7 +349,7 @@
                 @for($i=0;$i<count($raspored->petak);$i=$i+4)
                 <tr>
                         <th scope="row">{{$raspored->petak[$i+1]}}</th>
-                        <td>{{$raspored->petak[$i]}}</td>
+                        <td>{{$predmeti->find($raspored->petak[$i])->naziv}}</td>
                         <td>{{$raspored->petak[$i+2]}}</td>
                         <td>{{$raspored->petak[$i+3]}}</td>
                     </tr>
@@ -355,7 +357,7 @@
 
 
                 @endfor
-            @elseif($raspored->petak=='Nema predavanja')
+            @elseif($raspored->petak[0]=='Nema predavanja' || empty($raspored->petak[0]))
             <table class="table table-dark table-hover table-striped table-responsive-xs border">
                 <thead>
                     <tr class="bg-light">
@@ -384,7 +386,7 @@
                 <tbody>
                 <tr>
                     <th scope="row">{{$raspored->petak[1]}}</th>
-                    <td>{{$raspored->petak[0]}}</td>
+                    <td>{{$predmeti->find($raspored->petak[0])->naziv}}</td>
                     <td>{{$raspored->petak[2]}}</td>
                     <td>{{$raspored->petak[3]}}</td>
                 </tr>

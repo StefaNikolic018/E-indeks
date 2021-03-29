@@ -76,7 +76,7 @@
                     </div>
                     <h2 class="m-auto font-weight-bold pb-2">Ponedeljak</h2>
                     {{-- TREBA DA ISPISEM CASOVE KOJI VEC POSTOJE --}}
-                    @if($raspored->ponedeljak!='Nema predavanja')
+                    @if($raspored->ponedeljak[0]!='Nema predavanja' && !empty($raspored->ponedeljak[0]))
                     @php $j=0; @endphp
                     @for($i=0;$i<count($raspored->ponedeljak);$i=$i+4)
                         @php $j=$j+1; @endphp
@@ -161,7 +161,7 @@
                     </div>
                     <h2 class="m-auto font-weight-bold pb-2">Utorak</h2>
 
-                    @if($raspored->utorak!='Nema predavanja')
+                    @if($raspored->utorak[0]!='Nema predavanja' && !empty($raspored->utorak[0]))
                     @php $j=0; @endphp
                     @for($i=0;$i<count($raspored->utorak);$i=$i+4)
                         @php $j=$j+1; @endphp
@@ -248,7 +248,7 @@
                         </div>
                     </div>
                     <h2 class="m-auto font-weight-bold pb-2">Sreda</h2>
-                    @if($raspored->sreda!='Nema predavanja')
+                    @if($raspored->sreda[0]!='Nema predavanja' && !empty($raspored->sreda[0]))
                     @php $j=0; @endphp
                     @for($i=0;$i<count($raspored->sreda);$i=$i+4)
                         @php $j=$j+1; @endphp
@@ -332,7 +332,7 @@
                         </div>
                     </div>
                     <h2 class="m-auto font-weight-bold pb-2">Četvrtak</h2>
-                    @if($raspored->cetvrtak!='Nema predavanja')
+                    @if($raspored->cetvrtak[0]!='Nema predavanja' && !empty($raspored->cetvrtak[0]))
                     @php $j=0; @endphp
                     @for($i=0;$i<count($raspored->cetvrtak);$i=$i+4)
                         @php $j=$j+1; @endphp
@@ -416,7 +416,7 @@
                         </div>
                     </div>
                     <h2 class="m-auto font-weight-bold pb-2">Petak</h2>
-                    @if($raspored->petak!='Nema predavanja')
+                    @if($raspored->petak[0]!='Nema predavanja' && !empty($raspored->petak[0]))
                     @php $j=0; @endphp
                     @for($i=0;$i<count($raspored->petak);$i=$i+4)
                         @php $j=$j+1; @endphp
@@ -424,7 +424,7 @@
                             <h2 class="col-12 text-center p-2" id="Petak{{$j}}[]">Petak: {{$j}}. čas @if($j==(count($raspored->petak)/4))<span class="float-right btn btn-outline-danger" onclick="obrisiCas('Petak{{$j}}',{{$j}})"><i class="fas fa-times-circle"></i></span>@endif</h2><hr>
                             <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                             <label for="predmet">Predmet</label>
-                            <select value="{{ old("predmet") }}" required oninvalid="this.setCustomValidity("Molimo unesite ime predmeta!")" oninput="setCustomValidity("")" class="form-control custom-select @error("predmet") is-invalid @enderror" id="predmet" name="Petakk{{$j}}[]" placeholder="Unesite predmet">
+                            <select value="{{ old("predmet") }}" required oninvalid="this.setCustomValidity("Molimo unesite ime predmeta!")" oninput="setCustomValidity("")" class="form-control custom-select @error("predmet") is-invalid @enderror" id="predmet" name="Petak{{$j}}[]" placeholder="Unesite predmet">
                             <option value="">Izaberite predmet</option>
                             @foreach($predmeti as $predmet)
                             <option value="{{$predmet->id}}" @if($predmet->id==$raspored->petak[$i]) selected @endif>{{$predmet->naziv}}</option>
@@ -438,12 +438,12 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                             <label for="vreme">Vreme</label>
-                            <input value="{{ old("vreme") ? old("vreme") : $raspored->petak[$i+1] }}" required oninvalid="this.setCustomValidity("Molimo unesite vreme!(od-do)")" oninput="setCustomValidity("")" type="text" class="form-control @error("vreme") is-invalid @enderror" id="vreme" name="Petakk{{$j}}[]" placeholder="Unesite vreme">
+                            <input value="{{ old("vreme") ? old("vreme") : $raspored->petak[$i+1] }}" required oninvalid="this.setCustomValidity("Molimo unesite vreme!(od-do)")" oninput="setCustomValidity("")" type="text" class="form-control @error("vreme") is-invalid @enderror" id="vreme" name="Petak{{$j}}[]" placeholder="Unesite vreme">
                             @error("vreme")<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                             <label class="font-weight-bold" for="vrsta">Predavanja/vežbe</label>
-                            <select class="form-control custom-select mr-sm-2 @error("vrsta") is-invalid @enderror" id="vrsta" name="Petakk{{$j}}[]" oninvalid="this.setCustomValidity("Molimo izaberite vrstu predavanja!")" oninput="setCustomValidity("")">
+                            <select class="form-control custom-select mr-sm-2 @error("vrsta") is-invalid @enderror" id="vrsta" name="Petak{{$j}}[]" oninvalid="this.setCustomValidity("Molimo izaberite vrstu predavanja!")" oninput="setCustomValidity("")">
                             <option value="">Izaberite vrstu predavanja</option>
                             <option value="Predavanja" @if($raspored->petak[$i+2]=='Predavanja') selected @endif>Predavanja</option>
                             <option value="Vežbe" @if($raspored->petak[$i+2]=='Vežbe') selected @endif>Vežbe</option>'
@@ -456,7 +456,7 @@
                             </div>
                             <div class="form-group col-lg-3 col-md-3 col-sm-12 ">
                             <label class="font-weight-bold" for="prostorija">Prostorija</label>
-                            <select class="form-control custom-select mr-sm-2 @error("prostorija") is-invalid @enderror" id="prostorija" name="Petakk{{$j}}[]" oninvalid="this.setCustomValidity("Molimo izaberite prostoriju predavanja!")" oninput="setCustomValidity("")">
+                            <select class="form-control custom-select mr-sm-2 @error("prostorija") is-invalid @enderror" id="prostorija" name="Petak{{$j}}[]" oninvalid="this.setCustomValidity("Molimo izaberite prostoriju predavanja!")" oninput="setCustomValidity("")">
                             <option value="">Izaberite prostoriju predavanja</option>
                             <option value="A1" @if($raspored->petak[$i+3]=='A1') selected @endif>A1</option>
                             <option value="A2" @if($raspored->petak[$i+3]=='A2') selected @endif>A2</option>
@@ -796,7 +796,7 @@
                 html6+='<h2 class="col-12 text-center p-2" id="Četvrtak'+cas6+'[]">Četvrtak: '+cas6+'. čas</h2><hr>';
                 html6+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
                 html6+='<label for="predmet">Predmet</label>';
-                html6+='<select value="{{ old("predmet") }}" required oninvalid="this.setCustomValidity("Molimo unesite ime predmeta!")" oninput="setCustomValidity("")" class="form-control custom-select @error("predmet") is-invalid @enderror" id="predmet" name="Cetvrtak'+cas6+'[]" placeholder="Unesite predmet">';
+                html6+='<select value="{{ old("predmet") }}" required oninvalid="this.setCustomValidity("Molimo unesite ime predmeta!")" oninput="setCustomValidity("")" class="form-control custom-select @error("predmet") is-invalid @enderror" id="predmet" name="Četvrtak'+cas6+'[]" placeholder="Unesite predmet">';
                 html6+='<option value="">Izaberite predmet</option>';
                 html6+='@foreach($predmeti as $predmet) ';
                 html6+='<option value="{{$predmet->id}}">{{$predmet->naziv}}</option>';
@@ -810,12 +810,12 @@
                 html6+='</div>';
                 html6+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
                 html6+='<label for="vreme">Vreme</label>';
-                html6+='<input value="{{ old("vreme") }}" required oninvalid="this.setCustomValidity("Molimo unesite vreme!(od-do)")" oninput="setCustomValidity("")" type="text" class="form-control @error("vreme") is-invalid @enderror" id="vreme" name="Cetvrtak'+cas6+'[]" placeholder="Unesite vreme">';
+                html6+='<input value="{{ old("vreme") }}" required oninvalid="this.setCustomValidity("Molimo unesite vreme!(od-do)")" oninput="setCustomValidity("")" type="text" class="form-control @error("vreme") is-invalid @enderror" id="vreme" name="Četvrtak'+cas6+'[]" placeholder="Unesite vreme">';
                 html6+='@error("vreme")<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror';
                 html6+='</div>';
                 html6+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
                 html6+='<label class="font-weight-bold" for="vrsta">Predavanja/vežbe</label>';
-                html6+='<select class="form-control custom-select mr-sm-2 @error("vrsta") is-invalid @enderror" id="vrsta" name="Cetvrtak'+cas6+'[]" oninvalid="this.setCustomValidity("Molimo izaberite vrstu predavanja!")" oninput="setCustomValidity("")">';
+                html6+='<select class="form-control custom-select mr-sm-2 @error("vrsta") is-invalid @enderror" id="vrsta" name="Četvrtak'+cas6+'[]" oninvalid="this.setCustomValidity("Molimo izaberite vrstu predavanja!")" oninput="setCustomValidity("")">';
                 html6+='<option value="">Izaberite vrstu predavanja</option>';
                 html6+='<option value="Predavanja">Predavanja</option>';
                 html6+='<option value="Vežbe">Vežbe</option>'
@@ -828,7 +828,7 @@
                 html6+='</div>';
                 html6+='<div class="form-group col-lg-3 col-md-3 col-sm-12 ">';
                 html6+='<label class="font-weight-bold" for="prostorija">Prostorija</label>';
-                html6+='<select class="form-control custom-select mr-sm-2 @error("prostorija") is-invalid @enderror" id="prostorija" name="Cetvrtak'+cas6+'[]" oninvalid="this.setCustomValidity("Molimo izaberite prostoriju predavanja!")" oninput="setCustomValidity("")">';
+                html6+='<select class="form-control custom-select mr-sm-2 @error("prostorija") is-invalid @enderror" id="prostorija" name="Četvrtak'+cas6+'[]" oninvalid="this.setCustomValidity("Molimo izaberite prostoriju predavanja!")" oninput="setCustomValidity("")">';
                 html6+='<option value="">Izaberite prostoriju predavanja</option>';
                 html6+='<option value="A1">A1</option>';
                 html6+='<option value="A2">A2</option>';

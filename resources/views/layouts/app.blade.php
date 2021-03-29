@@ -33,140 +33,127 @@
     </script>
     {{-- TOOLTIP SCRIPT END --}}
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
+    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> --}}
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@300&display=swap" rel="stylesheet">
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css?v=echo time();') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 </head>
 
-<body style="background-image: linear-gradient(to bottom right, rgb(252,252,252), rgb(90, 90, 90)" onload="createFormFields()">
+<body style="background-color: #8EC5FC;
+background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+" onload="createFormFields()">
+
+{{-- <body style="background-color: #8BC6EC;
+background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+" onload="createFormFields()"> --}}
+{{-- <body style="background-image: linear-gradient(to bottom right, rgb(252,252,252), rgb(90, 90, 90)" onload="createFormFields()"> --}}
+
+
     <div id="app">
         @if(Auth::check())
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
-            <a class="navbar-brand " href={{ route('/') }}>Evidencija Studenata</a>
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #80D0C7;
+background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
+">
+            <a class="navbar-brand mr-0 mr-sm-2" href={{ route('/') }}><img class="img-fluid" style="max-height: 30px;" src="{{asset('images/logo1.png')}}" alt="Logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse text-center " id="navbarSupportedContent">
                 @can('isAdmin')
                 <ul class="navbar-nav mr-auto">
-                    {{-- @if(Request::is('predmeti') || Request::is('predmeti/*') || Request::is('korisnici') ||
-                    Request::is('korisnici/*') || Request::is('studenti'))
-                    <li class="nav-item
-                    @if(Request::is('studenti'))
-                    {{'active'}}
-                    @endif
-                    ">
-                    <a class="nav-link" href={{ route('studenti') }}><i class="fas fa-user-graduate"></i>
-                        Studenti</a>
-                    </li>
-                    @endif
-                    @if(Request::is('studenti/novi_student'))
-                    <li class="nav-item">
-                        <ol class="breadcrumb mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('studenti')}}>Studenti</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Novi student</li>
-                        </ol>
-                    </li>
-                    @elseif(Request::is('studenti/izmena_studenta/*'))
-                    <li class="nav-item">
-                        <ol class="breadcrumb mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('studenti')}}>Studenti</a></li>
-                            <li class="breadcrumb-item" aria-current="page"><a
-                                    href={{route('student',['id'=>$student->id])}}>Student "{{$student->ime}}"</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena studenta "{{$student->ime}}"
-                            </li>
-                        </ol>
-                    </li>
-                    @elseif(Request::is('studenti/student/*'))
-                    <li class="nav-item">
-                        <ol class="breadcrumb mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('studenti')}}>Studenti</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Student "{{$student->ime}}"</li>
-                        </ol>
-                    </li>
-                    @elseif(Request::is('ocene/ocena_izmena/*'))
-                    <li class="nav-item">
-                        <ol class="breadcrumb mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('studenti')}}>Studenti</a></li>
-                            <li class="breadcrumb-item" aria-current="page"><a
-                                    href={{route('student',['id'=>$id['st_id']])}}>Student "{{$ime}}"</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena ocene</li>
-                        </ol>
-                    </li>
-                    @endif
-                    @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('korisnici') ||
-                    Request::is('korisnici/*') || Request::is('predmeti') || Request::is('ocene/*'))
-                    <li class="nav-item
-                    @if(Request::is('predmeti'))
-                    {{'active'}}
-                    @endif
-                    ">
-                        <a class="nav-link" href={{ route('predmeti') }}><i class="fas fa-book"></i> Predmeti</a>
-                    </li>
-                    @endif
-                    @if(Request::is('predmeti/novi_predmet'))
-                    <li class="nav-item">
-                        <ol class="breadcrumb mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('predmeti')}}>Predmeti</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Novi predmet</li>
-                        </ol>
-                    </li>
-                    @elseif(Request::is('predmeti/izmena_predmeta/*'))
-                    <li class="nav-item">
-                        <ol class="breadcrumb mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('predmeti')}}>Predmeti</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena predmeta "{{$predmet->naziv}}"
-                            </li>
-                        </ol>
-                    </li>
-                    @endif
-                    @if(Request::is('studenti') || Request::is('studenti/*') || Request::is('predmeti') ||
-                    Request::is('predmeti/*') || Request::is('korisnici') || Request::is('ocene/*'))
-                    <li class="nav-item
-                    @if(Request::is('korisnici'))
+                    @if(Request::is('profesor/*') || Request::is('studenti/*') || Request::is('obavestenja') || Request::is('obavestenja/*'))
+                        <li class="nav-item">
+                            <a class="nav-link @if(Request::is('profesor/*')) active @endif" href={{route('profile',['ime'=>Auth::user()->ime])}}>
+                                <i class="fas fa-user-tie"></i>
+                                Profil
+                            </a>
+                        </li>
+                        @if(Request::is('profesor/*') || Request::is('studenti/svi') || Request::is('obavestenja') || Request::is('obavestenja/*') && !Request::is('studenti/*'))
+                        <li class="nav-item
+                        @if(Request::is('studenti/svi'))
                         {{'active'}}
+                        @endif
+                        ">
+                            <a class="nav-link" href={{ route('svi') }}><i class="fas fa-user-graduate"></i>
+                                Studenti</a>
+                        </li>
+                        @endif
+                        @if(Request::is('studenti/*') && !Request::is('studenti/svi'))
+                        <li class="nav-item">
+                            <ol class="breadcrumb mt-1 mb-0 py-1">
+                                <li class="breadcrumb-item"><a href={{ route('svi')}}>Studenti</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Student "{{$student->ime}}"</li>
+                            </ol>
+                        </li>
+                        @elseif(Request::is('ocene/ocena_izmena/*'))
+                        <li class="nav-item">
+                            <ol class="breadcrumb mt-1 mb-0 py-1">
+                                <li class="breadcrumb-item"><a href={{ route('svi')}}>Studenti</a></li>
+                                <li class="breadcrumb-item" aria-current="page"><a
+                                        href={{route('jedan_student',['id'=>$id['st_id']])}}>Student "{{$ime}}"</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Izmena ocene</li>
+                            </ol>
+                        </li>
+                        @endif
+                        @if(Request::is('obavestenja/sva') || Request::is('profesor/*') || Request::is('studenti/*'))
+                        <li class="nav-item
+                        @if(Request::is('obavestenja/sva'))
+                            {{'active'}}
+                        @endif
+                        ">
+                        <a class="nav-link" href={{ route('sva') }}><i class="fas fa-clipboard"></i> Obaveštenja
+                        </a>
+                        </li>
+                        @endif
+                        @if(Request::is('obavestenja/novo'))
+                        <li class="nav-item">
+                            <ol class="breadcrumb mt-1 mb-0 py-1">
+                                <li class="breadcrumb-item"><a href={{ route('sva')}}>Obaveštenja</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Novo obaveštenje</li>
+                            </ol>
+                        </li>
+                        @elseif(Request::is('obavestenja/izmena/*'))
+                        <li class="nav-item">
+                            <ol class="breadcrumb mt-1 mb-0 py-1">
+                                <li class="breadcrumb-item"><a href={{ route('sva')}}>Obaveštenja</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><a href={{route('profesorsko_obavestenje',['id'=>$obavestenje->id])}}>"{{ substr($obavestenje->naslov,0,10)}}..."</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Izmena "{{substr($obavestenje->naslov,0,10)}}..."</li>
+                            </ol>
+                        </li>
+                        @elseif(Request::is('obavestenja/*') && !Request::is('obavestenja/sva') && !Request::is('obavestenja/novo'))
+                        <li class="nav-item">
+                            <ol class="breadcrumb mt-1 mb-0 py-1">
+                                <li class="breadcrumb-item"><a href={{ route('sva')}}>Obaveštenja</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"> "{{substr($obavestenje->naslov,0,10)}}..."</li>
+                            </ol>
+                        </li>
+                        @endif
                     @endif
-                    ">
-                        <a class="nav-link" href={{ route('korisnici') }}><i class="fas fa-users"></i> Korisnici</a>
-                    </li>
-                    @endif
-                    @if(Request::is('korisnici/novi_korisnik'))
-                    <li class="nav-item">
-                        <ol class="breadcrumb mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('korisnici')}}>Korisnici</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Novi korisnik</li>
-                        </ol>
-                    </li>
-                    @elseif(Request::is('korisnici/izmena_korisnika/*'))
-                    <li class="nav-item">
-                        <ol class="breadcrumb mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('korisnici')}}>Korisnici</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena korisnika "{{$korisnik->ime}}"
-                            </li>
-                        </ol>
-                    </li>
-                    @endif --}}
-
                 </ul>
                 @elsecan('isUser')
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href={{route('profil',['ime'=>Auth::user()->ime])}}><i
-                                class="fas fa-user-graduate"></i>
-                            Profil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href=""><i class="fas fa-user-graduate"></i>
-                            Zahtev</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href=""><i class="fas fa-user-graduate"></i>
-                            Profil</a>
-                    </li>
+                    @if(Request::is('profil/*') || Request::is('kalendar') || Request::is('raspored_predavanja'))
+                        <li class="nav-item">
+                            <a class="nav-link @if(Request::is('profil/*')) active @endif" href={{route('profil',['ime'=>Auth::user()->ime])}}><i
+                                    class="fas fa-user-graduate"></i>
+                                Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(Request::is('raspored_predavanja')) active @endif" href={{ route('raspored_predavanja') }}><i class="fas fa-table"></i> Raspored
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if(Request::is('kalendar')) active @endif" href={{ route('kalendar') }}><i class="far fa-calendar-alt"></i> Ispiti/Kolokvijumi
+                            </a>
+                        </li>
+                    @endif
                 </ul>
                 @elsecan('isSuperAdmin')
                 <ul class="navbar-nav mr-auto">
@@ -205,8 +192,8 @@
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('studenti')}}>Studenti</a></li>
                             <li class="breadcrumb-item" aria-current="page"><a
-                                    href={{route('student',['id'=>$student->id])}}>Student "{{$student->ime}}"</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena studenta "{{$student->ime}}"
+                                    href={{route('student',['id'=>$student->id])}}>"{{$student->ime}}"</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena "{{$student->ime}}"
                             </li>
                         </ol>
                     </li>
@@ -214,7 +201,7 @@
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('studenti')}}>Studenti</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Student "{{$student->ime}}"</li>
+                            <li class="breadcrumb-item active" aria-current="page">"{{$student->ime}}"</li>
                         </ol>
                     </li>
                     @elseif(Request::is('ocene/ocena_izmena/*'))
@@ -222,8 +209,8 @@
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('studenti')}}>Studenti</a></li>
                             <li class="breadcrumb-item" aria-current="page"><a
-                                    href={{route('student',['id'=>$id['st_id']])}}>Student "{{$ime}}"</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena ocene</li>
+                                    href={{route('student',['id'=>$id['st_id']])}}>"{{$ime}}"</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena</li>
                         </ol>
                     </li>
                     @endif
@@ -250,8 +237,8 @@
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('profesori')}}>Profesori</a></li>
                             <li class="breadcrumb-item" aria-current="page"><a
-                                    href={{route('profesor',['id'=>$profesor->id])}}>Profesor "{{$profesor->ime}}"</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena profesora "{{$profesor->ime}}"
+                                    href={{route('profesor',['id'=>$profesor->id])}}>"{{$profesor->ime}}"</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena "{{$profesor->ime}}"
                             </li>
                         </ol>
                     </li>
@@ -259,7 +246,7 @@
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('profesori')}}>Profesori</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Profesor "{{$profesor->ime}}"</li>
+                            <li class="breadcrumb-item active" aria-current="page"> "{{$profesor->ime}}"</li>
                         </ol>
                     </li>
                     @endif
@@ -286,7 +273,7 @@
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('predmeti')}}>Predmeti</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena predmeta "{{$predmet->naziv}}"
+                            <li class="breadcrumb-item active" aria-current="page">Izmena "{{$predmet->naziv}}"
                             </li>
                         </ol>
                     </li>
@@ -294,7 +281,7 @@
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('predmeti')}}>Predmeti</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Kopiranje predmeta "{{$predmet->naziv}}"
+                            <li class="breadcrumb-item active" aria-current="page">Kopiranje "{{$predmet->naziv}}"
                             </li>
                         </ol>
                     </li>
@@ -321,7 +308,7 @@
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('korisnici')}}>Korisnici</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena korisnika "{{$korisnik->ime}}"
+                            <li class="breadcrumb-item active" aria-current="page">Izmena "{{$korisnik->ime}}"
                             </li>
                         </ol>
                     </li>
@@ -356,15 +343,15 @@
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('obavestenja')}}>Obaveštenja</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('obavestenje',['id'=>$obavestenje->id])}}>Obaveštenje "{{ substr($obavestenje->naslov,0,10)}}..."</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena obaveštenja "{{substr($obavestenje->naslov,0,10)}}..."</li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('obavestenje',['id'=>$obavestenje->id])}}> "{{ substr($obavestenje->naslov,0,10)}}..."</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena "{{substr($obavestenje->naslov,0,10)}}..."</li>
                         </ol>
                     </li>
                     @elseif(Request::is('obavestenja/obavestenje/*'))
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('obavestenja')}}>Obaveštenja</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Obaveštenje "{{substr($obavestenje->naslov,0,10)}}..."</li>
+                            <li class="breadcrumb-item active" aria-current="page"> "{{substr($obavestenje->naslov,0,10)}}..."</li>
                         </ol>
                     </li>
                     @endif
@@ -392,15 +379,15 @@
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('smerovi')}}>Smerovi</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('smerovi',['id'=>$smer->id])}}>Smer "{{ substr($smer->naziv,0,10)}}..."</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena smera "{{substr($smer->naziv,0,10)}}..."</li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('smerovi',['id'=>$smer->id])}}>"{{ substr($smer->naziv,0,10)}}..."</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena "{{substr($smer->naziv,0,10)}}..."</li>
                         </ol>
                     </li>
                     @elseif(Request::is('smerovi/smer/*'))
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('smerovi')}}>Smerovi</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Smer "{{substr($smer->naziv,0,10)}}..."</li>
+                            <li class="breadcrumb-item active" aria-current="page">"{{substr($smer->naziv,0,10)}}..."</li>
                         </ol>
                     </li>
                     @endif
@@ -428,15 +415,15 @@
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('raspored_ispita')}}>Ispiti/Kolokvijumi</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('raspored_ispita',['id'=>$raspored->id])}}>Raspored {{$raspored->godina_studija}}. godina"{{ substr($raspored->smerovi->naziv,0,10)}}..."</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena rasporeda..."</li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('raspored_ispita',['id'=>$raspored->id])}}>{{$raspored->godina_studija}}. godina"{{ substr($raspored->smerovi->naziv,0,10)}}..."</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena </li>
                         </ol>
                     </li>
                     @elseif(Request::is('raspored_ispita/jedan/*'))
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('raspored_ispita')}}>Ispiti/Kolokvijumi</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Raspored {{$raspored->godina_studija}}. godina "{{substr($raspored->smerovi->naziv,0,10)}}..."</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{$raspored->godina_studija}}. godina "{{substr($raspored->smerovi->naziv,0,10)}}..."</li>
                         </ol>
                     </li>
                     @endif
@@ -464,15 +451,15 @@
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('raspored')}}>Raspored</a></li>
-                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('raspored',['id'=>$raspored->id])}}>Raspored {{$raspored->godina_studija}}. godina"{{ substr($raspored->smerovi->naziv,0,10)}}..."</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena rasporeda..."</li>
+                            <li class="breadcrumb-item active" aria-current="page"><a href={{route('raspored',['id'=>$raspored->id])}}>{{$raspored->godina_studija}}. godina"{{ substr($raspored->smerovi->naziv,0,10)}}..."</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena</li>
                         </ol>
                     </li>
                     @elseif(Request::is('raspored/jedan/*'))
                     <li class="nav-item">
                         <ol class="breadcrumb mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('raspored')}}>Raspored</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Raspored {{$raspored->godina_studija}}. godina "{{substr($raspored->smerovi->naziv,0,10)}}..."</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{$raspored->godina_studija}}. godina "{{substr($raspored->smerovi->naziv,0,10)}}..."</li>
                         </ol>
                     </li>
                     @endif
@@ -481,7 +468,7 @@
                 </ul>
                 @endcan
                 <!-- Default dropleft button -->
-                <div class="btn-group dropleft float-right">
+                <div class="btn-group dropdown float-right">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         {{Auth::user()->ime}}

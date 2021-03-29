@@ -28,7 +28,7 @@
         <div class='col-xs-12 col-sm-6 my-2'>
             <div class="card border border-dark shadow-lg">
                 <div class="card-header">
-                    <h2>
+                    <h4>
                         <span class="badge badge-pill badge-primary shadow" data-toggle="tooltip" data-placement="top"
                             title="<b>RADNI STAŽ (GODINA)</b>" data-html="true">
                             {{-- OVDE TREBA DA BUDE RACUNICA OD DATUMA ZAPOSLJENJA --}}
@@ -42,8 +42,8 @@
                             {{-- OVDE TREBA IZRACUNATI BROJ PREDMETA KOJE PREDAJE --}}
                             {{ count($predmeti) }}
                         </span>
-
-                        <span class="float-right btn-group shadow "><a class="btn btn-outline-dark font-weight-bold"
+                        <span class="float-right btn-group shadow ">
+                            <a class="btn btn-outline-dark font-weight-bold"
                                 href={{ route('izmena_profesora', ['id'=>$profesor->id]) }}
                                 role="button">
                                 <i class="fas fa-edit" style="color:orange"></i> Izmeni
@@ -54,7 +54,8 @@
                                 Obriši
                             </button>
                         </span>
-                    </h2>
+
+                    </h4>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal{{ $profesor->id }}" tabindex="-1" role="dialog"

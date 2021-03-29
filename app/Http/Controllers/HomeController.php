@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
 
 use App\Models\Student;
 use App\Models\Predmet;
 use App\Models\Ocena;
 use App\Models\User;
 use App\Models\Smer;
+use App\Models\Profesor;
+
 
 
 
@@ -23,7 +27,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','can:isSuperAdmin']);
+        $this->middleware(['auth']);
     }
 
     /**
@@ -34,6 +38,9 @@ class HomeController extends Controller
     public function index(Request $req)
     {
         $stud=Student::all();
+        if(Auth::user()->role=='admin'){
+            return view('profesori.studenti.studenti',['stud'=>$stud]);
+        }
         return view('admin.studenti.studenti',['stud'=>$stud]);
     }
 
@@ -48,7 +55,19 @@ class HomeController extends Controller
             } else if(Student::count()==User::where('role','user')->count()){
                 $emails=[];
             } else {
-                $emails=User::rightJoin('studenti','studenti.email','!=','users.email')->where('users.email','!=','studenti.email')->where('users.role','user')->get(['users.email']);
+                $emails=[];
+                $korisnici=User::where('role','user')->get();
+                $studenti=Student::all();
+                $k_email=[];
+                $s_email=[];
+                foreach($korisnici as $korisnik){
+                    array_push($k_email,$korisnik->email);
+                }
+                foreach($studenti as $student){
+                        array_push($s_email,$student->email);
+                }
+                $emails=array_diff($k_email,$s_email);
+                // $emails=User::rightJoin('studenti','studenti.email','!=','users.email')->where('users.email','!=','studenti.email')->where('users.role','user')->get(['users.email']);
             }
             return view('admin.studenti.novi_student',['emails'=>$emails,'smerovi'=>$smerovi]);
         }
@@ -86,7 +105,11 @@ class HomeController extends Controller
         $ocene=Ocena::all();
         $predmeti_id=Ocena::where('student_id',$id)->pluck('predmet_id')->toArray();
         $predmeti=$predmeti->whereNotIn('id',$predmeti_id);
-
+        if(Auth::user()->role=='admin'){
+            $profesor=Profesor::where('email_korisnika',Auth::user()->email)->first();
+            $pred=explode(',',$profesor->predmeti);
+            return view('profesori.studenti.student',['student'=>$stud,'predmeti'=>$predmeti,'ocene'=>$ocene,'pred'=>$pred]);
+        }
         return view('admin.studenti.student',['student'=>$stud,'predmeti'=>$predmeti,'ocene'=>$ocene]);
 
     }
@@ -116,7 +139,6 @@ class HomeController extends Controller
             'godina_studija'=>'required|numeric|digits:1',
             'datum_rodjenja'=>['required','date','before_or_equal:2002-12-31'],
             'jmbg'=>'required|numeric|digits:12',
-            'smer'=>['required','exists:evidencija_studenata.smerovi,id']
         ]);
         // Ako polja nisu validna
         if($validator->fails()){

@@ -12,6 +12,8 @@ use App\Models\Predmet;
 use App\Models\Ocena;
 use App\Models\User;
 use App\Models\Obavestenje;
+use App\Models\Smer;
+
 
 
 
@@ -24,7 +26,7 @@ class ObavestenjeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','can:isSuperAdmin']);
+        $this->middleware(['auth']);
     }
 
     /**
@@ -35,6 +37,14 @@ class ObavestenjeController extends Controller
     public function index(Request $req)
     {
         $obavestenja=Obavestenje::all()->sortBy('odobrenje');
+        foreach($obavestenja as $obavestenje){
+            if($obavestenje->smer != 'svi'){
+                $obavestenje->smer=Smer::where('id',$obavestenje->smer)->pluck('naziv')->first();
+            }
+        }
+        if(Auth::user()->role=='admin'){
+            return view('profesori.obavestenja.obavestenja',['obavestenja'=>$obavestenja]);
+        }
         return view('admin.obavestenja.obavestenja',['obavestenja'=>$obavestenja]);
     }
 
@@ -43,15 +53,20 @@ class ObavestenjeController extends Controller
      */
     public function novo_obavestenje(Request $req){
         if($req->method()=='GET'){
-            return view('admin.obavestenja.novo_obavestenje');
+            $smerovi=Smer::all();
+            if(Auth::user()->role=='admin'){
+                return view('profesori.obavestenja.novo_obavestenje',['smerovi'=>$smerovi]);
+            }
+            return view('admin.obavestenja.novo_obavestenje',['smerovi'=>$smerovi]);
         }
-        $input=['naslov'=>$req->naslov,'obavestenje'=>$req->obavestenje,'potpis'=>Auth::user()->role,'datum'=>$req->datum,'odobrenje'=>0];
+        $input=['naslov'=>$req->naslov,'obavestenje'=>$req->obavestenje,'potpis'=>Auth::user()->role,'datum'=>$req->datum,'odobrenje'=>0,'smer'=>$req->smer];
         // Validator
         $validator=Validator::make($input,[
             'naslov'=>'required|max:50',
             'obavestenje'=>'required',
             'potpis'=>['required','regex:/admin|superAdmin/'],
             'datum'=>['required','date','before_or_equal:today'],
+            'smer'=>'required'
         ]);
         // Ako polja nisu validna
         if($validator->fails()){
@@ -60,6 +75,9 @@ class ObavestenjeController extends Controller
         // Ako jesu
         Obavestenje::create($input);
         $req->session()->flash('obavestenje',['success','Uspešno dodato obaveštenje!']);
+        if(Auth::user()->role=='admin'){
+            return redirect()->route('sva');
+        }
         return redirect()->route('obavestenja');
         }
 
@@ -69,8 +87,11 @@ class ObavestenjeController extends Controller
      */
     public function obavestenje($id){
         $obavestenje=Obavestenje::find($id);
-        return view('admin.obavestenja.obavestenje',['obavestenje'=>$obavestenje]);
-
+        $smer = ($obavestenje->smer!='svi') ? Smer::where('id',$obavestenje->smer)->pluck('naziv')->first() : 'Svi';
+        if(Auth::user()->role=='admin'){
+            return view('profesori.obavestenja.obavestenje',['obavestenje'=>$obavestenje,'smer'=>$smer]);
+        }
+        return view('admin.obavestenja.obavestenje',['obavestenje'=>$obavestenje,'smer'=>$smer]);
     }
 
     /**
@@ -79,15 +100,20 @@ class ObavestenjeController extends Controller
     public function izmena_obavestenja($id,Request $req){
         if($req->method()=='GET'){
             $obavestenje=Obavestenje::find($id);
-            return view('admin.obavestenja.izmena_obavestenja',['obavestenje'=>$obavestenje]);
+            $smerovi=Smer::all();
+            if(Auth::user()->role=='admin'){
+                return view('profesori.obavestenja.izmena_obavestenja',['obavestenje'=>$obavestenje,'smerovi'=>$smerovi]);
+            }
+            return view('admin.obavestenja.izmena_obavestenja',['obavestenje'=>$obavestenje,'smerovi'=>$smerovi]);
         }
-        $input=['naslov'=>$req->naslov,'obavestenje'=>$req->obavestenje,'potpis'=>Auth::user()->role,'datum'=>$req->datum,'odobrenje'=>0];
+        $input=['naslov'=>$req->naslov,'obavestenje'=>$req->obavestenje,'potpis'=>Auth::user()->role,'datum'=>$req->datum,'odobrenje'=>0,'smer'=>$req->smer];
         // Validator
         $validator=Validator::make($input,[
             'naslov'=>'required|max:50',
             'obavestenje'=>'required',
             'potpis'=>['required','regex:/admin|superAdmin/'],
             'datum'=>['required','date','before_or_equal:today'],
+            'smer'=>'required'
         ]);
         // Ako polja nisu validna
         if($validator->fails()){
@@ -97,6 +123,9 @@ class ObavestenjeController extends Controller
         Obavestenje::where('id',$id)->update($input);
 
         $req->session()->flash('obavestenje',['success','Uspešno izmenjeno obavestenje!']);
+        if(Auth::user()->role=='admin'){
+            return redirect()->route('profesorsko_obavestenje',['id'=>$id]);
+        }
 
         return redirect()->route('obavestenje',['id'=>$id]);
     }
@@ -107,6 +136,9 @@ class ObavestenjeController extends Controller
     public function brisanje_obavestenja($id, Request $req){
         Obavestenje::where('id',$id)->delete();
         $req->session()->flash('obavestenje',['success','Uspešno izbrisano obavestenje!']);
+        if(Auth::user()->role=='admin'){
+            return redirect()->route('sva');
+        }
         return redirect()->route('obavestenja');
     }
 

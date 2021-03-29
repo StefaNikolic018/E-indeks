@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-hover">
+                <table class="table table-hover table-responsive-sm">
                     <tbody>
                         <tr>
                             <th>Smer</th>
@@ -247,7 +247,7 @@
                     <p class="text-center justify-content-around">
                         <a class="btn btn-outline-primary font-weight-bold shadow mt-1" data-toggle="collapse"
                             href="#multiCollapseExample1" role="button" aria-expanded="false"
-                            aria-controls="multiCollapseExample1" style="width:138.512px">Prva godina <span
+                            aria-controls="multiCollapseExample1" style="width:138.512px">I godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
@@ -262,7 +262,7 @@
                             </span></a>
                         <button class="btn btn-primary font-weight-bold shadow mt-1" type="button"
                             data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false"
-                            aria-controls="multiCollapseExample2" style="width:138.512px">Druga godina <span
+                            aria-controls="multiCollapseExample2" style="width:138.512px">II godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
@@ -277,7 +277,7 @@
                             </span></button>
                         <button class="btn btn-info font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample3" aria-expanded="false"
-                            aria-controls="multiCollapseExample2" style="width:138.512px">Treća godina <span
+                            aria-controls="multiCollapseExample2" style="width:138.512px">III godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php

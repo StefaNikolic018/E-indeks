@@ -25,7 +25,7 @@ class Obavestenje extends Model
     /**
      * @var array
      */
-    protected $fillable = ['potpis', 'naslov', 'obavestenje', 'datum','odobrenje'];
+    protected $fillable = ['potpis', 'naslov', 'obavestenje', 'datum','odobrenje','smer'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

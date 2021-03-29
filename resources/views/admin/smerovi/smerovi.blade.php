@@ -9,7 +9,7 @@
     @if(session('smer'))
     <div class="row justify-content-center">
         <div class='col-lg-6 col-md-6 col-sm-12'>
-            <div class="alert alert-{{ session('smer')[0] }}" id="smer>
+            <div class="alert alert-{{ session('smer')[0] }}" id="smer">
                 {{ session('smer')[1] }}</div>
         </div>
     </div>

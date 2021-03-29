@@ -26,7 +26,7 @@
         <div class="container">
             <h1  style="text-shadow: 2px 2px lightgray"><i class="fas fa-book"></i> Predmeti</h1>
 
-            <p class="lead">U ovoj sekciji se upravlja predmetima studija<a
+            <p class="lead">U ovoj sekciji se upravlja predmetima<a
                     class="btn btn-outline-primary float-right font-weight-bold shadow" href={{ route('novi_predmet') }}
                     role="button">Dodaj Predmet</a></p>
         </div>

@@ -96,10 +96,11 @@ class RasporedController extends Controller
             $raspored1->petak=$raspored->petak;
 
         }
+        $predmeti=Predmet::all();
 
         // dd($raspored);
 
-        return view('admin.raspored_predavanja.jedan',['raspored'=>$raspored1]);
+        return view('admin.raspored_predavanja.jedan',['raspored'=>$raspored1,'predmeti'=>$predmeti]);
 
     }
 
@@ -120,27 +121,27 @@ class RasporedController extends Controller
                 $raspored1->petak=$raspored->petak;
 
             }
-            if($raspored1->ponedeljak!='Nema predavanja'){
+            if($raspored1->ponedeljak[0]!='Nema predavanja' && !empty($raspored1->ponedeljak[0])){
                 $pon=count($raspored1->ponedeljak)/4;
             } else {
                 $pon=0;
             }
-            if($raspored1->utorak!='Nema predavanja'){
+            if($raspored1->utorak[0]!='Nema predavanja' && !empty($raspored1->utorak[0])){
                 $uto=count($raspored1->utorak)/4;
             } else {
                 $uto=0;
             }
-            if($raspored1->sreda!='Nema predavanja'){
+            if($raspored1->sreda[0]!='Nema predavanja' && !empty($raspored1->sreda[0])){
                 $sre=count($raspored1->sreda)/4;
             } else {
                 $sre=0;
             }
-            if($raspored1->cetvrtak!='Nema predavanja'){
+            if($raspored1->cetvrtak[0]!='Nema predavanja' && !empty($raspored1->cetvrtak[0])){
                 $cet=count($raspored1->cetvrtak)/4;
             } else {
                 $cet=0;
             }
-            if($raspored1->petak!='Nema predavanja'){
+            if($raspored1->petak[0]!='Nema predavanja' && !empty($raspored1->petak[0])){
                 $pet=count($raspored1->petak)/4;
             } else {
                 $pet=0;
@@ -191,7 +192,7 @@ class RasporedController extends Controller
 
     // Kreiramo niz vrednosti iz forme za raspored casova
     private function kreirajNiz($broj,$dan,$polje,Request $req){
-        if($broj>0){
+        if($broj>0 && !empty($broj)){
             for($i=1;$i<=$broj;$i++){
                 $imeNiza=$dan.$i;
                 foreach($req->input() as $key=>$value){
@@ -218,7 +219,7 @@ class RasporedController extends Controller
         foreach($rasporedi as $raspored){
             foreach($week as $dan){
                 $raspored1=[];
-                if($raspored->$dan!='Nema predavanja'){
+                if($raspored->$dan!='Nema predavanja' || $raspored->$dan!=''){
                     if(strpos($raspored->$dan,'.')!=false){
 
                         $casovi=explode('.',$raspored->$dan);

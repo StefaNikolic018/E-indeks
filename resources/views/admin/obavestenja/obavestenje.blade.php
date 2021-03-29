@@ -24,7 +24,7 @@
         <div class='col-lg-12 col-md-12 col-sm-12 my-2'>
             <div class="card border border-dark shadow-lg">
                 <div class="card-header">
-                    <h2>
+                    <h5>
 
                             @if($obavestenje->odobrenje=='0')
                                 <span
@@ -49,7 +49,19 @@
                             @endif
                         </span>
 
-                        <span class="float-right btn-group shadow "><a class="btn btn-outline-dark font-weight-bold"
+                        <span data-toggle="tooltip" data-placement="top" title="<b>SMER</b>" data-html="true"
+                            class="badge badge-pill badge-primary shadow">
+                                {{$smer}}
+                        </span>
+
+                        <span class="float-right btn-group shadow pt-2 pt-sm-0">
+                            @if($obavestenje->odobrenje=='0')
+                            <a class="btn btn-success btn-outline-dark font-weight-bold shadow" href="{{ route('odobrenje_obavestenja',['id'=>$obavestenje->id,'odobrenje'=>1]) }}" role="button">ODOBRITI</a>
+
+                            @elseif($obavestenje->odobrenje=='1')
+                            <a class="btn btn-danger btn-outline-dark font-weight-bold shadow" href="{{ route('odobrenje_obavestenja',['id'=>$obavestenje->id,'odobrenje'=>0]) }}" role="button">ZABRANITI</a>
+                            @endif
+                            <a class="btn btn-outline-dark font-weight-bold"
                                 href={{ route('izmena_obavestenja', ['id'=>$obavestenje->id]) }} role="button">
                                 <i class="fas fa-edit" style="color:orange"></i> Izmeni
                             </a>
@@ -59,7 +71,7 @@
                                 Obriši
                             </button>
                         </span>
-                    </h2>
+                    </h5>
 
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal{{$obavestenje->id}}" tabindex="-1" role="dialog"

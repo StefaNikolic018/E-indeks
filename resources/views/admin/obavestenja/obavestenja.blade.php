@@ -38,13 +38,12 @@
     {{-- JUMBOTRON START --}}
     <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark shadow-lg">
         <div class="container">
-            <h1 style="text-shadow: 2px 2px lightgray"><i class="fas fa-clipboard"></i> Obaveštenja
-            </h1>
+            <h2 style="text-shadow: 2px 2px lightgray"><i class="fas fa-clipboard"></i> Obaveštenja
+            </h2>
 
             <p class="lead">U ovoj sekciji se upravlja obaveštenjima <a
                     class="btn btn-outline-primary float-right font-weight-bold shadow" href={{ route('novo_obavestenje') }}
-                    role="button">Dodaj
-                    Obaveštenje</a></p>
+                    role="button">Dodaj</a></p>
         </div>
     </div>
     {{-- JUMBOTRON END --}}
@@ -142,6 +141,7 @@
                                                     <tr>
                                                         <th scope="col">Naslov</th>
                                                         <th scope="col">Obaveštenje</th>
+                                                        <th scope="col">Smer</th>
                                                         <th scope="col">Datum</th>
                                                         <th scope="col" class="pl-4">Odobrenje</th>
                                                         <th scope="col"> &nbsp;Akcije</th>
@@ -153,6 +153,7 @@
                                                     <tr class="@if($obavestenje->odobrenje=='0') border border-right-0 border-top-0 border-bottom-0 border-danger @endif">
                                                         <td>{{ $obavestenje->naslov }}</td>
                                                         <td>{{ substr($obavestenje->obavestenje,0,10) }}...</td>
+                                                        <td>{{ ucfirst($obavestenje->smer) }}</td>
                                                         <td>{{ $obavestenje->datum }}</td>
                                                         <td>
                                                             @if($obavestenje->odobrenje=='0')
@@ -161,7 +162,6 @@
                                                             @elseif($obavestenje->odobrenje=='1')
                                                             <a class="btn btn-danger font-weight-bold shadow" href="{{ route('odobrenje_obavestenja',['id'=>$obavestenje->id,'odobrenje'=>0]) }}" role="button">ZABRANITI</a>
                                                             @endif
-
                                                         </td>
 
                                                         <td class="d-inline-flex">
@@ -290,6 +290,7 @@
                                                     <tr>
                                                         <th scope="col">Naslov</th>
                                                         <th scope="col">Obaveštenje</th>
+                                                        <th scope="col">Smer</th>
                                                         <th scope="col">Datum</th>
                                                         <th scope="col" class="pl-4">Odobrenje</th>
                                                         <th scope="col"> &nbsp;Akcije</th>
@@ -301,6 +302,7 @@
                                                     <tr class="@if($obavestenje->odobrenje=='0') border border-right-0 border-top-0 border-bottom-0 border-danger @endif">
                                                         <td>{{ $obavestenje->naslov }}</td>
                                                         <td>{{ substr($obavestenje->obavestenje,0,10) }}...</td>
+                                                        <td>{{ ucfirst($obavestenje->smer) }}</td>
                                                         <td>{{ $obavestenje->datum }}</td>
                                                         <td>
                                                             @if($obavestenje->odobrenje=='0')
@@ -436,6 +438,7 @@
                                                     <tr>
                                                         <th scope="col">Naslov</th>
                                                         <th scope="col">Obaveštenje</th>
+                                                        <th scope="col">Smer</th>
                                                         <th scope="col">Potpis</th>
                                                         <th scope="col">Datum</th>
                                                         <th scope="col" class="pl-4">Odobrenje</th>
@@ -447,6 +450,7 @@
                                                     <tr class="@if($obavestenje->odobrenje=='0') border border-right-0 border-top-0 border-bottom-0 border-danger @endif">
                                                         <td>{{ $obavestenje->naslov }}</td>
                                                         <td>{{ substr($obavestenje->obavestenje,0,10) }}...</td>
+                                                        <td>{{ ucfirst($obavestenje->smer) }}</td>
                                                         <td>
                                                             @if($obavestenje->potpis=='admin')
                                                                 Profesor

@@ -103,8 +103,14 @@ class PredmetController extends Controller
             // dump($validator);
             return back()->withErrors($validator)->withInput();
         }
-
-        Predmet::where('id',$id)->update($input);
+        $predmet=Predmet::find($id);
+        $st_id=Ocena::where('predmet_id',$id)->pluck('student_id');
+        foreach($st_id as $id1){
+            $student=Student::find($id1);
+            $espb=$student->espb-$predmet->espb+$input['espb'];
+            $student->update(['espb'=>$espb]);
+        }
+        $predmet->update($input);
 
         $req->session()->flash('predmet',['success','Uspešno izmenjen predmet '.$req->naziv.'!']);
         return redirect()->route('predmeti');
@@ -146,14 +152,17 @@ class PredmetController extends Controller
 
     public function brisanje_predmeta($id,Request $req){
         $st_id=Ocena::select('student_id')->where('predmet_id',$id)->get();
-
-        Predmet::where('id',$id)->delete();
+// TODO: Resiti konflikte izmedju trigera i kverija, tj. resiti problem ovde umesto u trigeru, jer ne moze od jednom da apdejtuje vise studenata u jednom trigeru -> RESENO
+        // Nalazimo predmet
+        $predmet=Predmet::find($id);
+        $predmet->delete();
 
         foreach($st_id as $id1){
+            $student=Student::find($id1->student_id);
+            $espb=$student->espb-$predmet->espb;
             $ocena=Ocena::where('student_id',$id1->student_id)->avg('ocena');
-            Student::where('id',$id1->student_id)->update(['prosek_ocena'=>$ocena]);
+            $student->update(['prosek_ocena'=>$ocena,'espb'=>$espb]);
         }
-
 
         $req->session()->flash('predmet',['success','Uspešno izbrisan predmet!']);
         return redirect()->route('predmeti');

@@ -24,7 +24,7 @@
         <div class="container">
             <h1  style="text-shadow: 2px 2px lightgray"><i class="fas fa-users"></i> Korisnici</h1>
 
-            <p class="lead">U ovoj sekciji se upravlja nalozima korisnika <a
+            <p class="lead">U ovoj sekciji se upravlja korisnicima <a
                     class="btn btn-outline-primary float-right font-weight-bold shadow"
                     href={{ route('novi_korisnik') }} role="button">Dodaj Korisnika</a></p>
         </div>
@@ -36,7 +36,7 @@
                 </h3>
             </div>
             <div class="card-body bg-dark">
-                <table class="table table-dark table-hover table-responsive-sm shadow-lg">
+                <table class="table table-dark table-hover table-responsive-sm shadow-lg ">
                     <thead>
                         <tr>
                             <th scope="col">Ime</th>

@@ -60,7 +60,7 @@ class SmerController extends Controller
         }
         // Ako jesu
         Smer::create($input);
-        $req->session()->flash('smer',['success','Uspešno dodato smer!']);
+        $req->session()->flash('smer',['success','Uspešno dodat smer!']);
         return redirect()->route('smerovi');
         }
 
@@ -107,7 +107,8 @@ class SmerController extends Controller
      * Deleting the student
      */
     public function brisanje_smera($id, Request $req){
-        Smer::where('id',$id)->delete();
+        Obavestenje::where('smer',$id)->delete();
+        Smer::find($id)->delete();
         $req->session()->flash('smer',['success','Uspešno izbrisan smer!']);
         return redirect()->route('smerovi');
     }

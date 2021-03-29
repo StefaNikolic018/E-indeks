@@ -142,7 +142,7 @@
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{ $student->id }}">
+                                                                        data-target="#exampleModal{{ $student->id }}1">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -150,13 +150,13 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $student->id }}"
+                                                            <div class="modal fade" id="exampleModal{{ $student->id }}1"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">
                                                                                 Brisanje studenta
                                                                             </h5>
@@ -165,7 +165,7 @@
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete
                                                                                 studenta
                                                                                 "{{ $student->ime }}"?</b>
@@ -269,7 +269,7 @@
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{ $student->id }}">
+                                                                        data-target="#exampleModal{{ $student->id }}2">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -277,13 +277,13 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $student->id }}"
+                                                            <div class="modal fade" id="exampleModal{{ $student->id }}2"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">
                                                                                 Brisanje studenta
                                                                             </h5>
@@ -292,7 +292,7 @@
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete
                                                                                 studenta
                                                                                 "{{ $student->ime }}"?</b>
@@ -394,7 +394,7 @@
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{ $student->id }}">
+                                                                        data-target="#exampleModal{{ $student->id }}3">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -402,13 +402,13 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $student->id }}"
+                                                            <div class="modal fade" id="exampleModal{{ $student->id }}3"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">
                                                                                 Brisanje studenta
                                                                             </h5>
@@ -417,7 +417,7 @@
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete
                                                                                 studenta
                                                                                 "{{ $student->ime }}"?</b>
@@ -529,7 +529,7 @@
                                                                     <div class="dropdown-divider"></div>
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{ $student->id }}">
+                                                                        data-target="#exampleModal{{ $student->id }}4">
                                                                         <i class="fas fa-trash-alt"
                                                                             style="color:red"></i>
                                                                         Obriši
@@ -537,13 +537,13 @@
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $student->id }}"
+                                                            <div class="modal fade" id="exampleModal{{ $student->id }}4"
                                                                 tabindex="-1" role="dialog"
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center"
+                                                                            <h5 class="modal-title text-center text-dark"
                                                                                 id="exampleModalLabel">
                                                                                 Brisanje studenta
                                                                             </h5>
@@ -552,7 +552,7 @@
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
+                                                                        <div class="modal-body text-center text-dark">
                                                                             <b>Da li stvarno želite da izbrišete
                                                                                 studenta
                                                                                 "{{ $student->ime }}"?</b>

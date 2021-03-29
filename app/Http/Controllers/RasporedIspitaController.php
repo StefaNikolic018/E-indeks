@@ -24,7 +24,7 @@ class RasporedIspitaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','can:isSuperAdmin']);
+        $this->middleware(['auth']);
     }
 
     /**
@@ -39,6 +39,10 @@ class RasporedIspitaController extends Controller
         $predmeti=Predmet::all();
         $dogadjaji=Dogadjaj::all();
         $dogadjaji=$this->formatDatuma($dogadjaji);
+
+        if(Auth::user()->role=='user'){
+            return view('studenti.kalendar',['rasporedi'=>$rasporedi,'predmeti'=>$predmeti,'dogadjaji'=>$dogadjaji]);
+        }
 
         return view('admin.raspored.raspored',['rasporedi'=>$rasporedi,'predmeti'=>$predmeti,'dogadjaji'=>$dogadjaji]);
     }

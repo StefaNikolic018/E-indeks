@@ -106,7 +106,7 @@
                     @if($neodobrena>0)
                     <a href="{{route('obavestenja')}}">
                     <span class="badge badge-pill badge-danger shadow" data-toggle="tooltip"
-                    data-placement="top" title="<b>NEODOBRENA OBAVEŠTENJA</b>" data-html="true">
+                    data-placement="top" title="<b>NEODOBRENA OBAVEŠTENJA</b>" data-html="true" style="animation: pulse 5s infinite;">
                         {{ $neodobrena }}
                     </span>
                     </a>
