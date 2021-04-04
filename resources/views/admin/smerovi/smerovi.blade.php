@@ -23,27 +23,26 @@
     @endif
     {{-- ALERT MESSAGES END --}}
     {{-- JUMBOTRON START --}}
-    <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark shadow-lg">
-        <div class="container">
-            <h1 style="text-shadow: 2px 2px lightgray"><i class="fas fa-swatchbook"></i> Smerovi
+    <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-white border border-dark shadow-lg mb-2">
+        <div class="container border border-secondary rounded shadow bg-gradient-light py-2">
+            <h1 style="text-shadow: 2px 2px lightgray" class="font-weight-bold"><i class="fas fa-swatchbook"></i> Smerovi
             </h1>
 
             <p class="lead">U ovoj sekciji se upravlja smerovima <a
-                    class="btn btn-outline-primary float-right font-weight-bold shadow" href={{ route('novi_smer') }}
-                    role="button">Dodaj
-                    Smer</a></p>
+                    class="btn btn-primary border border-secondary rounded float-right font-weight-bold shadow" href={{ route('novi_smer') }}
+                    role="button">Novi</a></p>
         </div>
     </div>
     {{-- JUMBOTRON END --}}
     {{-- COLLAPSE FOR SUBJECTS START --}}
     <div class="row ">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card-header border border-dark py-2">
-                <h3 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px gray">Spisak
-                    smerova</h3>
+            <div class="card-header border border-white bg-dark py-2">
+                <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px black">Spisak
+                    smerova</h4>
             </div>
             <div class="card border-dark shadow-lg">
-                <div class="card-header pt-3">
+                {{-- <div class="card-header pt-3">
                     <p class="text-center justify-content-around">
                             <button class="btn btn-dark font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample4" aria-expanded="false"
@@ -54,14 +53,14 @@
                             </span>
                         </button>
                     </p>
-                </div>
+                </div> --}}
                 <div class="row">
                     {{-- SVI SMEROVI START --}}
                     <div class="col-lg-12 col-mg-12 col-sm-12">
                         <div class="collapse multi-collapse show" id="multiCollapseExample4">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="text-center font-weight-bold pt-2">Svi smerovi
+                                <div class="card-header border border-dark p-2">
+                                    <h4 class="text-center font-weight-bold" style="text-shadow: 1px 1px gray">Svi smerovi
                                         <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ SMEROVA</b>" data-html="true">
@@ -73,7 +72,7 @@
                                     {{-- TABLE ALL STUDY PROGRAM START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Naziv</th>
@@ -92,14 +91,12 @@
                                                         <td>{{$smer->akreditovan}}.</td>
                                                         <td>{{ $smer->espb }}</td>
                                                         <td class="pl-5">
+                                                            <span
+                                                            class="badge badge-info shadow" data-toggle="tooltip"
+                                                            data-placement="top" title="<b>BROJ PREDMETA</b>" data-html="true">
                                                             {{$smer->predmeti->count()}}
-                                                            {{-- @if(strpos($smer->predmeti,',') !== false )
-                                                                {{count(explode(',',$smer->predmeti))}}
-                                                            @elseif($smer->predmeti != '')
-                                                                1
-                                                            @else
-                                                                0
-                                                            @endif --}}
+                                                            </span>
+
                                                         </td>
 
                                                         <td class="d-inline-flex">

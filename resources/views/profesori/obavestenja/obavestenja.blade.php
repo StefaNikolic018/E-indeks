@@ -5,19 +5,6 @@
 
 
 <div class="container" id="kontejner">
-    {{-- ALERT MESSAGES START --}}
-    {{-- <div class="row justify-content-center d-none">
-        <div class='col-lg-6 col-md-6 col-sm-12'>
-            <div class="alert alert-success" id="obavestenjeUspeh">
-                Uspešno izmenjen status obaveštenja!</div>
-        </div>
-    </div>
-    <div class="row justify-content-center d-none">
-        <div class='col-lg-6 col-md-6 col-sm-12'>
-            <div class="alert alert-danger" id="obavestenjeGreska">
-                Došlo je do greške, pokušajte ponovo!</div>
-        </div>
-    </div> --}}
 
     @if(session('obavestenje'))
     <div class="row justify-content-center">
@@ -36,31 +23,30 @@
     @endif
     {{-- ALERT MESSAGES END --}}
     {{-- JUMBOTRON START --}}
-    <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark shadow-lg">
-        <div class="container">
-            <h1 style="text-shadow: 2px 2px lightgray"><i class="fas fa-clipboard"></i> Obaveštenja
+    <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-white border border-dark shadow-lg mb-2">
+        <div class="container border border-secondary rounded shadow bg-gradient-light py-2">
+            <h1 style="text-shadow: 2px 2px lightgray" class="font-weight-bold"><i class="fas fa-clipboard"></i> Obaveštenja
             </h1>
 
             <p class="lead">U ovoj sekciji se upravlja obaveštenjima <a
-                    class="btn btn-outline-primary float-right font-weight-bold shadow" href={{ route('novo') }}
-                    role="button">Dodaj
-                    Obaveštenje</a></p>
+                    class="btn btn-primary border border-secondary rounded float-right font-weight-bold shadow" href={{ route('novo') }}
+                    role="button">Novo</a></p>
         </div>
     </div>
     {{-- JUMBOTRON END --}}
     {{-- COLLAPSE FOR SUBJECTS START --}}
     <div class="row ">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card-header border border-dark py-2">
-                <h3 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px gray">Spisak
-                    obaveštenja</h3>
+            <div class="card-header border border-white bg-dark py-2">
+                <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px black">Spisak
+                    obaveštenja</h4>
             </div>
             <div class="card border-dark shadow-lg">
                 <div class="card-header pt-3">
                     <p class="text-center justify-content-around">
                         <a class="btn btn-outline-primary font-weight-bold shadow mt-1" data-toggle="collapse"
                             href="#multiCollapseExample1" role="button" aria-expanded="false"
-                            aria-controls="multiCollapseExample1" style="width:138.512px">Profesor
+                            aria-controls="multiCollapseExample1" style="width:138.512px; text-shadow: 1px 1px black">Prof
                             <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>PROFESORSKA OBAVEŠTENJA</b>" data-html="true">
@@ -75,9 +61,9 @@
                             @endif
                         </a>
 
-                        <button class="btn btn-primary font-weight-bold shadow mt-1" type="button"
+                        <button class="btn btn-primary font-weight-bold shadow mt-1 border border-dark rounded" type="button"
                             data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false"
-                            aria-controls="multiCollapseExample2" style="width:138.512px">Admin
+                            aria-controls="multiCollapseExample2" style="width:138.512px; text-shadow: 1px 1px black">Admin
                             <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>ADMINISTRATORSKA OBAVEŠTENJA</b>" data-html="true">
@@ -95,7 +81,7 @@
 
                             <button class="btn btn-dark font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample4" aria-expanded="false"
-                            aria-controls="multiCollapseExample4" style="width:138.512px">Sva
+                            aria-controls="multiCollapseExample4" style="width:138.512px; text-shadow: 1px 1px black">Sva
                             <span class="badge badge-secondary shadow" data-toggle="tooltip"
                                 data-placement="top" title="<b>BROJ OBAVEŠTENJA</b>" data-html="true">
                                 {{$obavestenja->count()}}
@@ -137,7 +123,7 @@
                                                                         {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Naslov</th>
@@ -296,7 +282,7 @@
                                                                         {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Naslov</th>
@@ -432,8 +418,8 @@
                     <div class="col-lg-12 col-mg-12 col-sm-12">
                         <div class="collapse multi-collapse show" id="multiCollapseExample4">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="text-center font-weight-bold pt-2">Sva obaveštenja
+                                <div class="card-header border border-dark p-2">
+                                    <h4 class="text-center font-weight-bold" style="text-shadow: 1px 1px gray">Sva obaveštenja
                                         <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>SVA OBAVEŠTENJA</b>" data-html="true">
@@ -454,7 +440,7 @@
                                                                         {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Naslov</th>

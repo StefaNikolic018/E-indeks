@@ -70,7 +70,7 @@
 
 
                 </div>
-                <table class="table table-hover table-responsive-sm">
+                <table class="table table-hover table-responsive-sm table-striped table-bordered" id="studenti">
                     <tbody>
                         <tr>
                             <th class="ml-3">Ime</th>
@@ -169,17 +169,17 @@
     {{-- COLLAPSE FOR SUBJECTS START --}}
     <div class="row ">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card-header border border-dark py-2">
-                <h3 class="text-center font-weight-bold pt-1" style="text-shadow: 2px 2px rgb(180,180,180)">Spisak ocena
+            <div class="card-header border border-white bg-dark py-2">
+                <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px black">Spisak ocena
                     po godini
-                </h3>
+                </h4>
             </div>
             <div class="card border-dark shadow-lg">
                 <div class="card-header pt-3">
                     <p class="text-center justify-content-around">
                         <a class="btn btn-outline-primary font-weight-bold shadow mt-1" data-toggle="collapse"
                             href="#multiCollapseExample1" role="button" aria-expanded="false"
-                            aria-controls="multiCollapseExample1" style="width:138.512px">I godina <span
+                            aria-controls="multiCollapseExample1" style="width:138.512px; text-shadow: 1px 1px black">I godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
@@ -198,9 +198,9 @@
                                 echo $i;
                                 @endphp
                             </span></a>
-                        <button class="btn btn-primary font-weight-bold shadow mt-1" type="button"
+                        <button class="btn btn-primary border border-dark rounded font-weight-bold shadow mt-1" type="button"
                             data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false"
-                            aria-controls="multiCollapseExample2" style="width:138.512px">II godina <span
+                            aria-controls="multiCollapseExample2" style="width:138.512px; text-shadow: 1px 1px black">II godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
@@ -219,9 +219,9 @@
                                 echo $i;
                                 @endphp
                             </span></button>
-                        <button class="btn btn-info font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
+                        <button class="btn btn-info border border-dark rounded font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample3" aria-expanded="false"
-                            aria-controls="multiCollapseExample2" style="width:138.512px">III godina <span
+                            aria-controls="multiCollapseExample2" style="width:138.512px; text-shadow: 1px 1px gray">III godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
@@ -242,7 +242,7 @@
                             </span></button>
                         <button class="btn btn-dark font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample4" aria-expanded="false"
-                            aria-controls="multiCollapseExample4" style="width:138.512px">Sve ocene <span
+                            aria-controls="multiCollapseExample4" style="width:138.512px; text-shadow: 1px 1px black">Sve ocene <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ PREDMETA</b>" data-html="true">
                                 @php
@@ -279,12 +279,12 @@
                                     {{-- TABLE ALL GRADES FIRST YEAR START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Sifra</th>
+                                                        <th scope="col">Šifra</th>
                                                         <th scope="col">Naziv</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
 
@@ -335,12 +335,12 @@
                                 <div class="card-body bg-dark">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Sifra</th>
+                                                        <th scope="col">Šifra</th>
                                                         <th scope="col">Naziv</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
                                                     </tr>
@@ -388,12 +388,12 @@
                                     {{-- TABLE ALL GRADES THIRD YEAR START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Sifra</th>
+                                                        <th scope="col">Šifra</th>
                                                         <th scope="col">Naziv</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
                                                     </tr>
@@ -431,8 +431,8 @@
                     <div class="col-lg-12 col-mg-12 col-sm-12">
                         <div class="collapse multi-collapse show" id="multiCollapseExample4">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="text-center font-weight-bold pt-2">SVI PREDMETI <span
+                                <div class="card-header border border-dark rounded p-2">
+                                    <h4 class="text-center font-weight-bold" style="text-shadow:1px 1px gray">Sve ocene <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ PREDMETA</b>" data-html="true">
                                             {{$predmeti->count()}}
@@ -442,13 +442,13 @@
                                     {{-- TABLE ALL GRADES START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Sifra</th>
+                                                        <th scope="col">Šifra</th>
                                                         <th scope="col">Naziv</th>
-                                                        <th scope="col">Godina Studija</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Godina</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
                                                     </tr>
@@ -462,7 +462,7 @@
                                                     <tr>
                                                         <td>{{$predmet->sifra}}</td>
                                                         <td>{{$predmet->naziv}}</td>
-                                                        <td>{{$predmet->godina_studija}}</td>
+                                                        <td>{{$predmet->godina_studija}}.</td>
                                                         <td>{{$predmet->obavezni_izborni}}</td>
                                                         <td>{{$predmet->espb}}</td>
                                                         <td>{{$ocena->ocena}}</td>

@@ -72,7 +72,7 @@
                     </h3>
 
                 </div>
-                <table class="table table-hover">
+                <table class="table table-hover table-striped table-bordered" id="studenti">
                     <tbody>
                         <tr>
                             <th>Smer</th>
@@ -130,7 +130,8 @@
                 <div class="card-header text-center">
                     <h3 class="font-weight-bold pt-2" style="text-shadow: 2px 2px lightgray">Dodaj ocenu</h3>
                 </div>
-                <div class="card-body pb-5">
+                <div class="card-body pb-4">
+                    <div class="container border border-secondary rounded shadow bg-gradient-light py-2">
                     <form action={{route('dodaj_ocenu', ['id'=>$student->id])}} method="POST">
                         @csrf
                         <div class="form-group">
@@ -187,10 +188,11 @@
                             @enderror
                         </div>
                         <div class="d-flex justify-content-center">
-                            <input type="submit" class="btn btn-primary mb-3 ml-3 shadow font-weight-bold mt-3 p-2"
+                            <input type="submit" class="btn btn-primary mb-3 ml-3 shadow font-weight-bold mt-3 p-2 border border-dark rounded"
                                 role="button" value="Sačuvaj" />
                         </div>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -203,17 +205,17 @@
     {{-- COLLAPSE FOR SUBJECTS START --}}
     <div class="row ">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card-header border border-dark py-2">
-                <h3 class="text-center font-weight-bold pt-1" style="text-shadow: 2px 2px rgb(180,180,180)">Spisak ocena
+            <div class="card-header border border-white bg-dark py-2">
+                <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px black">Spisak ocena
                     po godini
-                </h3>
+                </h4>
             </div>
             <div class="card border-dark shadow-lg">
                 <div class="card-header pt-3">
                     <p class="text-center justify-content-around">
                         <a class="btn btn-outline-primary font-weight-bold shadow mt-1" data-toggle="collapse"
                             href="#multiCollapseExample1" role="button" aria-expanded="false"
-                            aria-controls="multiCollapseExample1" style="width:138.512px">Prva godina <span
+                            aria-controls="multiCollapseExample1" style="width:138.512px; text-shadow: 1px 1px black">I godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
@@ -226,9 +228,9 @@
                                 echo $i;
                             @endphp
                             </span></a>
-                        <button class="btn btn-primary font-weight-bold shadow mt-1" type="button"
+                        <button class="btn btn-primary font-weight-bold shadow mt-1 border border-dark rounded" type="button"
                             data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false"
-                            aria-controls="multiCollapseExample2" style="width:138.512px">Druga godina <span
+                            aria-controls="multiCollapseExample2" style="width:138.512px">II godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
@@ -241,9 +243,9 @@
                                 echo $i;
                                 @endphp
                             </span></button>
-                        <button class="btn btn-info font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
+                        <button class="btn btn-info font-weight-bold shadow mt-1 border border-dark rounded" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample3" aria-expanded="false"
-                            aria-controls="multiCollapseExample2" style="width:138.512px">Treća godina <span
+                            aria-controls="multiCollapseExample2" style="width:138.512px; text-shadow: 1px 1px gray">III godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
@@ -258,7 +260,7 @@
                             </span></button>
                         <button class="btn btn-dark font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample4" aria-expanded="false"
-                            aria-controls="multiCollapseExample4" style="width:138.512px">Sve ocene <span
+                            aria-controls="multiCollapseExample4" style="width:138.512px; text-shadow: 1px 1px black">Sve ocene <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ PREDMETA</b>" data-html="true">
                                 {{$student->ocene->count()}}
@@ -289,12 +291,12 @@
                                     {{-- TABLE ALL GRADES FIRST YEAR START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Sifra</th>
+                                                        <th scope="col">Šifra</th>
                                                         <th scope="col">Naziv</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
                                                         <th scope="col">Akcija</th>
@@ -427,12 +429,12 @@
                                 <div class="card-body bg-dark">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Sifra</th>
+                                                        <th scope="col">Šifra</th>
                                                         <th scope="col">Naziv</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
                                                         <th scope="col">Akcija</th>
@@ -563,12 +565,12 @@
                                     {{-- TABLE ALL GRADES THIRD YEAR START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Sifra</th>
+                                                        <th scope="col">Šifra</th>
                                                         <th scope="col">Naziv</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
                                                         <th scope="col">Akcija</th>
@@ -681,8 +683,8 @@
                     <div class="col-lg-12 col-mg-12 col-sm-12">
                         <div class="collapse multi-collapse show" id="multiCollapseExample4">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="text-center font-weight-bold pt-2">SVI PREDMETI <span
+                                <div class="card-header border border-dark p-2">
+                                    <h4 class="text-center font-weight-bold " style="text-shadow: 1px 1px gray">Svi predmeti <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ PREDMETA</b>" data-html="true">
                                             {{$student->ocene->count()}}
@@ -692,13 +694,13 @@
                                     {{-- TABLE ALL GRADES START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Sifra</th>
+                                                        <th scope="col">Šifra</th>
                                                         <th scope="col">Naziv</th>
                                                         <th scope="col">Godina Studija</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
                                                         <th scope="col">Akcija</th>

@@ -35,10 +35,10 @@
     @endif
     {{-- ALERT MESSAGES END --}}
     {{-- JUMBOTRON START --}}
-    <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark shadow-lg">
-        <div class="container">
-            <h1 style="text-shadow: 2px 2px lightgray"><i class="far fa-calendar-alt"></i> Raspored Kolokvijuma \ Ispita
-            </h1>
+    <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-white border border-dark shadow-lg mb-2">
+        <div class="container border border-secondary rounded shadow bg-gradient-light py-2">
+            <h3 style="text-shadow: 2px 2px lightgray" class="font-weight-bold"><i class="far fa-calendar-alt"></i> Raspored Kolokvijuma\Ispita
+            </h3>
 
             <p class="lead">U ovoj sekciji se upravlja rasporedom kolokvijuma i ispita
         </div>

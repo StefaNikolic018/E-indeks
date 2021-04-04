@@ -69,10 +69,10 @@
         </div>
         <div class="card-body">
             @if($raspored->ponedeljak[0] != 'Nema predavanja' && count($raspored->ponedeljak)>4)
-            <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
-                        <th colspan="4" class="text-center text-dark">PONEDELJAK
+                        <td colspan="4" class="text-center text-dark">PONEDELJAK
                     </tr>
                 <tr>
                     <th scope="col">VREME</th>
@@ -95,24 +95,24 @@
                 </tbody>
             </table>
             @elseif($raspored->ponedeljak[0] == 'Nema predavanja' || empty($raspored->ponedeljak[0]))
-            <table class="table table-dark table-hover table-striped table-responsive-xs border">
+            <table class="table table-bordered table-dark table-hover table-striped table-responsive-xs border">
                 <thead>
                     <tr class="bg-light">
-                        <th colspan="4" class="text-center text-dark">PONEDELJAK
+                        <td colspan="4" class="text-center text-dark">PONEDELJAK
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th colspan="4" class="text-center text-light"> Nema predavanja</th>
+                        <td colspan="4" class="text-center text-light"> Nema predavanja</td>
                     </tr>
                 </tbody>
             </table>
 
             @else
-            <table class="table table-dark table-hover table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-responsive-sm border">
                 <thead>
                 <tr class="bg-light">
-                    <th colspan="4" class="text-center text-dark">PONEDELJAK
+                    <td colspan="4" class="text-center text-dark">PONEDELJAK
                 </tr>
                 <tr>
                     <th scope="col">VREME</th>
@@ -136,10 +136,10 @@
             {{-- PONEDELJAK END --}}
             {{-- UTORAK START--}}
             @if($raspored->utorak[0] != 'Nema predavanja' && count($raspored->utorak)>4)
-            <table class="table table-dark table-hover table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-responsive-sm border">
                 <thead>
                 <tr class="bg-light">
-                    <th class="text-center text-dark" colspan="4">UTORAK
+                    <td class="text-center text-dark" colspan="4">UTORAK
                 </tr>
                 <tr>
                     <th scope="col">VREME</th>
@@ -163,24 +163,24 @@
                 </tbody>
             </table>
             @elseif($raspored->utorak[0]=='Nema predavanja' || empty($raspored->utorak[0]))
-            <table class="table table-dark table-hover table-striped table-responsive-xs border">
+            <table class="table table-bordered table-dark table-hover table-striped table-responsive-xs border">
                 <thead>
                     <tr class="bg-light">
-                        <th class="text-center text-dark" colspan="4">UTORAK
+                        <td class="text-center text-dark" colspan="4">UTORAK
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th colspan="4" class="text-center text-light"> Nema predavanja</th>
+                        <td colspan="4" class="text-center text-light"> Nema predavanja</td>
                     </tr>
                 </tbody>
             </table>
 
             @else
-            <table class="table table-dark table-hover table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
-                        <th class="text-center text-dark" colspan="4">UTORAK
+                        <td class="text-center text-dark" colspan="4">UTORAK
                     </tr>
                 <tr>
                     <th scope="col">VREME</th>
@@ -203,10 +203,10 @@
             {{-- UTORAK END --}}
             {{-- SREDA START --}}
             @if($raspored->sreda[0] != 'Nema predavanja' && count($raspored->sreda)>4)
-            <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
-                        <th colspan="4" class="text-center text-dark">SREDA
+                        <td colspan="4" class="text-center text-dark">SREDA
                     </tr>
                 <tr>
                     <th scope="col">VREME</th>
@@ -230,23 +230,23 @@
                 </tbody>
             </table>
             @elseif($raspored->sreda[0]=='Nema predavanja' || empty($raspored->sreda[0]))
-            <table class="table table-dark table-hover table-striped table-responsive-xs border">
+            <table class="table table-bordered table-dark table-hover table-striped table-responsive-xs border">
                 <thead>
                     <tr class="bg-light">
-                        <th class="text-center text-dark" colspan="4">SREDA
+                        <td class="text-center text-dark" colspan="4">SREDA
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th colspan="4" class="text-center text-light"> Nema predavanja</th>
+                        <td colspan="4" class="text-center text-light"> Nema predavanja</td>
                     </tr>
                 </tbody>
             </table>
             @else
-            <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
-                        <th colspan="4" class="text-center text-dark">SREDA
+                        <td colspan="4" class="text-center text-dark">SREDA
                     </tr>
                 <tr>
                     <th scope="col">VREME</th>
@@ -268,10 +268,10 @@
             {{-- SREDA END --}}
             {{-- CETVRTAK START --}}
             @if($raspored->cetvrtak[0] != 'Nema predavanja' && count($raspored->cetvrtak)>4)
-            <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
-                        <th colspan="4" class="text-center text-dark">ČETVRTAK
+                        <td colspan="4" class="text-center text-dark">ČETVRTAK
                     </tr>
                 <tr>
                     <th scope="col">VREME</th>
@@ -295,23 +295,23 @@
                 </tbody>
             </table>
             @elseif($raspored->cetvrtak[0]=='Nema predavanja' || empty($raspored->cetvrtak[0]))
-            <table class="table table-dark table-hover table-striped table-responsive-xs border">
+            <table class="table table-bordered table-dark table-hover table-striped table-responsive-xs border">
                 <thead>
                     <tr class="bg-light">
-                        <th class="text-center text-dark" colspan="4">ČETVRTAK
+                        <td class="text-center text-dark" colspan="4">ČETVRTAK
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th colspan="4" class="text-center text-light"> Nema predavanja</th>
+                        <td colspan="4" class="text-center text-light"> Nema predavanja</td>
                     </tr>
                 </tbody>
             </table>
             @else
-            <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
-                        <th colspan="4" class="text-center text-dark">ČETVRTAK
+                        <td colspan="4" class="text-center text-dark">ČETVRTAK
                     </tr>
                 <tr>
                     <th scope="col">VREME</th>
@@ -333,10 +333,10 @@
             {{-- CETVRTAK END --}}
             {{-- PETAK START --}}
             @if($raspored->petak[0] != 'Nema predavanja' && count($raspored->petak)>4)
-            <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
-                        <th colspan="4" class="text-center text-dark">PETAK
+                        <td colspan="4" class="text-center text-dark">PETAK
                     </tr>
                 <tr>
                     <th scope="col">VREME</th>
@@ -358,23 +358,23 @@
 
                 @endfor
             @elseif($raspored->petak[0]=='Nema predavanja' || empty($raspored->petak[0]))
-            <table class="table table-dark table-hover table-striped table-responsive-xs border">
+            <table class="table table-bordered table-dark table-hover table-striped table-responsive-xs border">
                 <thead>
                     <tr class="bg-light">
-                        <th class="text-center text-dark" colspan="4">PETAK
+                        <td class="text-center text-dark" colspan="4">PETAK
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th colspan="4" class="text-center text-light"> Nema predavanja</th>
+                        <td colspan="4" class="text-center text-light"> Nema predavanja</td>
                     </tr>
                 </tbody>
             </table>
             @else
-            <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
                 <thead>
                     <tr class="bg-light">
-                        <th colspan="4" class="text-center text-dark">PETAK
+                        <td colspan="4" class="text-center text-dark">PETAK
                     </tr>
                 <tr>
                     <th scope="col">VREME</th>

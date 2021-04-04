@@ -21,55 +21,39 @@
         </div>
     </div>
     @endif
-
-    {{-- ALERT MESSAGES END --}}
-    {{-- JUMBOTRON START --}}
-    {{-- <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark shadow-lg">
-        <div class="container">
-            <h1 style="text-shadow: 2px 2px lightgray"><i class="fas fa-user-graduate"></i> Studenti
-            </h1>
-
-            <p class="lead">U ovoj sekciji se upravlja studentima  <a
-                    class="btn btn-outline-primary float-right font-weight-bold shadow" href={{ route('novi_student') }}
-                    role="button">Dodaj
-                    Studenta</a></p>
-        </div>
-    </div> --}}
-    {{-- JUMBOTRON END --}}
-    {{-- COLLAPSE FOR SUBJECTS START --}}
     <div class="row ">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card-header border border-dark py-2">
-                <h3 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px gray">Spisak
-                    studenata po godini</h3>
+            <div class="card-header border border-white bg-dark py-2">
+                <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px black">Spisak
+                    studenata po godini</h4>
             </div>
             <div class="card border-dark shadow-lg">
                 <div class="card-header pt-3">
                     <p class="text-center justify-content-around">
                         <a class="btn btn-outline-primary font-weight-bold shadow mt-1" data-toggle="collapse"
                             href="#multiCollapseExample1" role="button" aria-expanded="false"
-                            aria-controls="multiCollapseExample1" style="width:138.512px">Prva godina <span
+                            aria-controls="multiCollapseExample1" style="width:138.512px; text-shadow: 1px 1px black">Prva godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ STUDENATA</b>" data-html="true">
                                 {{$stud->where('godina_studija',1)->count()}}
                             </span></a>
-                        <button class="btn btn-primary font-weight-bold shadow mt-1" type="button"
+                        <button class="btn btn-primary font-weight-bold shadow mt-1 border border-dark rounded" type="button"
                             data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false"
-                            aria-controls="multiCollapseExample2" style="width:138.512px">Druga godina <span
+                            aria-controls="multiCollapseExample2" style="width:138.512px; text-shadow: 1px 1px black">Druga godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ STUDENATA</b>" data-html="true">
                                 {{$stud->where('godina_studija',2)->count()}}
                             </span></button>
-                        <button class="btn btn-info font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
+                        <button class="btn btn-info font-weight-bold shadow mt-1 border border-dark rounded" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample3" aria-expanded="false"
-                            aria-controls="multiCollapseExample2" style="width:138.512px">Treća godina <span
+                            aria-controls="multiCollapseExample2" style="width:138.512px; text-shadow: 1px 1px gray">Treća godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ STUDENATA</b>" data-html="true">
                                 {{$stud->where('godina_studija',3)->count()}}
                             </span></button>
                         <button class="btn btn-dark font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample4" aria-expanded="false"
-                            aria-controls="multiCollapseExample4" style="width:138.512px">Svi
+                            aria-controls="multiCollapseExample4" style="width:138.512px; text-shadow: 1px 1px black">Svi
                             studenti <span class="badge badge-secondary shadow" data-toggle="tooltip"
                                 data-placement="top" title="<b>BROJ STUDENATA</b>" data-html="true">
                                 {{$stud->count()}}
@@ -82,7 +66,7 @@
                         <div class="collapse multi-collapse" id="multiCollapseExample1">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="text-center font-weight-bold pt-2">PRVA GODINA <span
+                                    <h4 style="text-shadow: 1px 1px gray" class="text-center font-weight-bold pt-2" >PRVA GODINA <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ STUDENATA</b>" data-html="true">
                                             {{$stud->where('godina_studija',1)->count()}}
@@ -92,7 +76,7 @@
                                     {{-- TABLE ALL STUDENTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Broj indeksa</th>
@@ -147,7 +131,7 @@
                         <div class="collapse multi-collapse" id="multiCollapseExample2">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="text-center font-weight-bold pt-2">DRUGA GODINA <span
+                                    <h4 style="text-shadow: 1px 1px gray" class="text-center font-weight-bold pt-2">DRUGA GODINA <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ STUDENATA</b>" data-html="true">
                                             {{$stud->where('godina_studija',2)->count()}}
@@ -157,7 +141,7 @@
                                 <div class="card-body bg-dark">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Broj indeksa</th>
@@ -210,7 +194,7 @@
                         <div class="collapse multi-collapse" id="multiCollapseExample3">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="text-center font-weight-bold pt-2">TREĆA GODINA <span
+                                    <h4 style="text-shadow: 1px 1px gray" class="text-center font-weight-bold pt-2">TREĆA GODINA <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ STUDENATA</b>" data-html="true">
                                             {{$stud->where('godina_studija',3)->count()}}
@@ -220,7 +204,7 @@
                                     {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Broj indeksa</th>
@@ -273,8 +257,8 @@
                     <div class="col-lg-12 col-mg-12 col-sm-12">
                         <div class="collapse multi-collapse show" id="multiCollapseExample4">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="text-center font-weight-bold pt-2">SVI STUDENTI <span
+                                <div class="card-header border border-dark p-2">
+                                    <h4 style="text-shadow: 1px 1px gray" class="text-center font-weight-bold">Svi studenti <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ STUDENATA</b>" data-html="true">
                                             {{$stud->count()}}
@@ -284,16 +268,16 @@
                                     {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm">
+                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Broj indeksa</th>
                                                         <th scope="col">Ime</th>
                                                         <th scope="col">Prezime</th>
-                                                        <th scope="col">Godina studija</th>
+                                                        <th scope="col">Godina</th>
                                                         <th scope="col">Smer</th>
                                                         <th scope="col">ESPB</th>
-                                                        <th scope="col">Prosek ocena</th>
+                                                        <th scope="col">Prosek</th>
                                                         <th scope="col"> &nbsp;Akcije</th>
                                                     </tr>
                                                 </thead>
@@ -303,7 +287,7 @@
                                                         <td>{{ $student->broj_indeksa }}</td>
                                                         <td>{{ $student->ime }}</td>
                                                         <td>{{ $student->prezime }}</td>
-                                                        <td>{{ $student->godina_studija }}</td>
+                                                        <td>{{ $student->godina_studija }}.</td>
                                                         <td>{{ $student->smers->naziv }}</td>
                                                         <td>{{ $student->espb }}</td>
                                                         <td>

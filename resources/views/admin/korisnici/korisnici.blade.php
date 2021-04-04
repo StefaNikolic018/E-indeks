@@ -20,23 +20,23 @@
 @endif
 
 <div class="container">
-    <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark rounded-lg shadow-lg">
-        <div class="container">
-            <h1  style="text-shadow: 2px 2px lightgray"><i class="fas fa-users"></i> Korisnici</h1>
+    <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-white border border-dark rounded-lg shadow-lg mb-2">
+        <div class="container border border-secondary rounded shadow bg-gradient-light py-2">
+            <h1 class="font-weight-bold"  style="text-shadow: 2px 2px lightgray"><i class="fas fa-users"></i> Korisnici</h1>
 
             <p class="lead">U ovoj sekciji se upravlja korisnicima <a
-                    class="btn btn-outline-primary float-right font-weight-bold shadow"
-                    href={{ route('novi_korisnik') }} role="button">Dodaj Korisnika</a></p>
+                    class="btn btn-primary border border-secondary rounded float-right font-weight-bold shadow"
+                    href={{ route('novi_korisnik') }} role="button">Novi</a></p>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card-header border border-dark">
-                <h3 class="text-center text-light font-weight-bold" style="text-shadow: 2px 2px gray">Spisak korisnika
-                </h3>
+            <div class="card-header border border-white bg-dark py-2">
+                <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px black">Spisak korisnika
+                </h4>
             </div>
             <div class="card-body bg-dark">
-                <table class="table table-dark table-hover table-responsive-sm shadow-lg ">
+                <table class="table table-dark table-hover table-responsive-sm shadow-lg table-bordered table-striped ">
                     <thead>
                         <tr>
                             <th scope="col">Ime</th>
