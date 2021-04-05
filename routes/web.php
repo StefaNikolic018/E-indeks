@@ -66,6 +66,8 @@ Route::group(['middleware' => ['auth','can:isAdmin']], function() {
     // Profesorski profil
     Route::prefix('profesor')->group(function(){
         Route::get('/{ime}',[App\Http\Controllers\ProfesorController::class, 'profesor'])->name('profile');
+
+        Route::match(['post','get'],'biografija/izmena/{id}',[App\Http\Controllers\ProfesorController::class,'izmena_biografije'])->name('izmena_biografije');
     });
 
     // Studenti kojima profesor daje ocene

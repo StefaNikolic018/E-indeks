@@ -89,7 +89,7 @@
                                     {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-bordered table-striped table-responsive-sm">
+                                            <table class="table table-dark table-hover table-bordered table-striped table-responsive-lg">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>
@@ -214,7 +214,7 @@
                                 <div class="card-body bg-dark">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-bordered table-striped table-responsive-sm">
+                                            <table class="table table-dark table-hover table-bordered table-striped table-responsive-lg">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>
@@ -337,7 +337,7 @@
                                     {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-bordered table-striped table-responsive-sm">
+                                            <table class="table table-dark table-hover table-bordered table-striped table-responsive-lg">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>
@@ -462,7 +462,7 @@
                                     {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-bordered table-striped table-responsive-sm">
+                                            <table class="table table-dark table-hover table-bordered table-striped table-responsive-lg">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>

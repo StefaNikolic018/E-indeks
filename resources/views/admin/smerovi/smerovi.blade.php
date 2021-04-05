@@ -72,7 +72,7 @@
                                     {{-- TABLE ALL STUDY PROGRAM START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
+                                            <table class="table table-dark table-hover table-responsive-lg table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Naziv</th>

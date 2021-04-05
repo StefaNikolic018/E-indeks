@@ -70,7 +70,7 @@
 
 
                 </div>
-                <table class="table table-hover table-responsive-sm table-striped table-bordered" id="studenti">
+                <table class="table table-hover table-responsive-lg table-striped table-bordered" id="studenti">
                     <tbody>
                         <tr>
                             <th class="ml-3">Ime</th>
@@ -279,7 +279,7 @@
                                     {{-- TABLE ALL GRADES FIRST YEAR START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
+                                            <table class="table table-dark table-hover table-responsive-lg table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>
@@ -335,7 +335,7 @@
                                 <div class="card-body bg-dark">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
+                                            <table class="table table-dark table-hover table-responsive-lg table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>
@@ -388,7 +388,7 @@
                                     {{-- TABLE ALL GRADES THIRD YEAR START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
+                                            <table class="table table-dark table-hover table-responsive-lg table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>
@@ -442,7 +442,7 @@
                                     {{-- TABLE ALL GRADES START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
+                                            <table class="table table-dark table-hover table-responsive-lg table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>

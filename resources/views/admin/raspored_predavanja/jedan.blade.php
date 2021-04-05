@@ -23,7 +23,7 @@
         @endif
         {{-- ALERT MESSAGES END --}}
     <div class="card">
-        <div class="card-header">
+        <div class="card-header text-center" style="text-shadow: 1px 1px gray">
             <h3>{{$raspored->smerovi->naziv}} <span
                 class="badge badge-secondary shadow" data-toggle="tooltip"
                 data-placement="top" title="<b>GODINA STUDIJA</b>" data-html="true">{{$raspored->godina_studija}}.</span>
@@ -69,7 +69,7 @@
         </div>
         <div class="card-body">
             @if($raspored->ponedeljak[0] != 'Nema predavanja' && count($raspored->ponedeljak)>4)
-            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-lg border">
                 <thead>
                     <tr class="bg-light">
                         <td colspan="4" class="text-center text-dark">PONEDELJAK
@@ -109,7 +109,7 @@
             </table>
 
             @else
-            <table class="table table-bordered table-dark table-hover table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-responsive-lg border">
                 <thead>
                 <tr class="bg-light">
                     <td colspan="4" class="text-center text-dark">PONEDELJAK
@@ -136,7 +136,7 @@
             {{-- PONEDELJAK END --}}
             {{-- UTORAK START--}}
             @if($raspored->utorak[0] != 'Nema predavanja' && count($raspored->utorak)>4)
-            <table class="table table-bordered table-dark table-hover table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-responsive-lg border">
                 <thead>
                 <tr class="bg-light">
                     <td class="text-center text-dark" colspan="4">UTORAK
@@ -177,7 +177,7 @@
             </table>
 
             @else
-            <table class="table table-bordered table-dark table-hover table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-responsive-lg border">
                 <thead>
                     <tr class="bg-light">
                         <td class="text-center text-dark" colspan="4">UTORAK
@@ -203,7 +203,7 @@
             {{-- UTORAK END --}}
             {{-- SREDA START --}}
             @if($raspored->sreda[0] != 'Nema predavanja' && count($raspored->sreda)>4)
-            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-lg border">
                 <thead>
                     <tr class="bg-light">
                         <td colspan="4" class="text-center text-dark">SREDA
@@ -243,7 +243,7 @@
                 </tbody>
             </table>
             @else
-            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-lg border">
                 <thead>
                     <tr class="bg-light">
                         <td colspan="4" class="text-center text-dark">SREDA
@@ -268,7 +268,7 @@
             {{-- SREDA END --}}
             {{-- CETVRTAK START --}}
             @if($raspored->cetvrtak[0] != 'Nema predavanja' && count($raspored->cetvrtak)>4)
-            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-lg border">
                 <thead>
                     <tr class="bg-light">
                         <td colspan="4" class="text-center text-dark">ČETVRTAK
@@ -308,7 +308,7 @@
                 </tbody>
             </table>
             @else
-            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-lg border">
                 <thead>
                     <tr class="bg-light">
                         <td colspan="4" class="text-center text-dark">ČETVRTAK
@@ -333,7 +333,7 @@
             {{-- CETVRTAK END --}}
             {{-- PETAK START --}}
             @if($raspored->petak[0] != 'Nema predavanja' && count($raspored->petak)>4)
-            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-lg border">
                 <thead>
                     <tr class="bg-light">
                         <td colspan="4" class="text-center text-dark">PETAK
@@ -371,7 +371,7 @@
                 </tbody>
             </table>
             @else
-            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-sm border">
+            <table class="table table-bordered table-dark table-hover table-striped table-striped table-responsive-lg border">
                 <thead>
                     <tr class="bg-light">
                         <td colspan="4" class="text-center text-dark">PETAK

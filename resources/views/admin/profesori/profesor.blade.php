@@ -90,7 +90,7 @@
                     @endcan
                 </div>
                 <div class="card-body">
-                <table class="table table-hover table-striped table-bordered table-responsive-sm" id="studenti">
+                <table class="table table-hover table-striped table-bordered table-responsive-lg" id="studenti">
                     <tbody>
                         <tr>
                             <th class="ml-3">Ime</th>
@@ -141,13 +141,24 @@
 
         {{-- BIOGRAFIJA START --}}
         <div class='col-xs-12 col-sm-6 my-2 '>
-            <div class="card rounded-lg bg-gradient-light border border-dark shadow-lg">
-                <div class="card-header text-center py-3">
-                    <h4 class="font-weight-bold " style="text-shadow: 2px 2px lightgray">Biografija</h4>
+            <div class="card rounded-lg bg-gradient-light border border-dark shadow-lg" style="max-height:354px">
+                <div class="card-header text-center pb-3">
+                    <h4 class="font-weight-bold " style="text-shadow: 1px 1px gray">Biografija
+                    </h4>
+
+                    @can('isAdmin')
+                    <div class="text-center">
+                        <a class="btn btn-dark font-weight-bold"
+                        href={{ route('izmena_biografije', ['id'=>$profesor->id]) }}
+                        role="button">
+                            <i class="fas fa-edit" style="color:orange"></i> Izmeni
+                        </a>
+                    </div>
+                @endcan
                 </div>
                 <div class="card-body bg-white">
                     {{-- OVDE TREBA BIOGRAFIJA --}}
-                    <div class="container border border-secondary rounded shadow bg-gradient-light py-4">
+                    <div class="container border border-secondary rounded shadow bg-gradient-light py-4" style="max-height:236px;overflow-y:scroll;">
                         @if($profesor->bio)
                         {{$profesor->bio}}
                         @else
@@ -255,7 +266,7 @@
                                     {{-- TABLE SUBJECTS FIRST YEAR START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
+                                            <table class="table table-dark table-hover table-responsive-lg table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>
@@ -314,7 +325,7 @@
                                 <div class="card-body bg-dark">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
+                                            <table class="table table-dark table-hover table-responsive-lg table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>
@@ -372,7 +383,7 @@
                                     {{-- TABLE SUBJECTS THIRD YEAR START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
+                                            <table class="table table-dark table-hover table-responsive-lg table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>
@@ -420,7 +431,7 @@
                                     {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-striped table-bordered">
+                                            <table class="table table-dark table-hover table-responsive-lg table-striped table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Šifra</th>

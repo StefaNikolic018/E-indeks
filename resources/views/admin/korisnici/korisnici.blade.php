@@ -36,7 +36,7 @@
                 </h4>
             </div>
             <div class="card-body bg-dark">
-                <table class="table table-dark table-hover table-responsive-sm shadow-lg table-bordered table-striped ">
+                <table class="table table-dark table-hover table-responsive-lg shadow-lg table-bordered table-striped ">
                     <thead>
                         <tr>
                             <th scope="col">Ime</th>

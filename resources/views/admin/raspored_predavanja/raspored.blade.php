@@ -88,7 +88,7 @@
                                             {{-- TABLE ALL SUBJECTS START --}}
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
+                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-lg border">
                                                         <thead>
                                                         <tr>
                                                             <th scope="col">Smer</th>
@@ -310,7 +310,7 @@
                                         <div class="card-body bg-dark">
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
+                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-lg border">
                                                         <thead>
                                                         <tr>
                                                             <th scope="col">Smer</th>
@@ -530,7 +530,7 @@
                                             {{-- TABLE ALL SUBJECTS START --}}
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
+                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-lg border">
                                                         <thead>
                                                         <tr>
                                                             <th scope="col">Smer</th>
@@ -752,7 +752,7 @@
                                             {{-- TABLE ALL SUBJECTS START --}}
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-sm border">
+                                                    <table class="table table-dark table-hover table-striped table-striped table-responsive-lg border">
                                                         <thead>
                                                         <tr>
                                                             <th scope="col">Smer</th>

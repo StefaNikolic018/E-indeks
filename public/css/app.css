@@ -2061,14 +2061,14 @@ pre code {
 }
 
 @media (max-width: 575.98px) {
-  .table-responsive-sm {
+  .table-responsive-lg {
     display: block;
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
 
-  .table-responsive-sm > .table-bordered {
+  .table-responsive-lg > .table-bordered {
     border: 0;
   }
 }

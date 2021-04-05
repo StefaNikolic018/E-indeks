@@ -135,4 +135,17 @@ class ProfesorController extends Controller
         return redirect()->route('profesori');
     }
 
+    public function izmena_biografije($id,Request $req){
+        if($req->method()=='GET'){
+            $profesor=Profesor::find($id);
+            return view('admin.profesori.izmena_biografije',['profesor'=>$profesor]);
+        }
+            $input=['bio'=>$req->bio];
+            Profesor::where('id',$id)->update($input);
+            $req->session()->flash('profesor',['success','Uspešno izmenjena biografija!']);
+
+            return redirect()->route('profile',['ime'=>Auth::user()->ime]);
+
+    }
+
 }

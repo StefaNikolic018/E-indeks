@@ -197,7 +197,7 @@
                                         {{-- TABLE SUBJECTS FIRST YEAR START --}}
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <table class="table table-dark table-hover table-responsive-sm">
+                                                <table class="table table-dark table-hover table-responsive-lg">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Sifra</th>
@@ -271,7 +271,7 @@
                                     <div class="card-body bg-dark">
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <table class="table table-dark table-hover table-responsive-sm">
+                                                <table class="table table-dark table-hover table-responsive-lg">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Sifra</th>
@@ -345,7 +345,7 @@
                                         {{-- TABLE SUBJECTS THIRD YEAR START --}}
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <table class="table table-dark table-hover table-responsive-sm">
+                                                <table class="table table-dark table-hover table-responsive-lg">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Sifra</th>
@@ -405,7 +405,7 @@
                                         {{-- TABLE ALL SUBJECTS START --}}
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <table class="table table-dark table-hover table-responsive-sm">
+                                                <table class="table table-dark table-hover table-responsive-lg">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Sifra</th>

@@ -94,7 +94,7 @@
                                     {{-- TABLE ALL STUDENTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-bordered table-striped">
+                                            <table class="table table-dark table-hover table-responsive-lg table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Broj indeksa</th>
@@ -221,7 +221,7 @@
                                 <div class="card-body bg-dark">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-bordered table-striped">
+                                            <table class="table table-dark table-hover table-responsive-lg table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Broj indeksa</th>
@@ -346,7 +346,7 @@
                                     {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-bordered table-striped">
+                                            <table class="table table-dark table-hover table-responsive-lg table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Broj indeksa</th>
@@ -472,7 +472,7 @@
                                     {{-- TABLE ALL SUBJECTS START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-sm table-bordered table-striped">
+                                            <table class="table table-dark table-hover table-responsive-lg table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Broj indeksa</th>
