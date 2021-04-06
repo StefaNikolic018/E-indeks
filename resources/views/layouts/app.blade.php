@@ -68,7 +68,7 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
             <div class="collapse navbar-collapse text-center " id="navbarSupportedContent">
                 @can('isAdmin')
                 <ul class="navbar-nav mr-auto">
-                    @if(Request::is('profesor/*') || Request::is('student/*') || Request::is('obavestavanje') || Request::is('obavestavanje/*') || Request::is('ocene/ocena_izmena/*/*'))
+                    @if(Request::is('profesor/*') || Request::is('student/*') || Request::is('obavestavanje') || Request::is('obavestavanje/*') || Request::is('ocene/ocena_izmena/*/*') || Request::is('smer/*'))
                         <li class="nav-item ml-sm-3 mr-sm-3 ml-0 mr-0">
                             <a class="nav-link @if(Request::is('profesor/*')) active @endif" href={{route('profile',['ime'=>Auth::user()->ime])}}>
                                 <i class="fas fa-user-tie"></i>
@@ -99,8 +99,15 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
                                 <li class="breadcrumb-item active" aria-current="page">Izmena ocene</li>
                             </ol>
                         </li>
+                        @elseif(Request::is('smer/*'))
+                        <li class="nav-item mr-sm-3 mr-0">
+                            <ol class="breadcrumb border border-secondary mt-1 mb-0 py-1">
+                                <li class="breadcrumb-item"><a href={{ route('svi')}}>Studenti</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Smer</li>
+                            </ol>
+                        </li>
                         @endif
-                        @if(Request::is('obavestavanje/sva') || Request::is('profesor/*') || Request::is('student/*') || Request::is('ocene/ocena_izmena/*/*'))
+                        @if(Request::is('obavestavanje/sva') || Request::is('profesor/*') || Request::is('student/*') || Request::is('ocene/ocena_izmena/*/*') || Request::is('smer/*'))
                         <li class="nav-item">
                         <a class="nav-link
                         @if(Request::is('obavestavanje/sva'))
@@ -191,7 +198,7 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
                             <li class="breadcrumb-item"><a href={{ route('studenti')}}>Studenti</a></li>
                             <li class="breadcrumb-item" aria-current="page"><a
                                     href={{route('student',['id'=>$student->id])}}>"{{$student->ime}}"</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena "{{$student->ime}}"
+                            <li class="breadcrumb-item active" aria-current="page">Izmena
                             </li>
                         </ol>
                     </li>
@@ -200,15 +207,6 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
                         <ol class="breadcrumb border border-secondary mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('studenti')}}>Studenti</a></li>
                             <li class="breadcrumb-item active" aria-current="page">"{{$student->ime}}"</li>
-                        </ol>
-                    </li>
-                    @elseif(Request::is('ocene/ocena_izmena/*'))
-                    <li class="nav-item">
-                        <ol class="breadcrumb border border-secondary mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('studenti')}}>Studenti</a></li>
-                            <li class="breadcrumb-item" aria-current="page"><a
-                                    href={{route('student',['id'=>$id['st_id']])}}>"{{$ime}}"</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena</li>
                         </ol>
                     </li>
                     @endif
@@ -236,7 +234,7 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
                             <li class="breadcrumb-item"><a href={{ route('profesori')}}>Profesori</a></li>
                             <li class="breadcrumb-item" aria-current="page"><a
                                     href={{route('profesor',['id'=>$profesor->id])}}>"{{$profesor->ime}}"</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena "{{$profesor->ime}}"
+                            <li class="breadcrumb-item active" aria-current="page">Izmena
                             </li>
                         </ol>
                     </li>
@@ -342,7 +340,7 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
                         <ol class="breadcrumb border border-secondary mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('obavestenja')}}>Obaveštenja</a></li>
                             <li class="breadcrumb-item active" aria-current="page"><a href={{route('obavestenje',['id'=>$obavestenje->id])}}> "{{ substr($obavestenje->naslov,0,10)}}..."</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena "{{substr($obavestenje->naslov,0,10)}}..."</li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena </li>
                         </ol>
                     </li>
                     @elseif(Request::is('obavestenja/obavestenje/*'))
@@ -378,7 +376,7 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
                         <ol class="breadcrumb border border-secondary mt-1 mb-0 py-1">
                             <li class="breadcrumb-item"><a href={{ route('smerovi')}}>Smerovi</a></li>
                             <li class="breadcrumb-item active" aria-current="page"><a href={{route('smerovi',['id'=>$smer->id])}}>"{{ substr($smer->naziv,0,10)}}..."</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Izmena "{{substr($smer->naziv,0,10)}}..."</li>
+                            <li class="breadcrumb-item active" aria-current="page">Izmena </li>
                         </ol>
                     </li>
                     @elseif(Request::is('smerovi/smer/*'))
@@ -398,21 +396,21 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
                         {{'active'}}
                     @endif
                     ">
-                    <a class="nav-link" href={{ route('raspored_ispita') }}><i class="far fa-calendar-alt"></i> Ispiti/Kolokvijumi
+                    <a class="nav-link" href={{ route('raspored_ispita') }}><i class="far fa-calendar-alt"></i> Kalendar
                     </a>
                     </li>
                     @endif
                     @if(Request::is('raspored_ispita/novi_raspored'))
                     <li class="nav-item">
                         <ol class="breadcrumb border border-secondary mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('raspored_ispita')}}>Ispiti/Kolokvijumi</a></li>
+                            <li class="breadcrumb-item"><a href={{ route('raspored_ispita')}}>Kalendar</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Novi </li>
                         </ol>
                     </li>
                     @elseif(Request::is('raspored_ispita/izmena_rasporeda/*'))
                     <li class="nav-item">
                         <ol class="breadcrumb border border-secondary mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('raspored_ispita')}}>Ispiti/Kolokvijumi</a></li>
+                            <li class="breadcrumb-item"><a href={{ route('raspored_ispita')}}>Kalendar</a></li>
                             <li class="breadcrumb-item active" aria-current="page"><a href={{route('raspored_ispita',['id'=>$raspored->id])}}>{{$raspored->godina_studija}}. godina"{{ substr($raspored->smerovi->naziv,0,10)}}..."</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Izmena </li>
                         </ol>
@@ -420,7 +418,7 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
                     @elseif(Request::is('raspored_ispita/jedan/*'))
                     <li class="nav-item">
                         <ol class="breadcrumb border border-secondary mt-1 mb-0 py-1">
-                            <li class="breadcrumb-item"><a href={{ route('raspored_ispita')}}>Ispiti/Kolokvijumi</a></li>
+                            <li class="breadcrumb-item"><a href={{ route('raspored_ispita')}}>Kalendar</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{$raspored->godina_studija}}. godina "{{substr($raspored->smerovi->naziv,0,10)}}..."</li>
                         </ol>
                     </li>

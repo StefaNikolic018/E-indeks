@@ -130,15 +130,15 @@
                 <div class="card-body pb-5" style="overflow-y:scroll;">
                     @if(!empty($obavestenja))
                         @foreach($obavestenja as $obavestenje)
-                        <div class="card rounded-lg bg-gradient-light border border-info shadow-lg">
-                            <div class="card-header text-center p-1">
+                        <div class="card rounded-lg bg-gradient-light border @if($obavestenje->datum==date("Y-m-d")) border-primary @else border-dark @endif shadow-lg">
+                            <div class="card-header text-center p-0 pt-1">
                                 <h5 class="font-weight-bold">{{$obavestenje->naslov}}</h5>
                             </div>
-                            <div class="card-body" style="overflow-y:scroll;">
+                            <div class="card-body border @if($obavestenje->datum==date("Y-m-d")) border-info @else border-dark @endif" style="overflow-y:scroll;">
                                 {{$obavestenje->obavestenje}}
                             </div>
-                            <div class="card-footer p-1">
-                                <h5>
+                            <div class="card-footer p-2">
+                                <h6>
                                 <span class="float-left">{{$obavestenje->datum}}</span>
                                 <span class="float-right">
                                     @switch($obavestenje->potpis)
@@ -149,7 +149,7 @@
                                             Administrator
                                     @endswitch
                                 </span>
-                                </h5>
+                                </h6>
                             </div>
                         </div>
                         <br>
@@ -157,6 +157,20 @@
                     @else
                         <h3 class="text-center m-auto p-3 border border-dark rounded">Nema obaveštenja</h3>
                     @endif
+                </div>
+                <div class="card-footer p-2">
+                    {{-- TREBA IZBROJATI OBAVESTENJA --}}
+                    <h3>
+                    <span class="badge badge-secondary shadow-lg float-left" data-toggle="tooltip" data-placement="top"
+                            title="<b>UKUPNO OBAVEŠTENJA</b>" data-html="true">
+                            {{count($obavestenja)}}
+                    </span>
+                    <span class="badge badge-primary shadow-lg float-right" data-toggle="tooltip" data-placement="top"
+                            title="<b>NOVA OBAVEŠTENJA</b>" data-html="true">
+                            {{count($obavestenja->where('datum',date('Y-m-d')))}}
+                    </span>
+                    </h3>
+
                 </div>
             </div>
         </div>

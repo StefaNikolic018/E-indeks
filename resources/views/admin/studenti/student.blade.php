@@ -33,10 +33,10 @@
 
     {{-- STUDENT INFO START --}}
     <div class="row justify-content-center">
-        <div class='col-xs-12 col-sm-6 my-2'>
+        <div class='col-xs-12 col-sm-4'>
             <div class="card border border-dark shadow-lg">
                 <div class="card-header">
-                    <h3>
+                    <h5>
                         <span class="d-flex justify-content-center">
                         <span class="badge badge-info shadow" data-toggle="tooltip" data-placement="top"
                         title="<b>BROJ INDEKSA</b>" data-html="true">
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <table class="table table-hover table-responsive-lg">
+                <table class="table table-hover table-responsive" id="studenti">
                     <tbody>
                         <tr>
                             <th>Smer</th>
@@ -160,87 +160,12 @@
                 </table>
             </div>
         </div>
-
-        {{-- DODAJ OCENU START --}}
-        <div class='col-xs-12 col-sm-6 my-2 '>
-            <div class="card rounded-lg bg-gradient-light border border-dark shadow-lg">
-                <div class="card-header text-center">
-                    <h3 class="font-weight-bold pt-2" style="text-shadow: 2px 2px lightgray">Dodaj ocenu</h3>
-                </div>
-                <div class="card-body pb-5">
-                    <form action={{route('dodaj_ocenu', ['id'=>$student->id])}} method="POST">
-                        @csrf
-                        <div class="form-group">
-                            <label for="izaberi">Predmet</label>
-                            <select class="custom-select mr-sm-2 @error('predmet_id') is-invalid @enderror" id="izaberi"
-                                name="izbor" required oninvalid="this.setCustomValidity('Molimo izaberite predmet!')"
-                                oninput="setCustomValidity('')">
-                                <option>Odaberi Predmet</option>
-                                {{-- OVDE TREBA DA LISTA SAMO PREDMETE SMERA KOJI STUDENT POHADJA --}}
-
-                                @foreach ($predmeti as $predmet)
-
-                                <option value={{$predmet->id}}>{{$predmet->naziv}}</option>
-                                @endforeach
-                            </select>
-                            @error('predmet_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ocena">Ocena</label>
-                            <div class="input-group">
-
-                                <input type="number" min="6" max="10" placeholder="6"
-                                    class="form-control @error('ocena') is-invalid @enderror" id="ocena" name="ocena"
-                                    required oninvalid="this.setCustomValidity('Molimo unesite ocenu!')"
-                                    oninput="setCustomValidity('')">
-                                @error('ocena')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                                <div class="input-group-append">
-                                    <span class="input-group-text" id="basic-addon2">.00</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="datum">Datum</label>
-                            <input type="date" class="form-control @error('datum') is-invalid @enderror" id="datum"
-                                name="datum" required oninvalid="this.setCustomValidity('Molimo unesite datum!')"
-                                oninput="setCustomValidity('')">
-                            @error('datum')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <input type="submit" class="btn btn-primary mb-3 ml-3 shadow font-weight-bold mt-3 p-2"
-                                role="button" value="Sačuvaj" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        {{-- DODAJ OCENU END --}}
-    </div>
-    {{-- STUDENT INFO END --}}
-    <br>
-
-
-    {{-- COLLAPSE FOR SUBJECTS START --}}
-    <div class="row ">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="card-header border border-dark py-2">
-                <h3 class="text-center font-weight-bold pt-1" style="text-shadow: 2px 2px rgb(180,180,180)">Spisak ocena
+        {{-- COLLAPSE FOR GRADES START --}}
+        <div class="col-xs-12 col-sm-8 mt-2 mt-sm-0">
+            <div class="card-header border border-white bg-dark py-2">
+                <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px black">Spisak ocena
                     po godini
-                </h3>
+                </h4>
             </div>
             <div class="card border-dark shadow-lg">
                 <div class="card-header pt-3">
@@ -323,16 +248,14 @@
                                     {{-- TABLE ALL GRADES FIRST YEAR START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-lg">
+                                            <table class="table table-dark table-hover table-responsive-md">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Sifra</th>
                                                         <th scope="col">Naziv</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
-                                                        <th scope="col">Akcija</th>
-
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -344,76 +267,6 @@
                                                         <td>{{$ocena->predmet->obavezni_izborni}}</td>
                                                         <td>{{$ocena->predmet->espb}}</td>
                                                         <td>{{$ocena->ocena}}</td>
-                                                        <td class="d-inline-flex">
-                                                            <!-- Split dropright button -->
-                                                            <div class="btn-group dropright">
-                                                                <button type="button" class="btn btn-info">
-                                                                    Upravljaj
-                                                                </button>
-                                                                <button type="button"
-                                                                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    <span class="sr-only">Toggle Dropright</span>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item"
-                                                                        href={{route('ocena_izmena', ['id'=>$ocena->id, 'id1'=>$student->id])}}
-                                                                        role="button">
-                                                                        <i class="fas fa-edit" style="color:orange"></i>
-                                                                        Izmeni
-                                                                    </a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <!-- Button trigger modal -->
-                                                                    <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{$ocena->predmet->sifra}}1">
-                                                                        <i class="fas fa-trash-alt"
-                                                                            style="color:red"></i>
-                                                                        Obriši
-                                                                    </button>
-
-                                                                </div>
-                                                            </div>
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{$ocena->predmet->sifra}}1"
-                                                                tabindex="-1" role="dialog"
-                                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center text-dark"
-                                                                                id="exampleModalLabel">
-                                                                                Brisanje ocene
-                                                                            </h5>
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body text-center text-dark">
-                                                                            <b>Da li stvarno želite da izbrišete ocenu
-                                                                                {{$ocena->ocena}} iz
-                                                                                predmeta
-                                                                                "{{$ocena->predmet->naziv}}"
-                                                                                studenta "{{ $student->ime }}"?</b>
-                                                                        </div>
-                                                                        <div
-                                                                            class="modal-footer justify-content-center">
-                                                                            <form
-                                                                                action={{ route('ocena_brisanje', ['id'=>$ocena->id, 'id1'=>$student->id]) }}
-                                                                                method="POST">
-                                                                                @csrf
-                                                                                <button class="btn btn-danger">
-                                                                                    Da</button>
-                                                                            </form>
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-dismiss="modal">Ne</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
                                                     </tr>
                                                     @endif
                                                     @endforeach
@@ -453,15 +306,14 @@
                                 <div class="card-body bg-dark">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-lg">
+                                            <table class="table table-dark table-hover table-responsive-md">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Sifra</th>
                                                         <th scope="col">Naziv</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
-                                                        <th scope="col">Akcija</th>
 
                                                     </tr>
                                                 </thead>
@@ -474,76 +326,6 @@
                                                         <td>{{$ocena->predmet->obavezni_izborni}}</td>
                                                         <td>{{$ocena->predmet->espb}}</td>
                                                         <td>{{$ocena->ocena}}</td>
-                                                        <td class="d-inline-flex">
-                                                            <!-- Split dropright button -->
-                                                            <div class="btn-group dropright">
-                                                                <button type="button" class="btn btn-info">
-                                                                    Upravljaj
-                                                                </button>
-                                                                <button type="button"
-                                                                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    <span class="sr-only">Toggle Dropright</span>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item"
-                                                                        href={{route('ocena_izmena', ['id'=>$ocena->id, 'id1'=>$student->id])}}
-                                                                        role="button">
-                                                                        <i class="fas fa-edit" style="color:orange"></i>
-                                                                        Izmeni
-                                                                    </a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <!-- Button trigger modal -->
-                                                                    <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{$ocena->predmet->sifra}}2">
-                                                                        <i class="fas fa-trash-alt"
-                                                                            style="color:red"></i>
-                                                                        Obriši
-                                                                    </button>
-
-                                                                </div>
-                                                            </div>
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{$ocena->predmet->sifra}}2"
-                                                                tabindex="-1" role="dialog"
-                                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center text-dark"
-                                                                                id="exampleModalLabel">
-                                                                                Brisanje ocene
-                                                                            </h5>
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body text-center text-dark">
-                                                                            <b>Da li stvarno želite da izbrišete ocenu
-                                                                                {{$ocena->ocena}} iz
-                                                                                predmeta
-                                                                                "{{$ocena->predmet->naziv}}"
-                                                                                studenta "{{ $student->ime }}"?</b>
-                                                                        </div>
-                                                                        <div
-                                                                            class="modal-footer justify-content-center">
-                                                                            <form
-                                                                                action={{ route('ocena_brisanje', ['id'=>$ocena->id, 'id1'=>$student->id]) }}
-                                                                                method="POST">
-                                                                                @csrf
-                                                                                <button class="btn btn-danger">
-                                                                                    Da</button>
-                                                                            </form>
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-dismiss="modal">Ne</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
                                                     </tr>
                                                     @endif
                                                     @endforeach
@@ -581,15 +363,14 @@
                                     {{-- TABLE ALL GRADES THIRD YEAR START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-lg">
+                                            <table class="table table-dark table-hover table-responsive-md">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Sifra</th>
                                                         <th scope="col">Naziv</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
-                                                        <th scope="col">Akcija</th>
 
                                                     </tr>
                                                 </thead>
@@ -602,76 +383,6 @@
                                                         <td>{{$ocena->predmet->obavezni_izborni}}</td>
                                                         <td>{{$ocena->predmet->espb}}</td>
                                                         <td>{{$ocena->ocena}}</td>
-                                                        <td class="d-inline-flex">
-                                                            <!-- Split dropright button -->
-                                                            <div class="btn-group dropright">
-                                                                <button type="button" class="btn btn-info">
-                                                                    Upravljaj
-                                                                </button>
-                                                                <button type="button"
-                                                                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    <span class="sr-only">Toggle Dropright</span>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item"
-                                                                        href={{route('ocena_izmena', ['id'=>$ocena->id, 'id1'=>$student->id])}}
-                                                                        role="button">
-                                                                        <i class="fas fa-edit" style="color:orange"></i>
-                                                                        Izmeni
-                                                                    </a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <!-- Button trigger modal -->
-                                                                    <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{$ocena->predmet->sifra}}3">
-                                                                        <i class="fas fa-trash-alt"
-                                                                            style="color:red"></i>
-                                                                        Obriši
-                                                                    </button>
-
-                                                                </div>
-                                                            </div>
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{$ocena->predmet->sifra}}3"
-                                                                tabindex="-1" role="dialog"
-                                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center text-dark"
-                                                                                id="exampleModalLabel">
-                                                                                Brisanje ocene
-                                                                            </h5>
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body text-center text-dark">
-                                                                            <b>Da li stvarno želite da izbrišete ocenu
-                                                                                {{$ocena->ocena}} iz
-                                                                                predmeta
-                                                                                "{{$ocena->predmet->naziv}}"
-                                                                                studenta "{{ $student->ime }}"?</b>
-                                                                        </div>
-                                                                        <div
-                                                                            class="modal-footer justify-content-center">
-                                                                            <form
-                                                                                action={{ route('ocena_brisanje', ['id'=>$ocena->id, 'id1'=>$student->id]) }}
-                                                                                method="POST">
-                                                                                @csrf
-                                                                                <button class="btn btn-danger">
-                                                                                    Da</button>
-                                                                            </form>
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-dismiss="modal">Ne</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
                                                     </tr>
                                                     @endif
                                                     @endforeach
@@ -691,8 +402,8 @@
                     <div class="col-lg-12 col-mg-12 col-sm-12">
                         <div class="collapse multi-collapse show" id="multiCollapseExample4">
                             <div class="card">
-                                <div class="card-header">
-                                    <h4 class="text-center font-weight-bold pt-2">SVI PREDMETI <span
+                                <div class="card-header border border-dark p-2">
+                                    <h4 class="text-center font-weight-bold " style="text-shadow: 1px 1px gray">Svi predmeti <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ PREDMETA</b>" data-html="true">
                                             {{$student->ocene->count()}}
@@ -702,16 +413,15 @@
                                     {{-- TABLE ALL GRADES START --}}
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <table class="table table-dark table-hover table-responsive-lg">
+                                            <table class="table table-dark table-hover table-responsive-md">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Sifra</th>
                                                         <th scope="col">Naziv</th>
-                                                        <th scope="col">Godina Studija</th>
-                                                        <th scope="col">Obavezni/Izborni</th>
+                                                        <th scope="col">Godina </th>
+                                                        <th scope="col">Status</th>
                                                         <th scope="col">ESPB</th>
                                                         <th scope="col">Ocena</th>
-                                                        <th scope="col">Akcija</th>
 
                                                     </tr>
                                                 </thead>
@@ -720,80 +430,10 @@
                                                     <tr>
                                                         <td>{{$ocena->predmet->sifra}}</td>
                                                         <td>{{$ocena->predmet->naziv}}</td>
-                                                        <td>{{$ocena->predmet->godina_studija}}</td>
+                                                        <td>{{$ocena->predmet->godina_studija}}.</td>
                                                         <td>{{$ocena->predmet->obavezni_izborni}}</td>
                                                         <td>{{$ocena->predmet->espb}}</td>
                                                         <td>{{$ocena->ocena}}</td>
-                                                        <td class="d-inline-flex">
-                                                            <!-- Split dropright button -->
-                                                            <div class="btn-group dropright">
-                                                                <button type="button" class="btn btn-info">
-                                                                    Upravljaj
-                                                                </button>
-                                                                <button type="button"
-                                                                    class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                                                                    data-toggle="dropdown" aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    <span class="sr-only">Toggle Dropright</span>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                    <a class="dropdown-item"
-                                                                        href={{route('ocena_izmena', ['id'=>$ocena->id, 'id1'=>$student->id])}}
-                                                                        role="button">
-                                                                        <i class="fas fa-edit" style="color:orange"></i>
-                                                                        Izmeni
-                                                                    </a>
-                                                                    <div class="dropdown-divider"></div>
-                                                                    <!-- Button trigger modal -->
-                                                                    <button class="dropdown-item" data-toggle="modal"
-                                                                        data-target="#exampleModal{{$ocena->predmet->sifra}}4">
-                                                                        <i class="fas fa-trash-alt"
-                                                                            style="color:red"></i>
-                                                                        Obriši
-                                                                    </button>
-
-                                                                </div>
-                                                            </div>
-                                                            <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{$ocena->predmet->sifra}}4"
-                                                                tabindex="-1" role="dialog"
-                                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog" role="document">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center text-dark"
-                                                                                id="exampleModalLabel">
-                                                                                Brisanje ocene
-                                                                            </h5>
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body text-center text-dark">
-                                                                            <b>Da li stvarno želite da izbrišete ocenu
-                                                                                {{$ocena->ocena}} iz
-                                                                                predmeta
-                                                                                "{{$ocena->predmet->naziv}}"
-                                                                                studenta "{{ $student->ime }}"?</b>
-                                                                        </div>
-                                                                        <div
-                                                                            class="modal-footer justify-content-center">
-                                                                            <form
-                                                                                action={{ route('ocena_brisanje', ['id'=>$ocena->id, 'id1'=>$student->id]) }}
-                                                                                method="POST">
-                                                                                @csrf
-                                                                                <button class="btn btn-danger">
-                                                                                    Da</button>
-                                                                            </form>
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-dismiss="modal">Ne</button>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
@@ -812,8 +452,14 @@
                 </div>
             </div>
         </div>
+        {{-- COLLAPSE FOR GRADES END --}}
+
+
+
     </div>
-    {{-- COLLAPSE FOR GRADES END --}}
+    {{-- STUDENT INFO END --}}
+    <br>
+
 
 </div>
 @endsection

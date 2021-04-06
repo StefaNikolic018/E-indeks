@@ -70,6 +70,10 @@ Route::group(['middleware' => ['auth','can:isAdmin']], function() {
         Route::match(['post','get'],'biografija/izmena/{id}',[App\Http\Controllers\ProfesorController::class,'izmena_biografije'])->name('izmena_biografije');
     });
 
+    // Studentski smer
+    Route::get('smer/{id}',[App\Http\Controllers\SmerController::class,'smer'])->name('program');
+
+
     // Studenti kojima profesor daje ocene
     Route::prefix('student')->group(function(){
         Route::get('svi',[App\Http\Controllers\HomeController::class, 'index'])->name('svi');

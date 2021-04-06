@@ -23,7 +23,7 @@ class SmerController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['auth','can:isSuperAdmin']);
+        $this->middleware(['auth']);
     }
 
     /**

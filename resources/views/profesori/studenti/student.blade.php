@@ -76,7 +76,7 @@
                     <tbody>
                         <tr>
                             <th>Smer</th>
-                            <td><a class="font-weight-bold" href="{{route('smer',['id'=>$student->smers->id])}}" style="color:inherit;">{{$student->smers->naziv}}</a></td>
+                            <td><a class="font-weight-bold" href="{{route('program',['id'=>$student->smers->id])}}" style="color:inherit;">{{$student->smers->naziv}}</a></td>
 
 
                         </tr>

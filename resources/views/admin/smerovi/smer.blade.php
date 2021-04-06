@@ -23,9 +23,10 @@
     @endif
     {{-- ALERT MESSAGES END --}}
     {{-- JUMBOTRON START --}}
-    <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark shadow-lg">
+    <div class="jumbotron jumbotron-fluid py-2 px-2 rounded bg-gradient-light border border-dark shadow-lg mb-2">
         <div class="container">
-            <h1 class="text-center" style="text-shadow: 1px 1px lightgray">
+            <h2 class="text-center" style="text-shadow: 1px 1px gray">
+                @can('isSuperAdmin')
                 <span class="text-center text-sm-left">
                 <a class="btn btn-dark font-weight-bold" style="text-shadow: 0px 0px"
                 href={{ route('izmena_smera', ['id'=>$smer->id]) }}
@@ -33,7 +34,9 @@
                 <i class="fas fa-edit" style="color:orange"></i>
                 Izmeni
                 </a></span>
+                @endcan
             {{$smer->naziv}}
+            @can('isSuperAdmin')
             <span class="text-center text-sm-right">
                 <button class="btn btn-dark font-weight-bold" data-toggle="modal"
                 data-target="#exampleModal{{ $smer->id }}">
@@ -43,7 +46,8 @@
             </button>
 
             </span>
-            </h1>
+            @endcan
+            </h2>
              <!-- Modal -->
              <div class="modal fade" id="exampleModal{{ $smer->id }}"
                 tabindex="-1" role="dialog"
@@ -83,7 +87,7 @@
             </div>
             {{-- Modal end --}}
             <hr>
-            <h4 class=" text-center">{{$smer->opis}}</h4>
+            <h4 class="text-center">{{$smer->opis}}</h4>
             <hr>
             <p class="font-weight-bold">ESPB:{{$smer->espb}} <span class="float-right"> Akreditovan:{{$smer->akreditovan}}. godine</span></p>
         </div>
@@ -92,16 +96,16 @@
         {{-- COLLAPSE FOR SUBJECTS START --}}
         <div class="row ">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="card-header border border-dark py-2">
-                    <h3 class="text-center font-weight-bold pt-1" style="text-shadow: 2px 2px rgb(180,180,180)">Spisak predmeta
-                    </h3>
+                <div class="card-header border border-white bg-dark py-2">
+                    <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px black">Spisak predmeta
+                    </h4>
                 </div>
                 <div class="card border-dark shadow-lg">
                     <div class="card-header pt-3">
                         <p class="text-center justify-content-around">
                             <a class="btn btn-outline-primary font-weight-bold shadow mt-1" data-toggle="collapse"
                                 href="#multiCollapseExample1" role="button" aria-expanded="false"
-                                aria-controls="multiCollapseExample1" style="width:138.512px">Prva godina <span
+                                aria-controls="multiCollapseExample1" style="width:138.512px;text-shadow: 1px 1px black">I godina <span
                                     class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                     title="<b>BROJ PREDMETA</b>" data-html="true">
                                     @php
@@ -116,9 +120,9 @@
                                     @endphp
                                 </span></a>
 
-                            <button class="btn btn-primary font-weight-bold shadow mt-1" type="button"
+                            <button class="btn btn-primary border border-dark rounded font-weight-bold shadow mt-1" type="button"
                                 data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false"
-                                aria-controls="multiCollapseExample2" style="width:138.512px">Druga godina <span
+                                aria-controls="multiCollapseExample2" style="width:138.512px;text-shadow: 1px 1px black">II godina <span
                                     class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                     title="<b>BROJ PREDMETA</b>" data-html="true">
                                     @php
@@ -132,9 +136,9 @@
                                         echo $i;
                                     @endphp
                                 </span></button>
-                            <button class="btn btn-info font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
+                            <button class="btn btn-info border border-dark rounded font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                                 data-target="#multiCollapseExample3" aria-expanded="false"
-                                aria-controls="multiCollapseExample2" style="width:138.512px">Treća godina <span
+                                aria-controls="multiCollapseExample2" style="width:138.512px;text-shadow: 1px 1px gray">III godina <span
                                     class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                     title="<b>BROJ PREDMETA</b>" data-html="true">
                                     @php
@@ -150,7 +154,7 @@
                                 </span></button>
                             <button class="btn btn-dark font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                                 data-target="#multiCollapseExample4" aria-expanded="false"
-                                aria-controls="multiCollapseExample4" style="width:138.512px">Svi predmeti <span
+                                aria-controls="multiCollapseExample4" style="width:138.512px;text-shadow: 1px 1px black">Svi <span
                                     class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                     title="<b>BROJ PREDMETA</b>" data-html="true">
                                     {{count($smer->predmeti)}}
@@ -382,8 +386,8 @@
                         <div class="col-lg-12 col-mg-12 col-sm-12">
                             <div class="collapse multi-collapse show" id="multiCollapseExample4">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h4 class="text-center font-weight-bold pt-2">SVI PREDMETI <span
+                                    <div class="card-header border border-dark p-2">
+                                        <h4 class="text-center font-weight-bold" style="text-shadow: 1px 1px gray">Svi predmeti <span
                                                 class="badge badge-secondary shadow" data-toggle="tooltip"
                                                 data-placement="top" title="<b>BROJ PREDMETA</b>" data-html="true">
                                                 {{count($smer->predmeti)}}
