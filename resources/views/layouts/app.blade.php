@@ -54,7 +54,7 @@ background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
 {{-- <body style="background-image: linear-gradient(to bottom right, rgb(252,252,252), rgb(90, 90, 90)" onload="createFormFields()"> --}}
 
 
-    <div id="app">
+    <div id="app" style="min-height:calc(100vh - 37px)">
         @if(Auth::check())
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #80D0C7;
 background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
@@ -485,10 +485,15 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
         </nav>
         @endif
 
-        <main class="py-4">
+        <main class="py-4" >
             @yield('content')
         </main>
+
     </div>
+    <footer class="text-center pt-2 pb-1" style="background-color: #80D0C7;
+    background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);height 100px;">
+        <h6>&#169; {{date('Y')}} <a href="https://www.linkedin.com/in/stefanikolic18/" class="text-light" target="blank" style="text-decoration:underline solid;">StefaNikolic</a>. All rights reserved.</h6>
+    </footer>
 
     {{-- script alert messages fade out start --}}
     <script>
@@ -545,6 +550,10 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
         table.fc-col-header th.fc-col-header-cell { text-shadow: 1px 1px white;}
         h2.fc-toolbar-title { text-shadow: 1px 1px white;}
         table#studenti th{ text-shadow: 1px 1px lightgray;}
+        /* FOR FOOTER START */
+
+        /* FOR FOOTER END */
+
     </style>
 
     {{-- script alert messages fade out end --}}
