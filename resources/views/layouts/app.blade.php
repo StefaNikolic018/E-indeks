@@ -546,10 +546,10 @@ background-image: linear-gradient(160deg, #80D0C7 5%, #0093E9 60%);
 
     </script>
     <style>
-        th{text-shadow: 2px 2px black;}
-        table.fc-col-header th.fc-col-header-cell { text-shadow: 1px 1px white;}
-        h2.fc-toolbar-title { text-shadow: 1px 1px white;}
-        table#studenti th{ text-shadow: 1px 1px lightgray;}
+        th{text-shadow: 2px 2px 5px black;}
+        table.fc-col-header th.fc-col-header-cell { text-shadow: 1px 1px 3px white;}
+        h2.fc-toolbar-title { text-shadow: 1px 1px 3px white;}
+        table#studenti th{ text-shadow: 1px 1px 3px lightgray;}
         /* FOR FOOTER START */
 
         /* FOR FOOTER END */

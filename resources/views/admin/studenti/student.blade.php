@@ -136,7 +136,7 @@
                         </tr>
 
                         <tr>
-                            <th>Broj telefona</th>
+                            <th>Telefon</th>
                             <td>0{{$student->broj_telefona}}</td>
 
                         </tr>

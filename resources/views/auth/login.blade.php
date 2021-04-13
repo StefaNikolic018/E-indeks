@@ -7,11 +7,11 @@
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class='row justify-content-center my-4 '>
-                <img class="img-fluid" style="filter:drop-shadow(2px 2px 5px gray)" src="{{asset('/images/logo.png')}}">
+                <img class="img-fluid" style="filter:drop-shadow(3px 3px 15px white)" src="{{asset('/images/logo.png')}}">
             </div>
-            <div class="card border bg-light rounded-lg shadow-lg">
+            <div class="card border border-primary bg-light rounded-lg shadow-lg">
                 <div class='row justify-content-center my-4 '>
-                    <h3 class="font-weight-bold " style="text-shadow: 2px 2px lightgray">Evidencija studenata</h3>
+                    <h3 class="font-weight-bold text-dark" style="text-shadow: 5px 5px 10px lightgray">EVIDENCIJA STUDENATA</h3>
                 </div>
                 <br>
 
@@ -69,7 +69,7 @@
 
                             {{-- BUTTON --}}
                             <div class="row justify-content-center my-5">
-                                <input type="submit" role="button" class="btn btn-primary shadow font-weight-bold"
+                                <input type="submit" role="button" class="btn btn-primary shadow border border-dark rounded"
                                     value="Prijavi se"></input>
                             </div>
                         </form>

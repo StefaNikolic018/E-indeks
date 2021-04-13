@@ -125,7 +125,7 @@
         <div class='col-xs-12 col-sm-6 my-2 '>
             <div class="card rounded-lg bg-gradient-light border border-dark shadow-lg" style="max-height:453.050px;">
                 <div class="card-header text-center">
-                    <h3 class="font-weight-bold pt-2" style="text-shadow: 2px 2px lightgray">Obaveštenja</h3>
+                    <h3 class="font-weight-bold pt-2" style="text-shadow: 2px 2px 4px lightgray">Obaveštenja</h3>
                 </div>
                 <div class="card-body pb-5" style="overflow-y:scroll;">
                     @if(!empty($obavestenja))
@@ -184,7 +184,7 @@
     <div class="row ">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card-header border border-white bg-dark py-2">
-                <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px black">Spisak ocena
+                <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px 4px black">Spisak ocena
                     po godini
                 </h4>
             </div>
@@ -214,7 +214,7 @@
                             </span></a>
                         <button class="btn btn-primary border border-dark rounded font-weight-bold shadow mt-1" type="button"
                             data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false"
-                            aria-controls="multiCollapseExample2" style="width:138.512px; text-shadow: 1px 1px black">II godina <span
+                            aria-controls="multiCollapseExample2" style="width:138.512px; text-shadow: 1px 1px 4px black">II godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
@@ -235,7 +235,7 @@
                             </span></button>
                         <button class="btn btn-info border border-dark rounded font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample3" aria-expanded="false"
-                            aria-controls="multiCollapseExample2" style="width:138.512px; text-shadow: 1px 1px gray">III godina <span
+                            aria-controls="multiCollapseExample2" style="width:138.512px; text-shadow: 1px 1px 4px gray">III godina <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ OCENA</b>" data-html="true">
                                 @php
@@ -256,7 +256,7 @@
                             </span></button>
                         <button class="btn btn-dark font-weight-bold shadow mt-1" type="button" data-toggle="collapse"
                             data-target="#multiCollapseExample4" aria-expanded="false"
-                            aria-controls="multiCollapseExample4" style="width:138.512px; text-shadow: 1px 1px black">Sve ocene <span
+                            aria-controls="multiCollapseExample4" style="width:138.512px; text-shadow: 1px 1px 4px black">Sve ocene <span
                                 class="badge badge-secondary shadow" data-toggle="tooltip" data-placement="top"
                                 title="<b>BROJ PREDMETA</b>" data-html="true">
                                 @php
@@ -446,7 +446,7 @@
                         <div class="collapse multi-collapse show" id="multiCollapseExample4">
                             <div class="card">
                                 <div class="card-header border border-dark rounded p-2">
-                                    <h4 class="text-center font-weight-bold" style="text-shadow:1px 1px gray">Sve ocene <span
+                                    <h4 class="text-center font-weight-bold" style="text-shadow:1px 1px 3px gray">Sve ocene <span
                                             class="badge badge-secondary shadow" data-toggle="tooltip"
                                             data-placement="top" title="<b>BROJ PREDMETA</b>" data-html="true">
                                             {{$predmeti->count()}}

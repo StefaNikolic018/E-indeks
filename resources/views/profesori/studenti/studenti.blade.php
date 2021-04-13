@@ -24,7 +24,7 @@
     <div class="row ">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="card-header border border-white bg-dark py-2">
-                <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px black">Spisak
+                <h4 class="text-center font-weight-bold pt-1 text-light" style="text-shadow: 2px 2px 5px black">Spisak
                     studenata po godini</h4>
             </div>
             <div class="card border-dark shadow-lg">
@@ -59,6 +59,14 @@
                                 {{$stud->count()}}
                             </span></button>
                     </p>
+                    {{-- SEARCH START --}}
+                    <div class="input-group col-12 col-sm-6 offset-sm-3">
+                        <input type="text" class="form-control" placeholder="Pronađite studenta" aria-label="Pronađite studenta" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                          <button class="input-group-text btn btn-info" id="basic-addon2"> <i class="fas fa-search"></i> </button>
+                        </div>
+                    </div>
+                    {{-- SEARCH END --}}
                 </div>
                 <div class="row">
                     {{-- PRVA GODINA START --}}
