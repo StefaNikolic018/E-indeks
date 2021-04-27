@@ -61,9 +61,9 @@
                     </p>
                     {{-- SEARCH START --}}
                     <div class="input-group col-12 col-sm-6 offset-sm-3">
-                        <input type="text" class="form-control" placeholder="Pronađite studenta" aria-label="Pronađite studenta" aria-describedby="basic-addon2">
+                        <input type="text" id="pretragaStudenata" class="form-control" placeholder="Pronađite studenta" aria-label="Pronađite studenta" aria-describedby="basic-addon2">
                         <div class="input-group-append">
-                          <button class="input-group-text btn btn-info" id="basic-addon2"> <i class="fas fa-search"></i> </button>
+                          <button class="input-group-text btn btn-primary" id="basic-addon2" disabled> <i class="fas fa-search"></i> </button>
                         </div>
                     </div>
                     {{-- SEARCH END --}}
@@ -262,7 +262,8 @@
                     </div>
                     {{-- TRECA GODINA END --}}
                     {{-- SVI STUDENTI START --}}
-                    <div class="col-lg-12 col-mg-12 col-sm-12">
+                    {{-- BEZ PRETRAGE START --}}
+                    <div class="col-lg-12 col-mg-12 col-sm-12" id="sviStudenti">
                         <div class="collapse multi-collapse show" id="multiCollapseExample4">
                             <div class="card">
                                 <div class="card-header border border-dark p-2">
@@ -333,12 +334,111 @@
 
                         </div>
                     </div>
+                    {{-- BEZ PRETRAGE END --}}
+                    {{-- SA PRETRAGOM START --}}
+                    <div class="col-lg-12 col-mg-12 col-sm-12 d-none" id="sviStudentiPretraga">
+                        <div class="collapse multi-collapse show" id="multiCollapseExample4">
+                            <div class="card">
+                                <div class="card-header border border-dark p-2">
+                                    <h4 style="text-shadow: 1px 1px gray" class="text-center font-weight-bold">Rezultati pretrage <span
+                                        class="badge badge-secondary shadow" data-toggle="tooltip"
+                                        data-placement="top" title="<b>BROJ STUDENATA</b>" data-html="true" id="brojacStudenata">
+
+                                    </span></h4>
+                                </div>
+                                <div class="card-body bg-dark">
+                                    {{-- TABLE ALL SUBJECTS START --}}
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <table class="table table-dark table-hover table-responsive-lg table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Broj indeksa</th>
+                                                        <th scope="col">Ime</th>
+                                                        <th scope="col">Prezime</th>
+                                                        <th scope="col">Godina</th>
+                                                        <th scope="col">Smer</th>
+                                                        <th scope="col">ESPB</th>
+                                                        <th scope="col">Prosek</th>
+                                                        <th scope="col"> &nbsp;Akcije</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="bodyTabela">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                    {{-- TABLE ALL SUBJECTS END --}}
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    {{-- SA PRETRAGOM END --}}
+
                     {{-- SVI STUDENTI END --}}
                 </div>
             </div>
         </div>
     </div>
     {{-- COLLAPSE FOR STUDENTS END --}}
+    <script>
+        var studenti = {!!$stud!!};
+        var tabela=document.getElementById('sviStudenti');
+        var tabelaPretraga=document.getElementById('sviStudentiPretraga');
+        var tabelaBody=document.getElementById('bodyTabela');
+        var brojacStudenata=document.getElementById('brojacStudenata');
+        document.getElementById('pretragaStudenata').addEventListener('keyup',function(event){
+            var value=event.target.value.toUpperCase();
+            var html='';
+            var br=0;
+            tabelaBody.innerHTML=html;
+            if(value!=''){
+                br=0;
+                html='';
+                studenti.forEach(st => {
+                    if(st.ime.toUpperCase().includes(value) || st.prezime.toUpperCase().includes(value) || st.ime_roditelja.toUpperCase().includes(value) || st.broj_indeksa.toUpperCase().includes(value) || String(st.godina_studija).includes(value) || String(st.jmbg).includes(value) || String(st.datum_rodjenja).includes(value) || String(st.broj_telefona).includes(value) || st.email.toUpperCase().includes(value) && value!=''){
+                        let Url = '{{ route("jedan_student",[":id"]) }}';
+                        Url = Url.replace(':id',st.id);
+                        ++br;
+                        html+='<tr>';
+                        html+='<td>'+st.broj_indeksa+'</td>';
+                        html+='<td>'+st.ime+'</td>';
+                        html+='<td>'+st.prezime+'</td>';
+                        html+='<td>'+st.godina_studija+'.</td>';
+                        html+='<td>'+st.smers.naziv+'</td>';
+                        html+='<td>'+st.espb+'</td>';
+                        html+='<td>'+(st.prosek_ocena ? st.prosek_ocena : 0.00) +'</td>';
+                        html+='<td class="d-inline-flex">';
+                        html+='<a href="'+Url+'" class="btn btn-info" role="button">';
+                        html+='<i class="fas fa-eye" style="color: #227dc7"></i> Pogledaj </a>';
+                        html+='</td>';
+                        html+='</tr>';
+                        tabelaBody.innerHTML=html;
+                        tabela.classList.add('d-none');
+                        tabelaPretraga.classList.remove('d-none');
+                        brojacStudenata.innerHTML=br;
+                    } else {
+                        brojacStudenata.innerHTML=br;
+                        tabelaBody.innerHTML=html;
+                    }
+
+                });
+            } else {
+                html='';
+                tabelaBody.innerHTML='';
+                tabelaPretraga.classList.add('d-none');
+                tabela.classList.remove('d-none');
+                br=0
+                brojacStudenata.innerHTML=0;
+            }
+
+
+        });
+    </script>
 
 
 
