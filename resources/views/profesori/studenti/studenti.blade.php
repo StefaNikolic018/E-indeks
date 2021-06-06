@@ -392,15 +392,16 @@
         var tabelaBody=document.getElementById('bodyTabela');
         var brojacStudenata=document.getElementById('brojacStudenata');
         document.getElementById('pretragaStudenata').addEventListener('keyup',function(event){
-            var value=event.target.value.toUpperCase();
-            var html='';
-            var br=0;
+            var value = event.target.value.toUpperCase();
+            var html ='';
+            var br = 0;
             tabelaBody.innerHTML=html;
             if(value!=''){
                 br=0;
                 html='';
                 studenti.forEach(st => {
-                    if(st.ime.toUpperCase().includes(value) || st.prezime.toUpperCase().includes(value) || st.ime_roditelja.toUpperCase().includes(value) || st.broj_indeksa.toUpperCase().includes(value) || String(st.godina_studija).includes(value) || String(st.jmbg).includes(value) || String(st.datum_rodjenja).includes(value) || String(st.broj_telefona).includes(value) || st.email.toUpperCase().includes(value) && value!=''){
+                    var ime = st.ime.toUpperCase()+' '+st.prezime.toUpperCase();
+                    if(ime.includes(value) || st.ime_roditelja.toUpperCase().includes(value) || st.broj_indeksa.toUpperCase().includes(value) || String(st.godina_studija).includes(value) || String(st.jmbg).includes(value) || String(st.datum_rodjenja).includes(value) || String(st.broj_telefona).includes(value) || st.email.toUpperCase().includes(value) && value!=''){
                         let Url = '{{ route("jedan_student",[":id"]) }}';
                         Url = Url.replace(':id',st.id);
                         ++br;
