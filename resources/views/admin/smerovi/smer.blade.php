@@ -1,4 +1,4 @@
-@section('title','Smer "'.$smer->naziv.'"')
+@section('title','Evidencija Studenata | Smer "'.$smer->naziv.'"')
 @extends('layouts.app')
 
 @section('content')

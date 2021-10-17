@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Izmena rasporeda '.$raspored->godina_studija.'. godine "'.$raspored->smerovi->naziv.'"')
+@section('title','Evidencija Studenata | Izmena rasporeda '.$raspored->godina_studija.'. godine "'.$raspored->smerovi->naziv.'"')
 
 
 @section('content')

@@ -1,4 +1,4 @@
-@section('title','Početna')
+@section('title','Evidencija Studenata | Početna')
 @extends('layouts.app')
 
 @section('content')

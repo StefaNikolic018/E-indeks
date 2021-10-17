@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Studenti')
+@section('title','Evidencija Studenata | Studenti')
 
 @section('content')
 

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Izmena korisnika '.$korisnik->ime)
+@section('title','Evidencija Studenata | Izmena korisnika '.$korisnik->ime)
 
 @section('content')
 <div class="container">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Izmena ocene')
+@section('title','Evidencija Studenata | Izmena ocene')
 
 @section('content')
 <div class="row justify-content-center mb-5">

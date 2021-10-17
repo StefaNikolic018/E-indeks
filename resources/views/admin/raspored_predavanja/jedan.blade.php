@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Raspored '.$raspored->godina_studija.'. godine "'.$raspored->smerovi->naziv.'"')
+@section('title','Evidencija Studenata | Raspored '.$raspored->godina_studija.'. godine "'.$raspored->smerovi->naziv.'"')
 
 @section('content')
     {{-- PONEDELJAK START --}}
