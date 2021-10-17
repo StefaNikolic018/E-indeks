@@ -60,7 +60,7 @@
                             {{$student->espb}}
                         </span>
 
-                        <span class="float-right badge badge-pill badge-info shadow mt-1" data-toggle="tooltip"
+                        <span class="float-right badge badge-pill badge-info shadow mt-1 text-wrap" data-toggle="tooltip"
                             data-placement="top" title="<b>Smer studija</b>" data-html="true">
                             {{$student->smers->naziv}}
                         </span>

@@ -99,7 +99,7 @@ class RasporedIspitaController extends Controller
         }
         // Ako jesu
         Dogadjaj::create($input);
-        $req->session()->flash('raspored_ispita',['success','Uspešno dodat raspored!']);
+        $req->session()->flash('raspored_ispita',['success','Uspešno dodat događaj!']);
         return redirect()->route('raspored_ispita');
         }
 

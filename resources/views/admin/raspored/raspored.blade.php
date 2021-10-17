@@ -155,7 +155,7 @@
                 <div class="form-group">
                     <label class="font-weight-bold" for="boja">Boja pozadine</label>
                     <input type="color" name="boja1" class="form-control" id="boja1" disabled="1" value="#DB5461">
-                    <p class="text-muted">Menja se prilikom izbora događaja( Ispit \ Kolokvijum )</p>
+                    <p class="text-muted">Menja se prilikom izbora događaja(Ispit \ Kolokvijum)</p>
                     @error("boja")
                     <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

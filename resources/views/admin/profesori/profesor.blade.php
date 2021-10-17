@@ -158,7 +158,7 @@
                 </div>
                 <div class="card-body bg-white">
                     {{-- OVDE TREBA BIOGRAFIJA --}}
-                    <div class="container border border-secondary rounded shadow bg-gradient-light py-4" style="max-height:236px;overflow-y:scroll;">
+                    <div class="container border border-secondary rounded shadow bg-gradient-light py-4" style="max-height:230px;overflow-y:scroll;">
                         @if($profesor->bio)
                         {{$profesor->bio}}
                         @else
