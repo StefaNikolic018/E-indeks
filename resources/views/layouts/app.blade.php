@@ -1,22 +1,16 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" style="min-height: 100%">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
     <title>
-
         @sectionMissing('title')
         @yield(config('app.name'))
         @else
         @yield('title')
         @endif
-
     </title>
     {{-- fullcalendar start --}}
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js" integrity="sha256-rPPF6R+AH/Gilj2aC00ZAuB2EKmnEjXlEWx5MkAp7bw=" crossorigin="anonymous"></script>
@@ -33,20 +27,16 @@
     </script>
     {{-- TOOLTIP SCRIPT END --}}
     <!-- Fonts -->
-    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com"> --}}
-    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    {{-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> --}}
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@300&display=swap" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css?v=echo time();') }}" rel="stylesheet">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 </head>
 
-    <body style="background-color: #8EC5FC;
-    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-    " onload="createFormFields()">
+<body style="background-color: #8EC5FC;
+background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+" onload="createFormFields()">
 
     <div id="app" style="min-height:calc(100vh - 37px)">
         @include('layouts.navbar')

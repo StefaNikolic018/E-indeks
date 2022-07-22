@@ -1,9 +1,9 @@
+
 @extends('layouts.app')
 @section('title','Evidencija Studenata | Studenti')
 
 @section('content')
-
-
+{{-- SADRŽAJ STRANICE --}}
 <div class="container">
     {{-- ALERT MESSAGES START --}}
     @if(session('student'))
