@@ -126,6 +126,7 @@
                         Studenti</a>
                 </li>
                 @endif
+                ...
                 @if(Request::is('studenti/novi_student'))
                 <li class="nav-item">
                     <ol class="breadcrumb border border-secondary mt-1 mb-0 py-1">
@@ -151,6 +152,7 @@
                     </ol>
                 </li>
                 @endif
+                ...
                 @if(Request::is('predmeti') || Request::is('predmeti/*') || Request::is('korisnici') ||
                 Request::is('korisnici/*') || Request::is('studenti') || Request::is('pocetna') || Request::is('profesori') || Request::is('studenti/*')|| Request::is('obavestenja')|| Request::is('obavestenja/*') || Request::is('smerovi') || Request::is('smerovi/*') || Request::is('raspored') || Request::is('raspored/*') || Request::is('raspored_ispita') || Request::is('raspored_ispita/*'))
                 <li class="nav-item

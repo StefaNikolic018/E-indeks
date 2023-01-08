@@ -183,45 +183,35 @@
                                                                     <!-- Button trigger modal -->
                                                                     <button class="dropdown-item" data-toggle="modal"
                                                                         data-target="#exampleModal{{ $obavestenje->id }}1">
-                                                                        <i class="fas fa-trash-alt"
-                                                                            style="color:red"></i>
+                                                                        <i class="fas fa-trash-alt" style="color:red"></i>
                                                                         Obriši
                                                                     </button>
                                                                 </div>
                                                             </div>
                                                             <!-- Modal -->
-                                                            <div class="modal fade" id="exampleModal{{ $obavestenje->id }}1"
-                                                                tabindex="-1" role="dialog"
+                                                            <div class="modal fade" id="exampleModal{{ $obavestenje->id }}1" tabindex="-1" role="dialog" 
                                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog" role="document">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header ">
-                                                                            <h5 class="modal-title text-center text-dark"
-                                                                                id="exampleModalLabel">
+                                                                            <h5 class="modal-title text-center text-dark" id="exampleModalLabel">
                                                                                 Brisanje obaveštenja
                                                                             </h5>
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-label="Close">
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body text-center text-dark">
-                                                                            <b>Da li stvarno želite da izbrišete
-                                                                                obaveštenje
-                                                                                "{{ $obavestenje->naslov }}"?</b>
+                                                                            <b>Da li stvarno želite da izbrišete obaveštenje "{{ $obavestenje->naslov }}"?</b>
                                                                         </div>
-                                                                        <div
-                                                                            class="modal-footer justify-content-center">
+                                                                        <div class="modal-footer justify-content-center">
                                                                             <form
                                                                                 action={{ route('brisanje', ['id'=>$obavestenje->id]) }}
                                                                                 method="POST">
                                                                                 @csrf
-                                                                                <button class="btn btn-danger">
-                                                                                    Da</button>
+                                                                                <button class="btn btn-danger">Da</button>
                                                                             </form>
-                                                                            <button type="button"
-                                                                                class="btn btn-secondary"
-                                                                                data-dismiss="modal">Ne</button>
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Ne</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
